@@ -9,10 +9,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 public class RemarkCommandTest {
-    private Model model =  new ModelManager();
-    
+
+    private Model model = new ModelManager();
+
     @Test
-    public void execute() {
+    public void execute() throws Exception {
         assertCommandFailure(new RemarkCommand(), model, MESSAGE_NOT_IMPLEMENTED_YET);
     }
 }
