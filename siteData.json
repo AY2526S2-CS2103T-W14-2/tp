@@ -9,7 +9,7 @@
         "project-team": "Project team",
         "achmad-firdaus-assabil": "Achmad Firdaus Assabil",
         "benedict-aurelius-tjia": "Benedict Aurelius Tjia",
-        "johnny-doe": "Johnny Doe",
+        "chen-beitian": "Chen Beitian",
         "chin-ling-xing-lance": "Chin Ling Xing, Lance",
         "james-doe": "James Doe"
       },
@@ -144,18 +144,18 @@
       "headingKeywords": {}
     },
     {
-      "src": "team/denselance-alt.md",
-      "title": "Lance's Project Portfolio Page",
+      "src": "team/chen-beitian.md",
+      "title": "Beitian's Project Portfolio Page",
       "headings": {
         "project-servemate": "Project: ServeMate"
       },
       "headingKeywords": {}
     },
     {
-      "src": "team/johndoe.md",
-      "title": "John Doe's Project Portfolio Page",
+      "src": "team/denselance-alt.md",
+      "title": "Lance's Project Portfolio Page",
       "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
+        "project-servemate": "Project: ServeMate"
       },
       "headingKeywords": {}
     },
