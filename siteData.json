@@ -11,7 +11,7 @@
         "benedict-aurelius-tjia": "Benedict Aurelius Tjia",
         "chen-beitian": "Chen Beitian",
         "chin-ling-xing-lance": "Chin Ling Xing, Lance",
-        "james-doe": "James Doe"
+        "elijah-ng-ding-jie": "Elijah Ng Ding Jie"
       },
       "headingKeywords": {}
     },
@@ -154,6 +154,14 @@
     {
       "src": "team/denselance-alt.md",
       "title": "Lance's Project Portfolio Page",
+      "headings": {
+        "project-servemate": "Project: ServeMate"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/elijah-ng.md",
+      "title": "Elijah Ng Ding Jie's Project Portfolio Page",
       "headings": {
         "project-servemate": "Project: ServeMate"
       },
