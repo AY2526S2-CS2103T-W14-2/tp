@@ -329,11 +329,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### 💻 Portability
+1. The system should support **any mainstream OS** with Java `17` or higher.
+2. The system should deliver the product as a **single, executable JAR file**.
+3. The system should function as a **standalone product** that does not require additional user installations.
 
-*{More to be added}*
+#### ⌨️ Usability
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+#### 🚀 Performance
+1. The system should remain **responsive** even when managing 1000 customer records.
+
+#### 💾 Data Persistence
+1. The system should store customer data locally in a **human editable JSON file**.
+2. The system should **automatically load the stored customer records** upon every system launch.
+
+#### 📝 Additional Requirements
+1. The system should use the **standard format** for addresses and phone numbers.
 
 ### Glossary
 
