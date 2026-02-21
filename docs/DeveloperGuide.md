@@ -317,7 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | expert user   | archive customers data                                  | see only the relevant data for currently subscribed customers                                        |
 
 
-*{More to be added}*
+
 
 ### Use cases
 
@@ -358,8 +358,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Tingkat Delivery**: Subscription-based home-cooked meal delivery service commonly found in Singapore.
+* **Tingkat Package**: The food catering package, ordered for a set number of days, usually 5, 10, or 20 days.
+* **CLI (Command Line Interface)**: A text-based user interface used to interact with software by typing commands.
+* **GUI (Graphical User Interface)**: A visual interface that allows users to interact with the application through graphical elements like buttons, windows, and icons.
+* **Customer**: A person who subscribes to the Tingkat delivery service.
+* **Delivery Route**: A sequence of stops planned for delivering meals to customers.
+* **Subscription**: A predefined plan for meal delivery over a specific period (e.g., 5, 10, or 20 days).
+* **Command**: A user input that triggers a specific action in the application (e.g., `add`, `delete`, `list`).
+* **Parser**: A component that interprets user commands and converts them into executable actions.
+* **Model**: The component responsible for managing the application's data and business logic.
+* **Storage**: The component responsible for saving and loading data to and from persistent storage.
+* **PlantUML**: A tool used to create UML diagrams for visualizing the architecture and design of the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
