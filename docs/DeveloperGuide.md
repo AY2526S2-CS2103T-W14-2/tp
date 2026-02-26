@@ -325,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ServeMate` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a customer**
+**Use case 1: Add a customer**
 
 **MSS**
 
@@ -355,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Delete a customer**
+**Use case 2: Delete a customer**
 
 **MSS**
 
@@ -379,7 +379,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Edit customer record**
+**Use case 3: Edit customer record**
 
 **MSS**
 
@@ -421,7 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Filter customer records**
+**Use case 4: Filter customer records**
 
 **MSS**
 
