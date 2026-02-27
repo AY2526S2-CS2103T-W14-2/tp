@@ -9,6 +9,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
+/**
+ * Parses input arguments and creates a new RemarkCommand object
+ */
 public class RemarkCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the RemarkCommand
