@@ -495,8 +495,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. Any parameter value is invalid.
     * 1b1. ServeMate shows an error message describing the violated constraint.
       Use case ends.
-* 1c. A delivery to the same customer on the same date and time already exists.
-    * 1c1. ServeMate shows an error message describing that a delivery to the same customer, date and time already exists.
+* 1c. A delivery to the same customer at the same date and time already exists.
+    * 1c1. ServeMate shows an error message describing that a delivery to the same customer at the same date and time already exists.
       Use case ends.
 
 **Use case 7: Delete upcoming delivery**
@@ -506,7 +506,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list all upcoming deliveries
 2. ServeMate shows a list of all upcoming deliveries from today onwards
 3. User requests to delete an upcoming delivery in the list
-4. ServeMate deletes the customer
+4. ServeMate deletes the upcoming delivery
 5. ServeMate shows a confirmation message with the deleted delivery's details
    Use case ends.
 
