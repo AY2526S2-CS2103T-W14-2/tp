@@ -474,7 +474,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. No upcoming deliveries are available.
+
     * 2a1. ServeMate shows an empty result list.
+
       Use case ends.
 
 **Use case 6: Add upcoming non-recurring delivery**
@@ -490,13 +492,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. Any required field is missing.
+
     * 1a1. ServeMate shows an error message describing the correct command format.
+
       Use case ends.
+
 * 1b. Any parameter value is invalid.
+
     * 1b1. ServeMate shows an error message describing the violated constraint.
+
       Use case ends.
+
 * 1c. A delivery to the same customer at the same date and time already exists.
+
     * 1c1. ServeMate shows an error message describing that a delivery to the same customer at the same date and time already exists.
+
       Use case ends.
 
 **Use case 7: Delete upcoming non-recurring delivery**
@@ -513,12 +523,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list of upcoming deliveries is empty.
+
   Use case ends.
+
 * 3a. The given index is not a positive integer.
+
   * 3a1. ServeMate shows an error message describing the correct command format.
+
     Use case resumes at step 2.
+
 * 3b. The given index is out of range.
+
   * 3b1. ServeMate shows an error message describing that the index value given is invalid.
+
     Use case resumes at step 2.
 
 **Use case 8: Tag customer by food preference**
@@ -534,15 +551,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list of customers is empty.
+
   Use case ends.
+
 * 3a. The given index is not a positive integer.
+
     * 3a1. ServeMate shows an error message describing the correct command format.
+
       Use case resumes at step 2.
+
 * 3b. The given index is out of range.
+
     * 3b1. ServeMate shows an error message describing that the index value given is invalid.
+
       Use case resumes at step 2.
+
 * 3c. The given tag is not within the pre-determined choices of food preference
+
     * 3c1. ServeMate shows an error message describing that the tag is not within the pre-determined options of food preference tags and shows the options.
+  
       Use case resumes at step 2.
 
 ### Non-Functional Requirements
