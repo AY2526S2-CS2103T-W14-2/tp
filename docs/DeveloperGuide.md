@@ -538,15 +538,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case 8: Tag customer by food preference**
+**Use case 8: Tag customer with delivery note**
 
 **MSS**
 
 1. User requests to view the help page
 2. ServeMate shows a list of customers
-3. User requests to tag a customer in the list by food preference from the pre-determined options
-4. ServeMate tags the customer in the customer record
-5. ServeMate shows a success message with the updated customer's details including the food preference tag
+3. User requests to tag a customer in the list with a delivery note
+4. ServeMate tags the customer in the customer record with the delivery note
+5. ServeMate shows a success message with the updated customer's details including the delivery note
 
 **Extensions**
 
@@ -566,9 +566,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3c. The given tag is not within the pre-determined choices of food preference.
+* 3c. The given delivery note is empty.
 
-    * 3c1. ServeMate shows an error message describing that the tag is not within the pre-determined options of food preference tags and shows the options.
+    * 3c1. ServeMate shows an error message describing that the delivery note is missing.
   
       Use case resumes at step 2.
 
