@@ -499,8 +499,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Tingkat Delivery**: Subscription-based home-cooked meal delivery service commonly found in Singapore.
 * **Tingkat Package**: The food catering package, ordered for a set number of days, usually 5, 10, or 20 days.
-* **CLI (Command Line Interface)**: A text-based user interface used to interact with software by typing commands.
-* **GUI (Graphical User Interface)**: A visual interface that allows users to interact with the application through graphical elements like buttons, windows, and icons.
+* **Command Line Interface (CLI)**: A text-based user interface used to interact with software by typing commands.
+* **Graphical User Interface (GUI)**: A visual interface that allows users to interact with the application through graphical elements like buttons, windows, and icons.
 * **Customer**: A person who subscribes to the Tingkat delivery service.
 * **Delivery Rider/Driver**: A person who delivers meals to customers.
 * **Tingkat Administrative Staff**: A person who manages the Tingkat delivery service.
