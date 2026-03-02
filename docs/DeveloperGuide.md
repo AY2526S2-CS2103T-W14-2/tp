@@ -473,7 +473,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. No upcoming deliveries are available.
+* 2a. ServeMate is unable to find any upcoming deliveries.
 
     * 2a1. ServeMate shows an empty result list.
 
