@@ -462,12 +462,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case 5: View all upcoming deliveries**
+**Use case 5: View all upcoming deliveries for the day**
 
 **MSS**
 
-1. User requests to view all upcoming deliveries
-2. ServeMate shows a list of all upcoming deliveries for today onwards
+1. User requests to view all upcoming deliveries for the day
+2. ServeMate shows a list of all upcoming deliveries for the day
 
    Use case ends.
 
