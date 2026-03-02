@@ -509,14 +509,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case 7: Delete upcoming non-recurring delivery**
+**Use case 7: Delete a particular delivery**
 
 **MSS**
 
 1. User requests to list all upcoming deliveries
 2. ServeMate shows a list of all upcoming deliveries from today onwards
-3. User requests to delete an upcoming non-recurring delivery in the list
-4. ServeMate deletes the single upcoming non-recurring delivery
+3. User requests to delete a particular upcoming delivery in the list
+4. ServeMate deletes the particular upcoming delivery
 5. ServeMate shows a confirmation message with the deleted delivery's details
    Use case ends.
 
