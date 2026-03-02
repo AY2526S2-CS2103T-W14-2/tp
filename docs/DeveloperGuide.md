@@ -479,13 +479,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case 6: Add upcoming non-recurring delivery**
+**Use case 6: Add upcoming delivery**
 
 **MSS**
 
-1. User requests to add a new upcoming non-recurring delivery with required fields
-2. ServeMate adds the upcoming non-recurring delivery to the list of upcoming deliveries
-3. ServeMate shows a success message with the added upcoming non-recurring delivery's details
+1. User requests to add a new upcoming delivery with required fields
+2. ServeMate adds the upcoming delivery to the list of upcoming deliveries
+3. ServeMate shows a success message with the added upcoming delivery's details
 
    Use case ends.
 
