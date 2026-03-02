@@ -473,9 +473,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. ServeMate is unable to find any upcoming deliveries.
+* 1a. ServeMate is unable to find any upcoming deliveries.
 
-    * 2a1. ServeMate shows an empty result list.
+    * 1a1. ServeMate shows an empty result list.
 
       Use case ends.
 
@@ -522,7 +522,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list of upcoming deliveries is empty.
+* 1a. The list of upcoming deliveries is empty.
 
   Use case ends.
 
@@ -550,7 +550,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list of customers is empty.
+* 1a. The list of customers is empty.
 
   Use case ends.
 
