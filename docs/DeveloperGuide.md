@@ -601,9 +601,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. The Developer Guide and User Guide should be PDF-friendly (e.g. no expandable panels, embedded videos, animated GIFs, etc.).
 2. The Developer Guide and User Guide should have a maximum size of 15MB each, when downloaded as PDF files.
 
-#### 📝 Additional Requirements
-1. The application should use the standardized **Singapore address and phone number format**.
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
