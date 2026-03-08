@@ -36,16 +36,15 @@ public class DeliveryTest {
         // null -> returns false
         assertFalse(DELIVERY_ONE.isSameDelivery(null));
 
-        // same start date, all other attributes different -> returns true
-        Delivery editedDeliveryOne = new DeliveryBuilder(DELIVERY_ONE).withEndDate(VALID_END_DATE_TWO)
-                .withDeliveryDays(VALID_DELIVERY_DAY_SECOND).withDeliveryTime(VALID_DELIVERY_TIME_TWO)
-                .withSkippedDates(VALID_SKIPPED_DATE_SECOND).build();
+        // new overlapping start and end date, all other attributes same -> returns true
+        Delivery editedDeliveryOne = new DeliveryBuilder(DELIVERY_ONE)
+                .withStartDate(VALID_START_DATE_TWO).withEndDate(VALID_END_DATE_TWO).build();
         assertTrue(DELIVERY_ONE.isSameDelivery(editedDeliveryOne));
 
-        // same end date, all other attributes different -> returns true
-        Delivery editedDeliveryTwo = new DeliveryBuilder(DELIVERY_TWO).withStartDate(VALID_START_DATE_ONE)
-                .withDeliveryDays(VALID_DELIVERY_DAY_FIRST).withDeliveryTime(VALID_DELIVERY_TIME_ONE)
-                .withSkippedDates(VALID_SKIPPED_DATE_FIRST).build();
+        // new overlapping start and date, all other attributes different -> returns true
+        Delivery editedDeliveryTwo = new DeliveryBuilder(DELIVERY_TWO).withStartDate(VALID_START_DATE_TWO)
+                .withEndDate(VALID_START_DATE_TWO).withDeliveryDays(VALID_DELIVERY_DAY_FIRST)
+                .withDeliveryTime(VALID_DELIVERY_TIME_ONE).withSkippedDates(VALID_SKIPPED_DATE_FIRST).build();
         assertTrue(DELIVERY_TWO.isSameDelivery(editedDeliveryTwo));
     }
 
