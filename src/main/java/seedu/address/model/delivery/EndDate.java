@@ -25,7 +25,7 @@ public class EndDate {
     public final LocalDate date;
 
     /**
-     * Constructs a {@code Date}.
+     * Constructs a {@code EndDate}.
      *
      * @param date A valid date string in the valid format.
      */
