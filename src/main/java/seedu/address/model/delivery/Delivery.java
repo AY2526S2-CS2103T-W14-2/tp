@@ -11,25 +11,19 @@ import java.util.Objects;
 public class Delivery {
 
     // Data fields
-    private final StartDate startDate;
-    private final EndDate endDate;
+    private final Date date;
     private final Time time;
 
     /**
      * Every field must be present and not null.
      */
-    public Delivery(StartDate startDate, EndDate endDate, Time time) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public Delivery(Date date, Time time) {
+        this.date = date;
         this.time = time;
     }
 
-    public StartDate getStartDate() {
-        return startDate;
-    }
-
-    public EndDate getEndDate() {
-        return endDate;
+    public Date getDate() {
+        return date;
     }
 
     public Time getTime() {
@@ -37,7 +31,7 @@ public class Delivery {
     }
 
     /**
-     * Returns true if both deliveries have overlapping start and end dates.
+     * Returns true if both deliveries have the same dates.
      * This defines the notion of equality between two deliveries consistent
      * with the application logic.
      */
@@ -47,10 +41,7 @@ public class Delivery {
         }
 
         return otherDelivery != null
-                && (
-                        otherDelivery.endDate.date.isAfter(startDate.date)
-                                || endDate.date.isAfter(otherDelivery.startDate.date)
-                );
+                && date.date.isEqual(otherDelivery.date.date);
     }
 
     @Override
@@ -65,22 +56,20 @@ public class Delivery {
         }
 
         Delivery otherDelivery = (Delivery) other;
-        return startDate.equals(otherDelivery.startDate)
-                && endDate.equals(otherDelivery.endDate)
+        return date.equals(otherDelivery.date)
                 && time.equals(otherDelivery.time);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(startDate, endDate, time);
+        return Objects.hash(date, time);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("start date", startDate)
-                .add("end date", endDate)
+                .add("date", date)
                 .add("time", time)
                 .toString();
     }

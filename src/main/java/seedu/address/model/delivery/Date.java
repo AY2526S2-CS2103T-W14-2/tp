@@ -10,9 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Delivery's start date in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidStartDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class StartDate {
+public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Date should be of the valid date format";
@@ -27,13 +27,13 @@ public class StartDate {
     public final LocalDate date;
 
     /**
-     * Constructs a {@code StartDate}.
+     * Constructs a {@code Date}.
      *
      * @param date A valid date string in the valid format.
      */
-    public StartDate(String date) {
+    public Date(String date) {
         requireNonNull(date);
-        checkArgument(isValidStartDate(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         this.date = LocalDate.parse(date, formatter);
     }
 
@@ -41,7 +41,7 @@ public class StartDate {
      * Returns true if a given string is a valid date
      * in the valid format.
      */
-    public static boolean isValidStartDate(String test) {
+    public static boolean isValidDate(String test) {
         try {
             LocalDate.parse(test, formatter);
             return true;
@@ -62,11 +62,11 @@ public class StartDate {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof StartDate)) {
+        if (!(other instanceof Date)) {
             return false;
         }
 
-        StartDate otherDate = (StartDate) other;
+        Date otherDate = (Date) other;
         return date.equals(otherDate.date);
     }
 
