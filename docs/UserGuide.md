@@ -4,9 +4,13 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# ServeMate User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+## Introduction
+Managing customer records and delivery schedules for a Tingkat catering business can quickly become overwhelming when information is scattered across spreadsheets, notebooks and chat messages.
+This is where **ServeMate** comes in.
+
+**ServeMate** is a desktop application designed to help administrative staff organize customer contacts and delivery details. Optimized for fast typing through a Command Line Interface (CLI), **ServeMate** allows you to quickly add, update, and retrieve customer records without navigating through complicated menus.
 
 <!-- * Table of Contents -->
 <page-nav-print />
