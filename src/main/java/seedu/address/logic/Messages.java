@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
 
 /**
@@ -48,4 +49,23 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code person}'s delivery for display to the user.
+     */
+    public static String formatDelivery(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        final Delivery delivery = person.getDelivery();
+        builder.append(person.getName())
+                .append("; Start Date: ")
+                .append(delivery.getStartDate())
+                .append("; End Date: ")
+                .append(delivery.getEndDate())
+                .append("; Delivery Days: ")
+                .append(delivery.getDeliveryDays())
+                .append("; Delivery Time: ")
+                .append(delivery.getDeliveryTime())
+                .append("; Skipped Dates: ")
+                .append(delivery.getSkippedDates());
+        return builder.toString();
+    }
 }
