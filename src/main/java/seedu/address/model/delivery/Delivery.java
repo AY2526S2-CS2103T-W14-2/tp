@@ -63,21 +63,6 @@ public class Delivery {
         return Collections.unmodifiableSet(skippedDates);
     }
 
-    /**
-     * Returns true if both deliveries have the overlapping delivery date ranges.
-     * This defines the notion of equality between two deliveries consistent
-     * with the application logic.
-     */
-    public boolean isSameDelivery(Delivery otherDelivery) {
-        if (otherDelivery == this) {
-            return true;
-        }
-
-        return otherDelivery != null
-                && endDate.date.isAfter(otherDelivery.startDate.date)
-                && otherDelivery.endDate.date.isAfter(startDate.date);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

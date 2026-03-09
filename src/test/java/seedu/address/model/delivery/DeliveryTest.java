@@ -27,26 +27,6 @@ public class DeliveryTest {
     }
 
     @Test
-    public void isSameDelivery() {
-        // same object -> returns true
-        assertTrue(DELIVERY_ONE.isSameDelivery(DELIVERY_ONE));
-
-        // null -> returns false
-        assertFalse(DELIVERY_ONE.isSameDelivery(null));
-
-        // new overlapping start and end date, all other attributes same -> returns true
-        Delivery editedDeliveryOne = new DeliveryBuilder(DELIVERY_ONE)
-                .withStartDate(VALID_START_DATE_TWO).withEndDate(VALID_END_DATE_TWO).build();
-        assertTrue(DELIVERY_ONE.isSameDelivery(editedDeliveryOne));
-
-        // new overlapping start and date, all other attributes different -> returns true
-        Delivery editedDeliveryTwo = new DeliveryBuilder(DELIVERY_TWO).withStartDate(VALID_START_DATE_TWO)
-                .withEndDate(VALID_START_DATE_TWO).withDeliveryDays(VALID_DELIVERY_DAY_FIRST)
-                .withDeliveryTime(VALID_DELIVERY_TIME_ONE).withSkippedDates(VALID_SKIPPED_DATE_FIRST).build();
-        assertTrue(DELIVERY_TWO.isSameDelivery(editedDeliveryTwo));
-    }
-
-    @Test
     public void equals() {
         // same values -> returns true
         Delivery deliveryOneCopy = new DeliveryBuilder(DELIVERY_ONE).build();
