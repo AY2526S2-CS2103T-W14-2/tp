@@ -44,7 +44,7 @@ public class DeliveryDay {
     public static boolean isValidDeliveryDay(String test) {
         try {
             // To prevent out of bounds access.
-            if (test.length() <= 2) {
+            if (test.isEmpty()) {
                 return false;
             }
 
