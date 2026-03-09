@@ -78,7 +78,8 @@ public class JsonAdaptedDelivery {
         }
 
         if (startDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "start date"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StartDate.class.getSimpleName()));
         }
 
         if (!StartDate.isValidStartDate(startDate)) {
@@ -88,11 +89,11 @@ public class JsonAdaptedDelivery {
         final StartDate modelStartDate = new StartDate(startDate);
 
         if (endDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "end date"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EndDate.class.getSimpleName()));
         }
 
         if (!StartDate.isValidStartDate(endDate)) {
-            throw new IllegalValueException(StartDate.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(EndDate.MESSAGE_CONSTRAINTS);
         }
 
         final EndDate modelEndDate = new EndDate(endDate);
@@ -100,7 +101,8 @@ public class JsonAdaptedDelivery {
         final Set<DeliveryDay> modelDeliveryDays = new HashSet<>(deliveryDays);
 
         if (deliveryTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "delivery time"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DeliveryTime.class.getSimpleName()));
         }
 
         if (!DeliveryTime.isValidDeliveryTime(deliveryTime)) {
