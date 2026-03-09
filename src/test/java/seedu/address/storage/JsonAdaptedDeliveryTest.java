@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedDelivery.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ALICE;
-import static seedu.address.testutil.TypicalDeliveries.DELIVERY_CARL;
+import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ELLE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,10 +125,11 @@ public class JsonAdaptedDeliveryTest {
 
     @Test
     public void toModelType_nullSkippedDates_returnsDelivery() throws Exception {
-        JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(DELIVERY_CARL.getStartDate().toString(),
-                DELIVERY_CARL.getEndDate().toString(),
-                DELIVERY_CARL.getDeliveryDays().stream().map(JsonAdaptedDeliveryDay::new).collect(Collectors.toList()),
-                DELIVERY_CARL.getDeliveryTime().toString(), null);
-        assertEquals(DELIVERY_CARL, delivery.toModelType());
+        JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(DELIVERY_ELLE.getStartDate().toString(),
+                DELIVERY_ELLE.getEndDate().toString(),
+                DELIVERY_ELLE.getDeliveryDays().stream().map(JsonAdaptedDeliveryDay::new).collect(Collectors.toList()),
+                DELIVERY_ELLE.getDeliveryTime().toString(),
+                DELIVERY_ELLE.getSkippedDates().stream().map(JsonAdaptedSkippedDate::new).collect(Collectors.toList()));
+        assertEquals(DELIVERY_ELLE, delivery.toModelType());
     }
 }
