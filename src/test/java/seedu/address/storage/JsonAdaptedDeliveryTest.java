@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedDelivery.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDeliveries.DELIVERY_FOUR;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ONE;
 
 import java.util.ArrayList;
@@ -120,5 +121,14 @@ public class JsonAdaptedDeliveryTest {
                         VALID_DELIVERY_TIME, invalidSkippedDates);
         String expectedMessage = SkippedDate.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullSkippedDates_returnsDelivery() throws Exception {
+        JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(DELIVERY_FOUR.getStartDate().toString(),
+                DELIVERY_FOUR.getEndDate().toString(),
+                DELIVERY_FOUR.getDeliveryDays().stream().map(JsonAdaptedDeliveryDay::new).collect(Collectors.toList()),
+                DELIVERY_FOUR.getDeliveryTime().toString(), null);
+        assertEquals(DELIVERY_FOUR, delivery.toModelType());
     }
 }
