@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.delivery.DeliveryDay;
+import seedu.address.model.delivery.SkippedDate;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -54,6 +56,24 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a deliveryDay set containing the list of strings given.
+     */
+    public static Set<DeliveryDay> getDeliveryDaySet(String... strings) {
+        return Arrays.stream(strings)
+                .map(DeliveryDay::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a skippedDate set containing the list of strings given.
+     */
+    public static Set<SkippedDate> getSkippedDateSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(SkippedDate::new)
                 .collect(Collectors.toSet());
     }
 
