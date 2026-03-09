@@ -1,13 +1,19 @@
 package seedu.address.model.util;
 
+import java.time.DayOfWeek;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDay;
+import seedu.address.model.delivery.DeliveryTime;
+import seedu.address.model.delivery.EndDate;
 import seedu.address.model.delivery.SkippedDate;
+import seedu.address.model.delivery.StartDate;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -19,16 +25,40 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    // sample deliveries for each person
+    private static final Delivery SAMPLE_DELIVERY_1 = new Delivery(
+            new StartDate("2026-10-21"), new EndDate("2026-12-21"),
+            EnumSet.range(DayOfWeek.MONDAY, DayOfWeek.FRIDAY)
+                    .stream()
+                    .map(Enum::name)
+                    .map(DeliveryDay::new)
+                    .collect(Collectors.toSet()),
+            new DeliveryTime("16:00"),
+            Set.of(new SkippedDate("2026-11-20"), new SkippedDate("2026-11-19"))
+    );
+    private static final Delivery SAMPLE_DELIVERY_2 = new Delivery(
+            new StartDate("2026-10-09"), new EndDate("2026-12-21"),
+            EnumSet.range(DayOfWeek.MONDAY, DayOfWeek.FRIDAY)
+                    .stream()
+                    .filter(day -> !day.equals(DayOfWeek.THURSDAY)) // do not deliver on Thursdays
+                    .map(Enum::name)
+                    .map(DeliveryDay::new)
+                    .collect(Collectors.toSet()),
+            new DeliveryTime("16:00"),
+            Set.of(new SkippedDate("2026-11-20"), new SkippedDate("2026-11-19"))
+    );
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends"),
-                null),
+                SAMPLE_DELIVERY_1),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"),
-                null),
+                SAMPLE_DELIVERY_2),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getTagSet("neighbours"),
