@@ -10,7 +10,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalDeliveries.*;
+import static seedu.address.testutil.TypicalDeliveries.DELIVERY_FIVE;
+import static seedu.address.testutil.TypicalDeliveries.DELIVERY_FOUR;
+import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ONE;
+import static seedu.address.testutil.TypicalDeliveries.DELIVERY_THREE;
+import static seedu.address.testutil.TypicalDeliveries.DELIVERY_TWO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
