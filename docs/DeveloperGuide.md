@@ -339,21 +339,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Any required field is missing.
 
-    * 1a1. ServeMate shows an error message describing the correct command format.
+    * 1a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Any parameter value is invalid.
 
-    * 1b1. ServeMate shows an error message describing the violated constraint.
+    * 1b1. ServeMate shows an error message describing the violated constraint and requests for a new command from the user.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. A customer with the same name already exists.
 
-    * 1c1. ServeMate shows an error message "This person already exists in the address book".
+    * 1c1. ServeMate shows an error message indicating that the customer already exists and requests for a new command from the user.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case 2: Delete a customer**
 
@@ -369,21 +369,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
 * 3a. The given index is not a positive integer.
 
-    * 3a1. ServeMate shows an error message describing the correct command format.
+    * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3b. The given index is out of range.
 
-    * 3b1. ServeMate shows an error message "The person index provided is invalid".
+    * 3b1. ServeMate shows an error message indicating that the provided index is invalid and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 **Use case 3: Edit customer record**
 
@@ -399,39 +399,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
 * 3a. The given index is not a positive integer.
 
-    * 3a1. ServeMate shows an error message describing the correct command format.
+    * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3b. The given index is out of range.
 
-    * 3b1. ServeMate shows an error message "The person index provided is invalid".
+    * 3b1. ServeMate shows an error message indicating that the provided index is invalid and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3c. No fields are specified for editing.
 
-    * 3c1. ServeMate shows an error message "At least one field to edit must be provided".
+    * 3c1. ServeMate shows an error message indicating that at least one field must be provided for editing and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3d. Any provided field value is invalid.
 
-    * 3d1. ServeMate shows an error message describing the violated constraint.
+    * 3d1. ServeMate shows an error message describing the violated constraint and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3e. Editing the name causes a duplicate with an existing customer.
 
-    * 3e1. ServeMate shows an error message "This person already exists in the address book".
+    * 3e1. ServeMate shows an error message indicating that the customer already exists and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 **Use case 4: Filter customer records**
 
@@ -446,19 +446,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The command format is invalid.
 
-    * 1a1. ServeMate shows an error message describing the correct command format.
+    * 1a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Any provided attribute value violates format constraints.
 
-    * 1b1. ServeMate shows an error message describing the violated constraint.
+    * 1b1. ServeMate shows an error message describing the violated constraint and requests for a new command from the user.
 
-      Use case ends.
+      Use case resumes at step 1.
 
-* 2a. No customers match the specified criteria.
+* 1c. No customers match the specified criteria.
 
-    * 2a1. ServeMate shows an empty result list.
+    * 1c1. ServeMate shows an empty result list.
 
       Use case ends.
 
