@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DAY_FIRST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_TIME_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_ONE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_TWO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SKIPPED_DATE_FIRST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SKIPPED_DATE_SECOND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_TWO;
 import static seedu.address.testutil.Assert.assertThrows;
