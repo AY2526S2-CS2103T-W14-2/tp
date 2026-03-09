@@ -302,8 +302,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | beginner user | see a message explaining how to access the help page    | learn what each operation does                                                                       |
 | `* *`    | user          | import customer data in bulk                            | conveniently transition into the app                                                                 |
 | `* *`    | user          | edit customer's data                                    | correct any mistakes or changes to customer data to keep information accuracy                        |
-| `* *`    | user          | add an upcoming delivery                                | track deliveries that need to be made                                                                |
-| `* *`    | user          | delete an upcoming delivery                             | eliminate cancelled delivery                                                                         |
+| `* *`    | user          | schedule a delivery                                     | track deliveries that need to be made                                                                |
+| `* *`    | user          | unschedule a delivery                                   | remove cancelled delivery                                                                            |
 | `* *`    | familiar user | display all upcoming deliveries                         | inform delivery drivers on their delivery points and plan production                                 |
 | `* *`    | familiar user | create a delivery route                                 | inform delivery drivers on their delivery route                                                      |
 | `* *`    | familiar user | reorder stops within a delivery route                   | ensures deliveries follow an efficient sequence                                                      |
