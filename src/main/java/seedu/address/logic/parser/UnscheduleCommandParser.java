@@ -14,7 +14,9 @@ public class UnscheduleCommandParser implements Parser<UnscheduleCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the UnscheduleCommand
      * and returns a UnscheduleCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args Input arguments to parse.
+     * @return {@code UnscheduleCommand} object based on the parsed arguments.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public UnscheduleCommand parse(String args) throws ParseException {
         try {

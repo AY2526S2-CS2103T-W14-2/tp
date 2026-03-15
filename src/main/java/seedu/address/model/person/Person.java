@@ -28,13 +28,20 @@ public class Person {
     private final Delivery delivery;
 
     /**
-     * Constructs a {@code Person} where every field,
-     * except for deliveries, must be present and not null.
+     * Constructs a {@code Person} with the given name, phone, email, address and tag.
+     * <p>
+     * The {@code delivery} field is set to {@code null} by default.
+     * @param name Name of the person, which must not be null.
+     * @param phone Phone number of the person, which must not be null.
+     * @param email Email of the person, which must not be null.
+     * @param address Address of the person, which must not be null.
+     * @param tags Set of tags associated with the person, which must not be null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         this(name, phone, email, address, tags, null);
     }
 
+    //@author BenedTj
     /**
      * Every field must be present and not null.
      */
@@ -46,6 +53,15 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.delivery = delivery;
+    }
+    //@@author
+
+    /**
+     * Returns a new {@code Person} without any delivery assigned.
+     * @return A copy of this person with their delivery removed.
+     */
+    public Person withoutDelivery() {
+        return new Person(name, phone, email, address, getTags());
     }
 
     public Name getName() {
@@ -114,6 +130,7 @@ public class Person {
             return false;
         }
 
+        //@@author BenedTj
         Person otherPerson = (Person) other;
 
         boolean isNonNullableFieldsEqual = name.equals(otherPerson.name)
@@ -127,6 +144,7 @@ public class Person {
         } else {
             return isNonNullableFieldsEqual && delivery.equals(otherPerson.delivery);
         }
+        //@@author
     }
 
     @Override
