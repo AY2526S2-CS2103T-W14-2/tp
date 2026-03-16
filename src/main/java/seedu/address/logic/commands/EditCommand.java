@@ -101,7 +101,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Delivery delivery = personToEdit.getDelivery();
+        Delivery delivery = editPersonDescriptor.getDelivery().orElse(personToEdit.getDelivery());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, delivery);
     }
@@ -140,6 +140,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Delivery delivery;
 
         public EditPersonDescriptor() {}
 
@@ -153,6 +154,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setDelivery(toCopy.delivery);
         }
 
         /**
@@ -209,6 +211,24 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Set {@code delivery} to this object's {@code delivery}.
+         *
+         * @param delivery
+         */
+        public void setDelivery(Delivery delivery) {
+            this.delivery = delivery;
+        }
+
+        /**
+         * Returns a delivery object wrapped in an {@code Optional}.
+         *
+         * @return {@code Optional#empty()} if {@code delivery} is null.
+         */
+        public Optional<Delivery> getDelivery() {
+            return Optional.ofNullable(delivery);
         }
 
         @Override
