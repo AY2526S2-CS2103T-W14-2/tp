@@ -33,7 +33,7 @@ public class StartDateTest {
         assertFalse(StartDate.isValidStartDate("2020-01")); // does not contain date number
         assertFalse(StartDate.isValidStartDate("12-01-2026")); // incorrect format
 
-        // valid start dates
+        // valid start date
         assertTrue(StartDate.isValidStartDate("2019-10-15")); // correct format
     }
 

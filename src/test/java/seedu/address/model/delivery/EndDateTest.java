@@ -21,10 +21,10 @@ public class EndDateTest {
 
     @Test
     public void isValidEndDate() {
-        // null start date
+        // null end date
         assertThrows(NullPointerException.class, () -> EndDate.isValidEndDate(null));
 
-        // invalid start dates
+        // invalid end dates
         assertFalse(EndDate.isValidEndDate("")); // empty string
         assertFalse(EndDate.isValidEndDate(" ")); // spaces only
         assertFalse(EndDate.isValidEndDate("12")); // only date number
@@ -33,7 +33,7 @@ public class EndDateTest {
         assertFalse(EndDate.isValidEndDate("2020-01")); // does not contain date number
         assertFalse(EndDate.isValidEndDate("12-01-2026")); // incorrect format
 
-        // valid start dates
+        // valid end date
         assertTrue(EndDate.isValidEndDate("2019-10-15")); // correct format
     }
 

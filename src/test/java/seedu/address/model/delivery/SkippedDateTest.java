@@ -20,10 +20,10 @@ public class SkippedDateTest {
 
     @Test
     public void isValidSkippedDate() {
-        // null start date
+        // null skipped date
         assertThrows(NullPointerException.class, () -> SkippedDate.isValidSkippedDate(null));
 
-        // invalid start dates
+        // invalid skipped dates
         assertFalse(SkippedDate.isValidSkippedDate("")); // empty string
         assertFalse(SkippedDate.isValidSkippedDate(" ")); // spaces only
         assertFalse(SkippedDate.isValidSkippedDate("12")); // only date number
@@ -32,7 +32,7 @@ public class SkippedDateTest {
         assertFalse(SkippedDate.isValidSkippedDate("2020-01")); // does not contain date number
         assertFalse(SkippedDate.isValidSkippedDate("12-01-2026")); // incorrect format
 
-        // valid start dates
+        // valid skipped date
         assertTrue(SkippedDate.isValidSkippedDate("2019-10-15")); // correct format
     }
 
