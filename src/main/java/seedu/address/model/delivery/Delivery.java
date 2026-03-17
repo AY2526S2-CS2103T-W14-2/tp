@@ -12,9 +12,6 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Delivery {
-
-    private static final int NUM_DAYS_PER_WEEK = 7;
-
     // Data fields
     private final StartDate startDate;
     private final EndDate endDate;
