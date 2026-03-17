@@ -19,6 +19,7 @@ public class DeliveryBuilder {
     public static final String DEFAULT_START_DATE = "2019-10-15";
     public static final String DEFAULT_END_DATE = "2019-10-20";
     public static final String DEFAULT_TIME = "12:59";
+    public static final String DEFAULT_DAY = "Monday";
 
     private StartDate startDate;
     private EndDate endDate;
@@ -33,6 +34,7 @@ public class DeliveryBuilder {
         startDate = new StartDate(DEFAULT_START_DATE);
         endDate = new EndDate(DEFAULT_END_DATE);
         deliveryDays = new HashSet<>();
+        deliveryDays.add(new DeliveryDay(DEFAULT_DAY));
         deliveryTime = new DeliveryTime(DEFAULT_TIME);
         skippedDates = new HashSet<>();
     }
