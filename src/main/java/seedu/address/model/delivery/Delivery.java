@@ -13,6 +13,8 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Delivery {
 
+    private static final int NUM_DAYS_PER_WEEK = 7;
+
     // Data fields
     private final StartDate startDate;
     private final EndDate endDate;
@@ -61,6 +63,15 @@ public class Delivery {
      */
     public Set<SkippedDate> getSkippedDates() {
         return Collections.unmodifiableSet(skippedDates);
+    }
+
+    /**
+     * Returns a formatted string of the delivery schedule for display.
+     *
+     * @return Formatted string containing the start date, end date, and time of delivery.
+     */
+    public String getFormattedDeliverySchedule() {
+        return startDate + " to " + endDate + "  |  " + deliveryTime;
     }
 
     @Override
