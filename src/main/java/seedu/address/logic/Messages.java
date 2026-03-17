@@ -60,7 +60,7 @@ public class Messages {
      *
      * @param person The person whose delivery is to be formatted.
      * @return String representation of the person's name and, if
-     *         present, their delivery, suitable for display.
+     *         present, information about their delivery.
      */
     public static String formatDeliveryFromPerson(Person person) {
         if (!person.hasDelivery()) {
@@ -76,8 +76,9 @@ public class Messages {
 
     /**
      * Formats the {@code delivery} for display to the user.
+     *
      * @param delivery The delivery to format.
-     * @return String representation of the delivery suitable for display.
+     * @return String representation of the delivery's information.
      */
     private static String formatDelivery(Delivery delivery) {
         final StringBuilder builder = new StringBuilder();
