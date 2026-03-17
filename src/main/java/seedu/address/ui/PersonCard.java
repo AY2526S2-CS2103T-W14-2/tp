@@ -19,13 +19,13 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
-    public static final String STYLE_DELIVERY_DAY_PRESENT = "-fx-background-color: #2196F3; "
+    public static final String STYLE_DELIVERY_DAY_PRESENT = "-fx-background-color: #3CB043; "
             + "-fx-text-fill: white; "
             + "-fx-font-weight: bold; "
             + "-fx-font-size: 11px; "
             + "-fx-background-radius: 5; "
             + "-fx-border-radius: 5; "
-            + "-fx-border-color: #1565C0; "
+            + "-fx-border-color: #028A0F; "
             + "-fx-border-width: 1;";
     public static final String STYLE_DELIVERY_DAY_ABSENT = "-fx-background-color: #E0E0E0; "
             + "-fx-text-fill: #9E9E9E; "
