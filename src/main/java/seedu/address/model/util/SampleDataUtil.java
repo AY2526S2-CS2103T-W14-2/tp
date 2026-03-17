@@ -26,8 +26,8 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    // sample deliveries for each person
-    private static final Delivery SAMPLE_DELIVERY_1 = new Delivery(
+    /** Sample delivery objects */
+    private static final Delivery SAMPLE_DELIVERY_ALEX = new Delivery(
             new StartDate("2026-10-21"), new EndDate("2026-12-21"),
             EnumSet.range(DayOfWeek.MONDAY, DayOfWeek.FRIDAY)
                     .stream()
@@ -37,7 +37,7 @@ public class SampleDataUtil {
             new DeliveryTime("16:00"),
             Set.of(new SkippedDate("2026-11-20"), new SkippedDate("2026-11-19"))
     );
-    private static final Delivery SAMPLE_DELIVERY_2 = new Delivery(
+    private static final Delivery SAMPLE_DELIVERY_BERNICE = new Delivery(
             new StartDate("2026-10-09"), new EndDate("2026-12-21"),
             EnumSet.range(DayOfWeek.MONDAY, DayOfWeek.FRIDAY)
                     .stream()
@@ -49,32 +49,33 @@ public class SampleDataUtil {
             Set.of(new SkippedDate("2026-11-20"), new SkippedDate("2026-11-19"))
     );
 
+    /**
+     * Returns an array of {@code Person} objects containing sample data.
+     *
+     * @return An array of {@code Person} objects containing sample data.
+     */
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends"),
-                SAMPLE_DELIVERY_1),
+                SAMPLE_DELIVERY_ALEX),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"),
-                SAMPLE_DELIVERY_2),
+                SAMPLE_DELIVERY_BERNICE),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"),
-                null),
+                getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"),
-                null),
+                getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"),
-                null),
+                getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"),
-                null)
+                getTagSet("colleagues"))
         };
     }
 
