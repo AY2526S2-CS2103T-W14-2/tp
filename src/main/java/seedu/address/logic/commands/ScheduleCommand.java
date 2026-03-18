@@ -45,8 +45,6 @@ public class ScheduleCommand extends Command {
             + PREFIX_DAYS + "124";
 
     public static final String MESSAGE_SCHEDULE_DELIVERY_SUCCESS = "Scheduled Delivery for Person: %1$s";
-    public static final String MESSAGE_NOT_SCHEDULED =
-            "At least one field for delivery to schedule must be provided.";
 
     private final Index targetIndex;
     private final Delivery toSchedule;
