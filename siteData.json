@@ -120,6 +120,7 @@
         "locating-customers-by-name-find": "Locating customers by name: find",
         "locating-customers-by-delivery-date-find-delivery": "Locating customers by delivery date: find-delivery",
         "deleting-a-customer-delete": "Deleting a customer : delete",
+        "scheduling-a-delivery-schedule": "Scheduling a delivery : schedule",
         "unscheduling-a-delivery-unschedule": "Unscheduling a delivery : unschedule",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
