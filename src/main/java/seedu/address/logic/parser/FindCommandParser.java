@@ -21,7 +21,10 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @param args Arguments specified after the find command word.
+     * @return The constructed {@code FindCommand} based on the arguments specified.
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -54,6 +57,11 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Returns true if at least 1 of the prefixes contains a non-empty {@code Optional} value in the given
      * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap {@code ArgumentMultimap} to check for values of the specified prefixes.
+     * @param prefixes Variable number of {@code Prefix} to check for their values.
+     * @return {@code true} if at least 1 of the prefixes contains a non-empty {@code Optional} value.
+     *         {@code false} otherwise.
      */
     private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         // anyMatch checks if any of the prefixes is present (short-circuiting)

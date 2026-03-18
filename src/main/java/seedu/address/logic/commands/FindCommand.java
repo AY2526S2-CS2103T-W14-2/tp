@@ -14,7 +14,6 @@ import seedu.address.model.person.PersonMatchesFilterPredicate;
  * Finds and lists all persons in address book whose attributes (fields) match all the filters.
  * Keyword matching is case insensitive. Full word match is required.
  */
-
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
