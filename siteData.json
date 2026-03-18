@@ -118,6 +118,7 @@
         "listing-all-customers-list": "Listing all customers: list",
         "editing-a-customer-edit": "Editing a customer: edit",
         "locating-customers-by-name-find": "Locating customers by name: find",
+        "locating-customers-by-delivery-date-find-delivery": "Locating customers by delivery date: find-delivery",
         "deleting-a-customer-delete": "Deleting a customer : delete",
         "unscheduling-a-delivery-unschedule": "Unscheduling a delivery : unschedule",
         "clearing-all-entries-clear": "Clearing all entries : clear",
