@@ -116,21 +116,22 @@ public class Person {
     }
 
     /**
-     * Returns an immutable set of delivery day names, or {@code null} if the person does not
-     * have a delivery assigned.
+     * Returns an immutable set of delivery day names.
+     * <p>If the person does not have a delivery assigned or has a delivery with no delivery days,
+     * an empty set is returned.
      * <p>Example of delivery day names: Monday, Tuesday ...
      *
      * @return A set of delivery day names if the person has a delivery assigned.
      */
     public Set<String> getDeliveryDayNames() {
         if (!hasDelivery()) {
-            return null;
+            return Collections.emptySet();
         }
         return delivery
                 .getDeliveryDays()
                 .stream()
                 .map(DeliveryDay::toString)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     /**
