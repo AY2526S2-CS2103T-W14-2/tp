@@ -39,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Disallow duplicate prefixes
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_TAG);
 
-        // Parse string of keywords, to obtain list of keywords (after splitting by whitespaces)
+        // Extract list of name, address and tag keywords for filtering.
         // Throws ParseException if name, address or tag keywords are invalid.
         List<String> nameKeywords = parseKeywords(argMultimap, PREFIX_NAME);
         List<String> addressKeywords = parseKeywords(argMultimap, PREFIX_ADDRESS);
