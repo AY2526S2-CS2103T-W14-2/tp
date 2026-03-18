@@ -139,15 +139,15 @@ Format: `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`
 * If a filter is not specified or there are no keywords, the filter is *not applied*.
 * Only customers matching *all* filters specified will be displayed.
 * For each filter, multiple keywords can be specified. A customer matches the filter if *at least one* keyword matches (i.e. `OR` search).
-  e.g. `n/John Lily t/North` will return all your customers whose name is `John` or `Lily`, and tagged with delivery area `North`.
+  e.g. `n/John Lily t/Vegetarian` will return all your customers whose name is `John` or `Lily`, and tagged with dietary restriction `Vegetarian`.
 
 Examples:
 * `find a/Jurong` displays all customers with address containing `Jurong`.
-* `find t/West` displays all customers tagged with delivery area `West`.
-* `find n/Alex t/North` displays customers whose name is `Alex` *and* tagged with delivery area `North`.
+* `find t/Vegetarian` displays all customers tagged with dietary restriction `Vegetarian`.
+* `find n/Alex t/Vegetarian` displays customers whose name is `Alex` *and* tagged with dietary restriction `Vegetarian`.
 * `find n/Bernice a/Yishun Jurong` displays customers whose name is `Bernice` *and* with address containing `Yishun` or `Jurong`.
-* `find n/Alex Bernice a/Yishun t/North` displays customers whose name is `Alex` or `Bernice`, with address containing `Yishun` *and* tagged with delivery area `North`.<br>
-  ![result for 'find n/Alex Bernice a/Yishun t/North'](images/findAlexBerniceResult.png)
+* `find n/Alex Bernice a/Yishun t/Vegetarian` displays customers whose name is `Alex` or `Bernice`, with address containing `Yishun` *and* tagged with dietary restriction `Vegetarian`.<br>
+  ![result for 'find n/Alex Bernice a/Yishun t/Vegetarian'](images/findAlexBerniceResult.png)
 
 ### Deleting a customer : `delete`
 
