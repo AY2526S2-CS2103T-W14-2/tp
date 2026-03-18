@@ -167,7 +167,7 @@ Format: `schedule INDEX d/START_DATE n/NUMBER_OF_DAYS t/DELIVERY_TIME days/DELIV
 * If the specified customer already has a delivery, the delivery field is overwritten.
 * The index refers to the index number shown in the displayed customer list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* `DELIVERY_DAYS` must be a set of numbers **within the range of 1-7 inclusive** representing days of the week Monday to Sunday without whitespaces. For example, set of numbers, where 1 = Monday, 2 = Tuesday, ..., 7 = Sunday.
+* `DELIVERY_DAYS` must be a set of numbers **within the range of 1-7 inclusive** representing days of the week Monday to Sunday without whitespaces. For example, set of numbers, where 1 = Monday, 2 = Tuesday, …​, 7 = Sunday.
 
 Examples:
 * `schedule 1 d/2026-02-01 n/1 t/12:59 days/125`
