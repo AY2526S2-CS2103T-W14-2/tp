@@ -117,7 +117,7 @@
         "adding-a-customer-add": "Adding a customer: add",
         "listing-all-customers-list": "Listing all customers: list",
         "editing-a-customer-edit": "Editing a customer: edit",
-        "locating-customers-by-name-find": "Locating customers by name: find",
+        "locating-customers-by-attributes-find": "Locating customers by attributes: find",
         "locating-customers-by-delivery-date-find-delivery": "Locating customers by delivery date: find-delivery",
         "deleting-a-customer-delete": "Deleting a customer : delete",
         "scheduling-a-delivery-schedule": "Scheduling a delivery : schedule",
