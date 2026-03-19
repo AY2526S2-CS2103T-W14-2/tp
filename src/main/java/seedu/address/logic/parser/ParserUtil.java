@@ -270,6 +270,9 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_DUPLICATE_DELIVERY_DAYS);
         }
 
+        // Sort delivery days
+        Arrays.sort(listOfDeliveryDays);
+
         Set<DeliveryDay> deliveryDaySet = new HashSet<>();
         for (String deliveryDayNumber : listOfDeliveryDays) {
             deliveryDaySet.add(parseDeliveryDayNumber(deliveryDayNumber));
