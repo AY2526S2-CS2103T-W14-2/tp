@@ -1,8 +1,8 @@
 {
   "baseUrl": "",
-  "titlePrefix": "ServeMate",
-  "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "titlePrefix": "",
+  "titleSuffix": "ServeMate",
+  "faviconPath": "images/ServeMate.png",
   "style": {
     "codeTheme": "light"
   },
