@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
-  "titlePrefix": "",
-  "titleSuffix": "ServeMate",
+  "titlePrefix": "ServeMate",
+  "titleSuffix": "",
   "faviconPath": "images/servemate.png",
   "style": {
     "codeTheme": "light"
