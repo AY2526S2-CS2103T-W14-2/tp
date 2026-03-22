@@ -11,26 +11,34 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## Acknowledgements
 
 ### Original Source
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+### Libraries Used
+* [JavaFX](https://openjfx.io/) for GUI rendering.
+* [Jackson](https://github.com/FasterXML/jackson) for JSON processing.
+* [JUnit5](https://github.com/junit-team/junit5) for unit and integration testing.
+* [PlantUML](https://plantuml.com/stdlib) for generating UML diagrams.
 
 ### AI Generated Work
 * Gemini was used to generate the ServeMate icon for the application and GUI window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## Setting Up and Getting Started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## Design
 
-> **Note:** <br>
-> All references of a person in this design section represent a customer.
+<box type="info" seamless>
+
+**Note:** All references of a person in this design section represent a customer.
+</box>
 
 ### Architecture
 
@@ -161,111 +169,63 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## Feature implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Find customer by attribute
 
-#### Proposed Implementation
+### Find delivery by date
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+### Schedule delivery
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+### Reschedule delivery
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+### Unschedule delivery
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+**Objective:** Allows administrative staff to delete a delivery that is associated with the specified customer, without deleting the customer record.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th customer in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new customer. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+#### Implementation details
+The following sequence diagram illustrates the interactions within the `Logic` component for unscheduling a delivery:
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
+**Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-Step 4. The user now decides that adding the customer was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+<puml src="diagrams/UnscheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `unschedule 2` Command" />
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+**Execution flow:**
+1. The user enters the `unschedule` command as an input string.
+2. `LogicManager` receives the input string and passes it to `AddressBookParser`.
+3. `AddressBookParser` creates an `UnscheduleCommandParser` to parse the command arguments.
+4. `UnscheduleCommandParser` parses the index and creates an `UnscheduleCommand` object.
+5. `LogicManager` executes the `UnscheduleCommand` object.
+6. `UnscheduleCommand` checks whether the specified customer and their delivery exist.
+7. If the customer has a delivery, `UnscheduleCommand` creates a new `Person` object with all existing fields intact except the delivery.
+8. `UnscheduleCommand` requests `Model` to replace the old entry in the address book with the newly created `Person` object.
+9. `UnscheduleCommand` completes and returns the result of the `unschedule` command.
 
+#### Design considerations
 
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the customer being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+1. How the command is named.
+    * **Chosen:** Name the command as `unschedule`.
+      * Pros: User-friendly and intuitive, as it maintains consistency with delivery-related commands (`schedule`, `reschedule`).
+      * Cons: Not commonly used in standard English, which may cause first-time users to find it unusual.
+    * **Alternative:** Name the command as `cancel`.
+      * Pros: Familiar word that users are unlikely to mistype.
+      * Cons: Ambiguous, since `cancel` could refer to cancelling of other actions beyond deliveries; breaks consistency with `schedule` and `reschedule`.
+2. How `unschedule` removes the delivery from a person.
+    * **Chosen:** Implement a dedicated `unschedule` command.
+      * Pros: One-shot command that enables users to easily remove the delivery of the specified person.
+      * Cons: Requires implementing a new command class.
+    * **Alternative:** Instruct the user to delete the customer and add them back without their delivery details.
+      * Pros: Reuses existing `delete` and `add` commands without needing additional implementation effort.
+      * Cons: More error-prone, as the user must manually re-enter the customer's details.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## Documentation, logging, testing, configuration, dev-ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -275,7 +235,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## Appendix: Requirements
 
 ### Product scope
 
@@ -535,15 +495,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 4.
 
-**Use case 7: Delete a particular customer's delivery**
+**Use case 7: Delete a delivery associated with a customer**
 
 **MSS**
 
 1. User requests to list customers
 2. ServeMate shows a list of customers
-3. User requests to delete a particular customer's delivery
-4. ServeMate deletes the particular customer's delivery from the customer's details
-5. ServeMate shows a confirmation message with the deleted delivery's details
+3. User requests to delete a customer's delivery
+4. ServeMate deletes the delivery associated with the specified customer
+5. ServeMate shows a confirmation message that includes the customer's name and details of the deleted delivery
    Use case ends.
 
 **Extensions**
@@ -554,19 +514,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is not a positive integer.
 
-  * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
+  * 3a1. ServeMate shows an error message describing the correct command format.
 
     Use case resumes at step 3.
 
 * 3b. The given index is out of range.
 
-  * 3b1. ServeMate shows an error message describing that the index value given is invalid and requests for a new command from the user.
+  * 3b1. ServeMate shows an error message describing that the index provided is invalid.
 
     Use case resumes at step 3.
 
-* 3c. The details of the customer at the given index does not have a delivery added to it.
+* 3c. The customer at the given index does not have a delivery.
 
-  * 3c1. ServeMate shows an error message describing that the customer at the index value does not have a delivery added to the customer details.
+  * 3c1. ServeMate shows an error message describing that the specified customer does not have an existing delivery.
 
     Use case ends.
 
@@ -651,7 +611,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
