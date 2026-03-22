@@ -103,10 +103,11 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(CARL, DANIEL, GEORGE), model.getFilteredPersonList());
     }
 
+    //@@author elijah-ng
     @Test
     public void execute_multipleTagKeywords_multiplePersonsFound() {
         PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(
-                Collections.emptyList(), Collections.emptyList(), Arrays.asList("friends", "colleagues"));
+                Collections.emptyList(), Collections.emptyList(), Arrays.asList("West", "Halal"));
         FindCommand command = new FindCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
@@ -116,6 +117,7 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
     }
+    //@@author
 
     @Test
     public void execute_multipleFiltersAndKeywords_personFound() {
@@ -131,10 +133,11 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
     }
 
+    //@@author elijah-ng
     @Test
     public void execute_allFiltersAndMixedCaseKeywords_personFound() {
         PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(
-                Arrays.asList("dAnieL"), Arrays.asList("strEEt"), Arrays.asList("FRiends"));
+                Arrays.asList("dAnieL"), Arrays.asList("strEEt"), Arrays.asList("hAlAL"));
         FindCommand command = new FindCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
@@ -144,6 +147,7 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(DANIEL), model.getFilteredPersonList());
     }
+    //@@author
 
     @Test
     public void toStringMethod() {
