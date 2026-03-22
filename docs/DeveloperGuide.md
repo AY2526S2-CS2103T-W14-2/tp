@@ -494,15 +494,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 4.
 
-**Use case 7: Delete a particular customer's delivery**
+**Use case 7: Delete a delivery associated with a customer**
 
 **MSS**
 
 1. User requests to list customers
 2. ServeMate shows a list of customers
-3. User requests to delete a particular customer's delivery
-4. ServeMate deletes the particular customer's delivery from the customer's details
-5. ServeMate shows a confirmation message with the deleted delivery's details
+3. User requests to delete a customer's delivery
+4. ServeMate deletes the delivery associated with the specified customer
+5. ServeMate shows a confirmation message that includes the customer's name and details of the deleted delivery
    Use case ends.
 
 **Extensions**
@@ -513,19 +513,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is not a positive integer.
 
-  * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
+  * 3a1. ServeMate shows an error message describing the correct command format.
 
     Use case resumes at step 3.
 
 * 3b. The given index is out of range.
 
-  * 3b1. ServeMate shows an error message describing that the index value given is invalid and requests for a new command from the user.
+  * 3b1. ServeMate shows an error message describing that the index provided is invalid.
 
     Use case resumes at step 3.
 
-* 3c. The details of the customer at the given index does not have a delivery added to it.
+* 3c. The customer at the given index does not have a delivery.
 
-  * 3c1. ServeMate shows an error message describing that the customer at the index value does not have a delivery added to the customer details.
+  * 3c1. ServeMate shows an error message describing that the specified customer does not have an existing delivery.
 
     Use case ends.
 
