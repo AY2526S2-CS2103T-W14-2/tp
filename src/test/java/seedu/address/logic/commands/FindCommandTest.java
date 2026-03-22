@@ -103,6 +103,7 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(CARL, DANIEL, GEORGE), model.getFilteredPersonList());
     }
 
+    //@@author elijah-ng
     @Test
     public void execute_multipleTagKeywords_multiplePersonsFound() {
         PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(
@@ -116,6 +117,7 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
     }
+    //@@author
 
     @Test
     public void execute_multipleFiltersAndKeywords_personFound() {
@@ -131,6 +133,7 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
     }
 
+    //@@author elijah-ng
     @Test
     public void execute_allFiltersAndMixedCaseKeywords_personFound() {
         PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(
@@ -144,6 +147,7 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(DANIEL), model.getFilteredPersonList());
     }
+    //@@author
 
     @Test
     public void toStringMethod() {

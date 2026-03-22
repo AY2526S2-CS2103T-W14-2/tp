@@ -16,14 +16,14 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_VEGETARIAN;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HALAL;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_VEGETARIAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_VEGETARIAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HALAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_VEGETARIAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -60,8 +60,9 @@ public class AddCommandParserTest {
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_VEGETARIAN, VALID_TAG_HALAL)
                 .build();
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HALAL + TAG_DESC_VEGETARIAN,
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_HALAL + TAG_DESC_VEGETARIAN,
                 new AddCommand(expectedPersonMultipleTags));
     }
 

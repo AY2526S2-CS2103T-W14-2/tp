@@ -1,8 +1,8 @@
 package seedu.address.model.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_VEGETARIAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HALAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_VEGETARIAN;
 import static seedu.address.model.util.SampleDataUtil.getDeliveryDaySet;
 import static seedu.address.model.util.SampleDataUtil.getSkippedDateSet;
 import static seedu.address.model.util.SampleDataUtil.getTagSet;
