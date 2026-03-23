@@ -48,6 +48,7 @@ public class RescheduleCommand extends Command {
 
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NON_EXISTENT_DELIVERY = "This person does not have an existing delivery";
 
     private final Index targetIndex;
     private final RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor;
@@ -76,6 +77,9 @@ public class RescheduleCommand extends Command {
         }
 
         Person personToReschedule = lastShownList.get(targetIndex.getZeroBased());
+        if (!personToReschedule.hasDelivery()) {
+            throw new CommandException(MESSAGE_NON_EXISTENT_DELIVERY);
+        }
         Person rescheduledPerson = createRescheduledPerson(personToReschedule, rescheduleDeliveryDescriptor);
 
         model.setPerson(personToReschedule, rescheduledPerson);
