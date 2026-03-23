@@ -128,11 +128,7 @@ public class Person {
         if (!hasDelivery()) {
             return Collections.emptySet();
         }
-        return delivery
-                .getDeliveryDays()
-                .stream()
-                .map(DeliveryDay::toString)
-                .collect(Collectors.toUnmodifiableSet());
+        return delivery.getDeliveryDayNames();
     }
 
     /**

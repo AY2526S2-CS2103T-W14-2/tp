@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 
@@ -74,6 +75,19 @@ public class Delivery {
         assert deliveryTime != null;
 
         return startDate + " to " + endDate + "  |  " + deliveryTime;
+    }
+
+    /**
+     * Returns an immutable set of delivery day names.
+     * <p>Example of delivery day names: Monday, Tuesday ...
+     *
+     * @return A set of delivery day names.
+     */
+    public Set<String> getDeliveryDayNames() {
+        return deliveryDays
+                .stream()
+                .map(DeliveryDay::toString)
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     /**
