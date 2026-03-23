@@ -163,7 +163,7 @@ public class RescheduleCommandTest {
     }
 
     @Test
-    public void execute_validPerson_noDelivery_failure() {
+    public void execute_validPersonWithoutDelivery_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person firstPersonWithoutDelivery = new PersonBuilder(firstPerson).withDelivery(null).build();
 

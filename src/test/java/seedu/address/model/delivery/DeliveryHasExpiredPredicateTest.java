@@ -61,7 +61,7 @@ public class DeliveryHasExpiredPredicateTest {
     }
 
     @Test
-    public void equal() {
+    public void equals() {
         LocalDate firstDate = LocalDate.of(2026, 4, 1);
         LocalDate secondDate = LocalDate.of(2026, 2, 28);
 

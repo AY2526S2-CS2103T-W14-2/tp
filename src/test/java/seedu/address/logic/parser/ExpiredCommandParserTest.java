@@ -82,8 +82,8 @@ public class ExpiredCommandParserTest {
 
     @Test
     public void parse_extraDate_failure() {
-        assertParseFailure(parser, " " + PREFIX_BEFORE_DATE + "2026-02-29 2026-02-29"
-                , ParserUtil.MESSAGE_INVALID_DATE);
+        assertParseFailure(parser, " " + PREFIX_BEFORE_DATE + "2026-02-29 2026-02-29",
+                ParserUtil.MESSAGE_INVALID_DATE);
     }
 
 }

@@ -21,8 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for
- * {@code UnscheduleCommand}.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code UnscheduleCommand}.
  */
 public class UnscheduleCommandTest {
 

@@ -15,7 +15,7 @@ import seedu.address.testutil.PersonBuilder;
 public class PersonHasExpiredDeliveryPredicateTest {
 
     @Test
-    public void test_personWithDelivery_deliveryExpired_returnsTrue() {
+    public void test_personWithExpiredDelivery_returnsTrue() {
         Delivery delivery = new DeliveryBuilder()
                 .withStartDate("2024-03-01")
                 .withEndDate("2024-04-01")
@@ -36,7 +36,7 @@ public class PersonHasExpiredDeliveryPredicateTest {
     }
 
     @Test
-    public void test_personWithoutDelivery_returnFalse() {
+    public void test_personWithoutDelivery_returnsFalse() {
         // Equivalence partition for person without deliveries
         Person person = new PersonBuilder()
                 .withDelivery(null)
@@ -47,7 +47,7 @@ public class PersonHasExpiredDeliveryPredicateTest {
     }
 
     @Test
-    public void test_personWithDelivery_deliveryNotExpired_returnsFalse() {
+    public void test_personWithNonExpiredDelivery_returnsFalse() {
         Delivery delivery = new DeliveryBuilder()
                 .withStartDate("2024-03-01")
                 .withEndDate("2024-04-01")
@@ -80,7 +80,7 @@ public class PersonHasExpiredDeliveryPredicateTest {
     }
 
     @Test
-    public void equal() {
+    public void equals() {
         LocalDate firstDate = LocalDate.of(2026, 4, 1);
         LocalDate secondDate = LocalDate.of(2026, 2, 28);
 
