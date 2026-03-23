@@ -7,12 +7,10 @@ import static seedu.address.commons.util.DateTimeUtil.parseDeliveryDate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Delivery's end date in the address book.
- * Guarantees: immutable;
- * is valid as declared in {@link seedu.address.commons.util.DateTimeUtil#isValidDeliveryDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidEndDate(String)}
  */
 public class EndDate {
     public static final String MESSAGE_CONSTRAINTS =
@@ -34,8 +32,16 @@ public class EndDate {
      */
     public EndDate(String date) {
         requireNonNull(date);
-        checkArgument(isValidDeliveryDate(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidEndDate(date), MESSAGE_CONSTRAINTS);
         this.date = parseDeliveryDate(date);
+    }
+
+    /**
+     * Returns true if a given string is a valid
+     * end date in the valid format.
+     */
+    public static boolean isValidEndDate(String test) {
+        return isValidDeliveryDate(test);
     }
 
     @Override
