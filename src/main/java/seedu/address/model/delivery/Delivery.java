@@ -1,7 +1,5 @@
 package seedu.address.model.delivery;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
@@ -71,6 +69,10 @@ public class Delivery {
      * @return Formatted string containing the start date, end date, and time of delivery.
      */
     public String getFormattedDeliverySchedule() {
+        assert startDate != null;
+        assert endDate != null;
+        assert deliveryTime != null;
+
         return startDate + " to " + endDate + "  |  " + deliveryTime;
     }
 
@@ -83,6 +85,7 @@ public class Delivery {
      */
     public boolean hasExpired(LocalDate beforeDate) {
         assert beforeDate != null;
+
         return endDate.isBefore(beforeDate);
     }
 
