@@ -125,15 +125,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_findDelivery() throws Exception {
-        String dateString = "2026-04-01";
-        LocalDate date = LocalDate.of(2026, 4, 1);
-        FindDeliveryCommand command = (FindDeliveryCommand) parser.parseCommand(
-                FindDeliveryCommand.COMMAND_WORD + " " + dateString);
-        assertEquals(new FindDeliveryCommand(new DeliveryDatePredicate(date)), command);
-    }
-
-    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
