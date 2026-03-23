@@ -11,6 +11,8 @@ import seedu.address.model.delivery.SkippedDate;
 import seedu.address.model.delivery.StartDate;
 import seedu.address.model.util.SampleDataUtil;
 
+import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
+
 /**
  * A utility class to help with building Delivery objects
  */
@@ -34,7 +36,7 @@ public class DeliveryBuilder {
         startDate = new StartDate(DEFAULT_START_DATE);
         endDate = new EndDate(DEFAULT_END_DATE);
         deliveryDays = new HashSet<>();
-        deliveryDays.add(new DeliveryDay(DEFAULT_DAY));
+        deliveryDays.add(toDeliveryDay(DEFAULT_DAY));
         deliveryTime = new DeliveryTime(DEFAULT_TIME);
         skippedDates = new HashSet<>();
     }
