@@ -10,7 +10,7 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryHasExpiredPredicate;
 
 /**
- * Tests that a {@code Person} has an expired delivery.
+ * Tests that a {@code Person} has a delivery and it is expired.
  * <p>A delivery is considered expired if its end date is before the specified date.
  */
 public class PersonHasExpiredDeliveryPredicate implements Predicate<Person> {
@@ -30,6 +30,11 @@ public class PersonHasExpiredDeliveryPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         Delivery delivery = person.getDelivery();
+
+        if (delivery == null) {
+            return false; // person has no delivery -> person has no expired deliveries
+        }
+
         return new DeliveryHasExpiredPredicate(beforeDate).test(delivery);
     }
 
