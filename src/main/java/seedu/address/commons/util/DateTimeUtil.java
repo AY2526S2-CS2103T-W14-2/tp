@@ -10,7 +10,7 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 /**
- * Helper functions for handling dates.
+ * Helper functions for handling dates, days and times.
  */
 public class DateTimeUtil {
     /**
@@ -66,7 +66,7 @@ public class DateTimeUtil {
     }
 
     /**
-     * Parses raw string dates into their corresponding LocalDate objects.
+     * Parses {@code date} into a {@code LocalDate} and returns it.
      *
      * @throws DateTimeParseException If the argument passed is an invalid delivery date value.
      */
@@ -95,7 +95,7 @@ public class DateTimeUtil {
     }
 
     /**
-     * Parses raw day word strings into the DayOfWeek object value.
+     * Parses {@code day} into a {@code DayOfWeek} and returns it.
      *
      * @throws DateTimeParseException If the argument passed is an invalid delivery day word value.
      * @throws IllegalArgumentException If an empty string is passed as the argument.
@@ -154,7 +154,7 @@ public class DateTimeUtil {
     }
 
     /**
-     * Parses raw time strings into the corresponding LocalTime object.
+     * Parses {@code time} into a {@code LocalTime} and returns it.
      *
      * @throws DateTimeParseException If the argument passed is an invalid delivery time value.
      */
