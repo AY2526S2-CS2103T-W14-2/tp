@@ -10,11 +10,16 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Delivery in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Delivery {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Start date of the delivery must not be before the end date";
+
     // Data fields
     private final StartDate startDate;
     private final EndDate endDate;
@@ -31,11 +36,16 @@ public class Delivery {
                     DeliveryTime deliveryTime,
                     Set<SkippedDate> skippedDates) {
         requireAllNonNull(startDate, endDate, deliveryDays, deliveryTime, skippedDates);
+        checkArgument(isValidDateRange(startDate, endDate), MESSAGE_CONSTRAINTS);
         this.startDate = startDate;
         this.endDate = endDate;
         this.deliveryDays.addAll(deliveryDays);
         this.deliveryTime = deliveryTime;
         this.skippedDates.addAll(skippedDates);
+    }
+
+    private static boolean isValidDateRange(StartDate startDate, EndDate endDate) {
+        return !startDate.date.isAfter(endDate.date);
     }
 
     public StartDate getStartDate() {
