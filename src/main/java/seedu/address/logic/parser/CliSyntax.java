@@ -18,4 +18,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_NUMBER_OF_DAYS = new Prefix("n/");
     public static final Prefix PREFIX_TIME = new Prefix("tm/");
     public static final Prefix PREFIX_DAYS = new Prefix("d/");
+    public static final Prefix PREFIX_FIND_DATE = new Prefix("dt/");
 }

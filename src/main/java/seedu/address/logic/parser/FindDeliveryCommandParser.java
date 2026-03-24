@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.time.LocalDate;
 
@@ -28,7 +28,7 @@ public class FindDeliveryCommandParser implements Parser<FindDeliveryCommand> {
     public FindDeliveryCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_FIND_DATE, PREFIX_FIND_START, PREFIX_FIND_END);
+                ArgumentTokenizer.tokenize(args, PREFIX_FIND_DATE, PREFIX_START_DATE, PREFIX_END_DATE);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
@@ -36,8 +36,8 @@ public class FindDeliveryCommandParser implements Parser<FindDeliveryCommand> {
         }
 
         boolean hasDate = argMultimap.getValue(PREFIX_FIND_DATE).isPresent();
-        boolean hasStart = argMultimap.getValue(PREFIX_FIND_START).isPresent();
-        boolean hasEnd = argMultimap.getValue(PREFIX_FIND_END).isPresent();
+        boolean hasStart = argMultimap.getValue(PREFIX_START_DATE).isPresent();
+        boolean hasEnd = argMultimap.getValue(PREFIX_END_DATE).isPresent();
 
         if (hasDate && (hasStart || hasEnd)) {
             throw new ParseException(
@@ -51,9 +51,9 @@ public class FindDeliveryCommandParser implements Parser<FindDeliveryCommand> {
         }
 
         if (hasStart && hasEnd) {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIND_START, PREFIX_FIND_END);
-            LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FIND_START).get());
-            LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FIND_END).get());
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_START_DATE, PREFIX_END_DATE);
+            LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_START_DATE).get());
+            LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
             if (startDate.isAfter(endDate)) {
                 throw new ParseException(MESSAGE_START_AFTER_END);
             }
