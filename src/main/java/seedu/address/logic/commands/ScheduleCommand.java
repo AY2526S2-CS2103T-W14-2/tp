@@ -35,7 +35,7 @@ public class ScheduleCommand extends Command {
             + ": Adds a delivery to the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_START_DATE + "START DATE "
-            + PREFIX_END_DATE + "NUMBER OF DAYS "
+            + PREFIX_END_DATE + "END DATE "
             + PREFIX_TIME + "DELIVERY TIME "
             + PREFIX_DAYS + "DELIVERY DAYS...\n"
             + "Example: " + COMMAND_WORD + " 1 "
