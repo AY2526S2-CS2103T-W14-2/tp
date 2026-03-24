@@ -6,11 +6,13 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDay;
+import seedu.address.model.delivery.DeliveryTime;
+import seedu.address.model.delivery.EndDate;
+import seedu.address.model.delivery.StartDate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -65,7 +67,7 @@ public class Person {
      * @return A copy of this person with their delivery removed.
      */
     public Person withoutDelivery() {
-        return new Person(name, phone, email, address, getTags());
+        return new Person(name, phone, email, address, new HashSet<>(tags));
     }
 
     public Name getName() {
@@ -82,6 +84,22 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public StartDate getDeliveryStartDate() {
+        return delivery.getStartDate();
+    }
+
+    public EndDate getDeliveryEndDate() {
+        return delivery.getEndDate();
+    }
+
+    public Set<DeliveryDay> getDeliveryDays() {
+        return delivery.getDeliveryDays();
+    }
+
+    public DeliveryTime getDeliveryTime() {
+        return delivery.getDeliveryTime();
     }
 
     /**
@@ -128,11 +146,7 @@ public class Person {
         if (!hasDelivery()) {
             return Collections.emptySet();
         }
-        return delivery
-                .getDeliveryDays()
-                .stream()
-                .map(DeliveryDay::toString)
-                .collect(Collectors.toUnmodifiableSet());
+        return delivery.getDeliveryDayNames();
     }
 
     /**
