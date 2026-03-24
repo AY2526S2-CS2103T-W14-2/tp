@@ -52,6 +52,10 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         DeliveryTime deliveryTime = ParserUtil.parseDeliveryTime(argMultimap.getValue(PREFIX_TIME).get());
         Set<DeliveryDay> deliveryDayList = ParserUtil.parseDeliveryDays(argMultimap.getValue(PREFIX_DAYS).get());
 
+        if (!Delivery.isValidDateRange(startDate, endDate)) {
+            throw new ParseException(Delivery.MESSAGE_CONSTRAINTS);
+        }
+
         // TODO: Remove Set<SkippedDate> from constructor after removing SkippedDate.
         Delivery delivery = new Delivery(startDate,
                                          endDate,

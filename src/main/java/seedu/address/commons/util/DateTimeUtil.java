@@ -16,6 +16,14 @@ import java.util.Locale;
  */
 public class DateTimeUtil {
     /**
+     * The date must follow the format yyyy-MM-dd
+     * where yyyy is the 4-digit year, MM is the 2-digit month number,
+     * and dd is the 2-digit date number.
+     */
+    private static final DateTimeFormatter DATE_FORMATTER =
+            DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
+
+    /**
      * The day input that uses this formatter must follow the format of
      * having the number representing the day of the week.
      *
@@ -23,16 +31,8 @@ public class DateTimeUtil {
      * The formatter will only successfully parse numbers in the range 1-7.
      *
      */
-    public static final DateTimeFormatter DAY_NUMBER_FORMATTER =
+    private static final DateTimeFormatter DAY_NUMBER_FORMATTER =
             DateTimeFormatter.ofPattern("e", Locale.UK).withResolverStyle(ResolverStyle.STRICT);
-
-    /**
-     * The date must follow the format yyyy-MM-dd
-     * where yyyy is the 4-digit year, MM is the 2-digit month number,
-     * and dd is the 2-digit date number.
-     */
-    private static final DateTimeFormatter DATE_FORMATTER =
-            DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * The day must follow the format of
@@ -75,6 +75,14 @@ public class DateTimeUtil {
     public static LocalDate parseDeliveryDate(String date) throws NullPointerException, DateTimeParseException {
         requireNonNull(date, "delivery date must not be null");
         return LocalDate.parse(date, DATE_FORMATTER);
+    }
+
+    /**
+     * Formats {@code date} into a {@code String}
+     * with the format of {@link #DATE_FORMATTER} and returns it.
+     */
+    public static String formatDeliveryDate(LocalDate date) {
+        return DATE_FORMATTER.format(date);
     }
 
     /**
@@ -145,6 +153,14 @@ public class DateTimeUtil {
         requireNonNull(dayNumber, "delivery day number must not be null");
         DayOfWeek day = DayOfWeek.from(DAY_NUMBER_FORMATTER.parse(dayNumber));
         return day.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+    }
+
+    /**
+     * Formats {@code day} into a {@code String}
+     * with the format of {@link #DAY_NUMBER_FORMATTER} and returns it.
+     */
+    public static String formatDayNumber(DayOfWeek day) {
+        return DAY_NUMBER_FORMATTER.format(day);
     }
 
     /**

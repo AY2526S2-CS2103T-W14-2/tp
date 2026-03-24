@@ -1,5 +1,6 @@
 package seedu.address.model.delivery;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -9,8 +10,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
-
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Delivery in the address book.
@@ -44,7 +43,7 @@ public class Delivery {
         this.skippedDates.addAll(skippedDates);
     }
 
-    private static boolean isValidDateRange(StartDate startDate, EndDate endDate) {
+    public static boolean isValidDateRange(StartDate startDate, EndDate endDate) {
         return !startDate.date.isAfter(endDate.date);
     }
 
