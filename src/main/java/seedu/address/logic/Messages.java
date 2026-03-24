@@ -41,6 +41,8 @@ public class Messages {
      * @return String representation of the person's information.
      */
     public static String formatPerson(Person person) {
+        assert person != null;
+
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
@@ -82,6 +84,8 @@ public class Messages {
      * @return String representation of the delivery's information.
      */
     private static String formatDelivery(Delivery delivery) {
+        assert delivery != null;
+
         final StringBuilder builder = new StringBuilder();
         return builder.append("; Start Date: ")
                 .append(delivery.getStartDate())
