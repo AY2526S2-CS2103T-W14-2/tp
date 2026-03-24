@@ -51,6 +51,8 @@ public class DeliveryDatePredicate implements Predicate<Person> {
             return false;
         }
 
+        // For each delivery day of the week, find its first occurrence on or after overlapStart.
+        // If that date falls within the overlap period, a valid delivery day exists in the range.
         if (delivery.getDeliveryDays().stream()
                 .noneMatch(deliveryDay -> {
                     DayOfWeek dow = deliveryDay.getDay();
