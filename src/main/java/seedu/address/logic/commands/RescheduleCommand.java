@@ -18,6 +18,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDay;
@@ -97,7 +98,8 @@ public class RescheduleCommand extends Command {
      * @return A new {@code Person} with the edited delivery details.
      */
     private Person createRescheduledPerson(Person personToReschedule,
-                                           RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor) {
+                                           RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor)
+            throws CommandException {
         assert personToReschedule != null;
 
         Delivery rescheduledDelivery = createRescheduledDelivery(personToReschedule, rescheduleDeliveryDescriptor);
@@ -106,7 +108,8 @@ public class RescheduleCommand extends Command {
     }
 
     private Delivery createRescheduledDelivery(Person personToReschedule,
-                                               RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor) {
+                                               RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor)
+            throws CommandException {
         StartDate startDate = rescheduleDeliveryDescriptor.getStartDate()
                 .orElse(personToReschedule.getDeliveryStartDate());
         EndDate endDate = rescheduleDeliveryDescriptor.getEndDate()
@@ -115,6 +118,10 @@ public class RescheduleCommand extends Command {
                 .orElse(personToReschedule.getDeliveryDays());
         DeliveryTime deliveryTime = rescheduleDeliveryDescriptor.getDeliveryTime()
                 .orElse(personToReschedule.getDeliveryTime());
+
+        if (!Delivery.isValidDateRange(startDate, endDate)) {
+            throw new CommandException(Delivery.MESSAGE_CONSTRAINTS);
+        }
 
         Delivery rescheduledDelivery = new Delivery(startDate, endDate, deliveryDays, deliveryTime, new HashSet<>());
         return rescheduledDelivery;
