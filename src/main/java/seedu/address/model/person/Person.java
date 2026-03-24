@@ -67,7 +67,7 @@ public class Person {
      * @return A copy of this person with their delivery removed.
      */
     public Person withoutDelivery() {
-        return new Person(name, phone, email, address, getTags());
+        return new Person(name, phone, email, address, new HashSet<>(tags));
     }
 
     public Name getName() {

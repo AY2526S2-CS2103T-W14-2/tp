@@ -1,5 +1,7 @@
 package seedu.address.model.delivery;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
@@ -29,6 +31,7 @@ public class Delivery {
                     Set<DeliveryDay> deliveryDays,
                     DeliveryTime deliveryTime,
                     Set<SkippedDate> skippedDates) {
+        requireAllNonNull(startDate, endDate, deliveryDays, deliveryTime, skippedDates);
         this.startDate = startDate;
         this.endDate = endDate;
         this.deliveryDays.addAll(deliveryDays);
