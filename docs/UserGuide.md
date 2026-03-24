@@ -64,9 +64,9 @@ Action | Command Format (with Examples)
 **Edit customer** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br><br>Example:<br>`edit 2 n/James Lee e/jameslee@example.com`
 **Delete customer** | `delete INDEX`<br><br>Example:<br>`delete 3`
 **Find customers by attribute** | `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`<br><br>Example:<br>`find n/James Jake a/Jurong`
-**Find deliveries on date** | `find-delivery dt/DATE`<br><br>Example:<br>`find-delivery dt/2026-10-22`
-**Find deliveries within date range** | `find-delivery st/START_DATE ed/END_DATE`<br><br>Example:<br>`find-delivery st/2026-10-27 ed/2026-11-10`
-**Find expired deliveries** | `expired bf/DATE`<br><br>Example:<br>`expired bf/2026-12-22`
+**Find customers with delivery on date** | `find-delivery dt/DATE`<br><br>Example:<br>`find-delivery dt/2026-10-22`
+**Find customers with delivery within date range** | `find-delivery st/START_DATE ed/END_DATE`<br><br>Example:<br>`find-delivery st/2026-10-27 ed/2026-11-10`
+**Find customers with expired delivery** | `expired bf/DATE`<br><br>Example:<br>`expired bf/2026-12-22`
 **Schedule delivery** | `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DAYS`<br><br>Example:<br>`schedule 3 st/2026-04-09 ed/2026-04-21 t/16:00 days/12367`
 **Unschedule delivery** | `unschedule INDEX`<br><br>Example:<br>`unschedule 3`
 **Clear all entries** | `clear`
@@ -95,7 +95,7 @@ Action | Command Format (with Examples)
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Dates are in `yyyy-MM-dd` format.<br>
+* Dates are in `yyyy-MM-dd` format, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day.<br>
   e.g. 9th March 2026 can be written has `2026-03-09`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -186,13 +186,13 @@ Examples:
 * `find n/Alex Bernice a/Yishun t/Vegetarian` displays customers whose name is `Alex` or `Bernice`, with address containing `Yishun` *and* tagged with dietary restriction `Vegetarian`.<br>
   ![result for 'find n/Alex Bernice a/Yishun t/Vegetarian'](images/findAlexBerniceResult.png)
 
-### Finding customers by delivery date: `find-delivery`
+### Finding deliveries on a given date: `find-delivery`
 
 Finds customers who have a delivery scheduled on the given date.
 
 Format: `find-delivery DATE`
 
-* The date should be in the format `yyyy-MM-dd`, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day. e.g. `2026-04-01`
+* `DATE` is in the format `yyyy-MM-dd` (e.g., 2026-04-09).
 * A customer is shown only if all of the following are true:
   * They have a delivery assigned.
   * The given date falls within their delivery's start and end dates (inclusive).
@@ -203,6 +203,18 @@ Format: `find-delivery DATE`
 Examples:
 * `find-delivery 2026-04-01` returns all customers with a delivery on Wednesday, 1 April 2026.
 * `find-delivery 2026-12-25` returns all customers with a delivery on Friday, 25 December 2026.
+
+### Finding customers with expired delivery: `expired`
+
+Finds all customers with deliveries that have expired before the given date.
+
+Format: `expired bf/DATE`
+* `DATE` is in the format `yyyy-MM-dd` (e.g., 2026-04-09).
+* Displays all customers whose delivery end date is **before** the specified date.
+* A delivery that ends on the exact date specified is **not** considered as expired.
+
+Example:
+* `expired bf/2026-12-21` displays all customers whose deliveries have ended before 21 December 2026. 
 
 ### Scheduling a delivery : `schedule`
 

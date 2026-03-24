@@ -7,7 +7,7 @@
     "tags" : [ "Halal" ],
     "delivery" : {
       "startDate" : "2026-10-21",
-      "endDate" : "2026-12-21",
+      "endDate" : "2026-12-20",
       "deliveryDays" : [ "WEDNESDAY", "SUNDAY", "MONDAY", "TUESDAY", "FRIDAY" ],
       "deliveryTime" : "16:00",
       "skippedDates" : [ "2026-11-20", "2026-11-19" ]
