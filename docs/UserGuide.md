@@ -185,7 +185,7 @@ Examples:
 
 Adds a delivery or overwrites the existing delivery associated with the specified customer.
 
-Format: `schedule INDEX st/START_DATE ed/END DATE tm/DELIVERY_TIME d/DELIVERY_DAYS`
+Format: `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DAYS`
 
 * Adds the delivery for the customer at the specified `INDEX`.
 * If the specified customer already has a delivery, the delivery field is overwritten.
