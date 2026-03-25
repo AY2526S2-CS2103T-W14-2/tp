@@ -124,6 +124,7 @@
         "finding-customers-with-expired-delivery-expired": "Finding customers with expired delivery: expired",
         "scheduling-a-delivery-schedule": "Scheduling a delivery : schedule",
         "unscheduling-a-delivery-unschedule": "Unscheduling a delivery : unschedule",
+        "editing-a-delivery-reschedule": "Editing a delivery : reschedule",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
         "saving-the-data": "Saving the data",
