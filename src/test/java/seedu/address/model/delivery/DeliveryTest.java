@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_TIME_B
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
+import static seedu.address.model.delivery.Delivery.isValidDateRange;
 import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.DeliveryUtil.generateEndDate;
@@ -32,6 +33,22 @@ public class DeliveryTest {
         deliveryDaySet.add(toDeliveryDay(VALID_DELIVERY_DAY));
         assertThrows(IllegalArgumentException.class, () ->
                 new Delivery(startDate, endDate, deliveryDaySet, deliveryTime));
+    }
+
+    @Test
+    public void isValidDateRange_invalidDateRange_returnsFalse() {
+        StartDate startDate = new StartDate(VALID_START_DATE_BOB);
+        EndDate endDate = generateEndDate(startDate, -5);
+
+        assertFalse(isValidDateRange(startDate, endDate));
+    }
+
+    @Test
+    public void isValidDateRange_validDateRange_returnsTrue() {
+        StartDate startDate = new StartDate(VALID_START_DATE_BOB);
+        EndDate endDate = generateEndDate(startDate, 0);
+
+        assertTrue(isValidDateRange(startDate, endDate));
     }
 
     @Test
