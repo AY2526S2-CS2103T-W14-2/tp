@@ -1,5 +1,8 @@
 package seedu.address.commons.util;
 
+import seedu.address.model.delivery.EndDate;
+import seedu.address.model.delivery.StartDate;
+
 import static java.util.Objects.requireNonNull;
 
 import java.time.DayOfWeek;
@@ -185,5 +188,13 @@ public class DateTimeUtil {
     public static LocalTime parseDeliveryTime(String time) throws NullPointerException, DateTimeParseException {
         requireNonNull(time, "delivery time must not be null");
         return LocalTime.parse(time, FORMATTER_TIME);
+    }
+
+    /**
+     * Returns true if the date range is valid
+     * ({@code startDate} is not after {@code endDate}).
+     */
+    public static boolean isValidDeliveryDateRange(LocalDate startDate, LocalDate endDate) {
+        return !startDate.isAfter(endDate);
     }
 }

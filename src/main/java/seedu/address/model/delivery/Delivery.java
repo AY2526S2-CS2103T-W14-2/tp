@@ -2,6 +2,7 @@ package seedu.address.model.delivery;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.DateTimeUtil.isValidDeliveryDateRange;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -41,7 +42,7 @@ public class Delivery {
     }
 
     public static boolean isValidDateRange(StartDate startDate, EndDate endDate) {
-        return !startDate.date.isAfter(endDate.date);
+        return isValidDeliveryDateRange(startDate.date, endDate.date);
     }
 
     public StartDate getStartDate() {
