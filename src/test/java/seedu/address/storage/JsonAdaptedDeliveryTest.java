@@ -117,7 +117,7 @@ public class JsonAdaptedDeliveryTest {
     }
 
     @Test
-    public void toModelType_sortedDeliveryDays_returnsDeliveryWithSortedDeliveryDays() throws IllegalValueException {
+    public void toModelType_unsortedDeliveryDays_returnsDeliveryWithSortedDeliveryDays() throws IllegalValueException {
         List<JsonAdaptedDeliveryDay> unsortedJsonAdaptedDeliveryDays =
                 Arrays.stream(UNSORTED_DAYS.split(""))
                         .map(day -> FORMATTER_DAY_NUMBER.parse(day))
