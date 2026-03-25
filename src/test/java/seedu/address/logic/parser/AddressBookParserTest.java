@@ -6,7 +6,10 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEFORE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -26,6 +29,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExpiredCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindDeliveryCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RescheduleCommand;
@@ -34,6 +38,7 @@ import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.UnscheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryDatePredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonHasExpiredDeliveryPredicate;
 import seedu.address.model.person.PersonMatchesFilterPredicate;
@@ -81,6 +86,23 @@ public class AddressBookParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_findDelivery() throws Exception {
+        // single exact date
+        LocalDate date = LocalDate.of(2026, 4, 1);
+        FindDeliveryCommand command = (FindDeliveryCommand) parser.parseCommand(
+                FindDeliveryCommand.COMMAND_WORD + " " + PREFIX_FIND_DATE + "2026-04-01");
+        assertEquals(new FindDeliveryCommand(new DeliveryDatePredicate(date)), command);
+
+        // date range
+        LocalDate startDate = LocalDate.of(2026, 4, 1);
+        LocalDate endDate = LocalDate.of(2026, 4, 30);
+        FindDeliveryCommand rangeCommand = (FindDeliveryCommand) parser.parseCommand(
+                FindDeliveryCommand.COMMAND_WORD + " " + PREFIX_START_DATE + "2026-04-01 "
+                        + PREFIX_END_DATE + "2026-04-30");
+        assertEquals(new FindDeliveryCommand(new DeliveryDatePredicate(startDate, endDate)), rangeCommand);
     }
 
     @Test

@@ -20,5 +20,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DAYS = new Prefix("d/");
 
     /* Prefix definitions for Delivery filters */
+    public static final Prefix PREFIX_FIND_DATE = new Prefix("dt/");
     public static final Prefix PREFIX_BEFORE_DATE = new Prefix("bf/");
 }

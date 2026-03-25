@@ -2,23 +2,34 @@ package seedu.address.model.delivery;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Tests whether a {@code Person} has a delivery on the given date.
+ * Tests whether a {@code Person} has a delivery scheduled within the given date range.
  */
 public class DeliveryDatePredicate implements Predicate<Person> {
 
-    private final LocalDate targetDate;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
 
     /**
-     * Creates a DeliveryDatePredicate that tests whether a person has a delivery on {@code targetDate}.
+     * Creates a DeliveryDatePredicate that tests whether a person has a delivery on {@code date}.
      */
-    public DeliveryDatePredicate(LocalDate targetDate) {
-        this.targetDate = targetDate;
+    public DeliveryDatePredicate(LocalDate date) {
+        this(date, date);
+    }
+
+    /**
+     * Creates a DeliveryDatePredicate that tests whether a person has a delivery
+     * within the range from {@code startDate} to {@code endDate} (inclusive).
+     */
+    public DeliveryDatePredicate(LocalDate startDate, LocalDate endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
@@ -30,17 +41,24 @@ public class DeliveryDatePredicate implements Predicate<Person> {
             return false;
         }
 
-        LocalDate startDate = delivery.getStartDate().date;
-        LocalDate endDate = delivery.getEndDate().date;
+        LocalDate deliveryStart = delivery.getStartDate().date;
+        LocalDate deliveryEnd = delivery.getEndDate().date;
 
-        if (targetDate.isBefore(startDate) || targetDate.isAfter(endDate)) {
+        LocalDate overlapStart = startDate.isAfter(deliveryStart) ? startDate : deliveryStart;
+        LocalDate overlapEnd = endDate.isBefore(deliveryEnd) ? endDate : deliveryEnd;
+
+        if (overlapStart.isAfter(overlapEnd)) {
             return false;
         }
 
-        DayOfWeek targetDay = targetDate.getDayOfWeek();
-
+        // For each delivery day of the week, find its first occurrence on or after overlapStart.
+        // If that date falls within the overlap period, a valid delivery day exists in the range.
         if (delivery.getDeliveryDays().stream()
-                .noneMatch(deliveryDay -> deliveryDay.isSameDay(targetDay))) {
+                .noneMatch(deliveryDay -> {
+                    DayOfWeek dow = deliveryDay.getDay();
+                    LocalDate firstOccurrence = overlapStart.with(TemporalAdjusters.nextOrSame(dow));
+                    return !firstOccurrence.isAfter(overlapEnd);
+                })) {
             return false;
         }
 
@@ -58,11 +76,15 @@ public class DeliveryDatePredicate implements Predicate<Person> {
         }
 
         DeliveryDatePredicate otherPredicate = (DeliveryDatePredicate) other;
-        return targetDate.equals(otherPredicate.targetDate);
+        return startDate.equals(otherPredicate.startDate)
+                && endDate.equals(otherPredicate.endDate);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("targetDate", targetDate).toString();
+        return new ToStringBuilder(this)
+                .add("startDate", startDate)
+                .add("endDate", endDate)
+                .toString();
     }
 }

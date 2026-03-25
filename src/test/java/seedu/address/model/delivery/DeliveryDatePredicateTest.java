@@ -29,6 +29,23 @@ public class DeliveryDatePredicateTest {
 
         // different predicate -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
+
+        // same single date as equivalent range -> returns true
+        DeliveryDatePredicate sameAsRange = new DeliveryDatePredicate(
+                LocalDate.of(2026, 4, 1), LocalDate.of(2026, 4, 1));
+        assertTrue(firstPredicate.equals(sameAsRange));
+
+        // same range -> returns true
+        DeliveryDatePredicate rangePredicate = new DeliveryDatePredicate(
+                LocalDate.of(2026, 4, 1), LocalDate.of(2026, 4, 30));
+        DeliveryDatePredicate rangePredicateCopy = new DeliveryDatePredicate(
+                LocalDate.of(2026, 4, 1), LocalDate.of(2026, 4, 30));
+        assertTrue(rangePredicate.equals(rangePredicateCopy));
+
+        // different range -> returns false
+        DeliveryDatePredicate differentRange = new DeliveryDatePredicate(
+                LocalDate.of(2026, 4, 1), LocalDate.of(2026, 5, 1));
+        assertFalse(rangePredicate.equals(differentRange));
     }
 
     @Test
@@ -91,6 +108,67 @@ public class DeliveryDatePredicateTest {
 
         DeliveryDatePredicate predicate =
                 new DeliveryDatePredicate(LocalDate.of(2026, 4, 1));
+
+        assertFalse(predicate.test(person));
+    }
+
+    @Test
+    public void test_rangeOverlapsDelivery_returnsTrue() {
+        // Delivery: 2026-04-01 to 2026-04-30, Wednesday
+        // Query range: 2026-04-05 to 2026-04-15
+        // First Wednesday in overlap is 2026-04-08 -> true
+        Delivery delivery = new DeliveryBuilder()
+                .withStartDate("2026-04-01")
+                .withEndDate("2026-04-30")
+                .withDeliveryDays("Wednesday")
+                .build();
+
+        Person person = new PersonBuilder()
+                .withDelivery(delivery)
+                .build();
+
+        DeliveryDatePredicate predicate = new DeliveryDatePredicate(
+                LocalDate.of(2026, 4, 5), LocalDate.of(2026, 4, 15));
+
+        assertTrue(predicate.test(person));
+    }
+
+    @Test
+    public void test_rangeNoOverlapWithDelivery_returnsFalse() {
+        // Delivery: 2026-04-01 to 2026-04-10, Wednesday
+        // Query range: 2026-04-15 to 2026-04-30 -> no overlap -> false
+        Delivery delivery = new DeliveryBuilder()
+                .withStartDate("2026-04-01")
+                .withEndDate("2026-04-10")
+                .withDeliveryDays("Wednesday")
+                .build();
+
+        Person person = new PersonBuilder()
+                .withDelivery(delivery)
+                .build();
+
+        DeliveryDatePredicate predicate = new DeliveryDatePredicate(
+                LocalDate.of(2026, 4, 15), LocalDate.of(2026, 4, 30));
+
+        assertFalse(predicate.test(person));
+    }
+
+    @Test
+    public void test_rangeOverlapsButNoMatchingDay_returnsFalse() {
+        // Delivery: 2026-04-01 to 2026-04-30, Wednesday (2026-04-01 is Wednesday)
+        // Query range: 2026-04-02 to 2026-04-07 -> overlap exists but no Wednesday in range -> false
+        Delivery delivery = new DeliveryBuilder()
+                .withStartDate("2026-04-01")
+                .withEndDate("2026-04-30")
+                .withDeliveryDays("Wednesday")
+                .build();
+
+        Person person = new PersonBuilder()
+                .withDelivery(delivery)
+                .build();
+
+        DeliveryDatePredicate predicate = new DeliveryDatePredicate(
+                LocalDate.of(2026, 4, 2), LocalDate.of(2026, 4, 7));
 
         assertFalse(predicate.test(person));
     }

@@ -54,9 +54,29 @@ If Java is not installed, follow the installation guide for your operating syste
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Command summary
+
+Action | Command Format (with Examples)
+-----------------|-------------------------------------------------------------------------------------------------
+**Getting help** | `help`
+**Add customer** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br><br>Example:<br>`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Vegan t/West`
+**List all customers** | `list`
+**Edit customer** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br><br>Example:<br>`edit 2 n/James Lee e/jameslee@example.com`
+**Delete customer** | `delete INDEX`<br><br>Example:<br>`delete 3`
+**Find customers by attribute** | `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`<br><br>Example:<br>`find n/James Jake a/Jurong`
+**Find customers with delivery on date** | `find-delivery dt/DATE`<br><br>Example:<br>`find-delivery dt/2026-10-22`
+**Find customers with delivery within date range** | `find-delivery st/START_DATE ed/END_DATE`<br><br>Example:<br>`find-delivery st/2026-10-27 ed/2026-11-10`
+**Find customers with expired delivery** | `expired bf/DATE`<br><br>Example:<br>`expired bf/2026-12-22`
+**Schedule delivery** | `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DAYS`<br><br>Example:<br>`schedule 3 st/2026-04-09 ed/2026-04-21 tm/16:00 d/12367`
+**Unschedule delivery** | `unschedule INDEX`<br><br>Example:<br>`unschedule 3`
+**Clear all entries** | `clear`
+**Exit program** | `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Notes about the command format:**<br>
 
@@ -64,7 +84,7 @@ If Java is not installed, follow the installation guide for your operating syste
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Halal` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Halal` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Vegetarian`, `t/Vegetarian t/East` etc.
@@ -74,6 +94,9 @@ If Java is not installed, follow the installation guide for your operating syste
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Dates are in `yyyy-MM-dd` format, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day.<br>
+  e.g. 9th March 2026 can be written has `2026-03-09`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -93,7 +116,7 @@ Creates a new customer record.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless>
+<box type="tip" light>
 
 **Tip:** A customer can have any number of tags (including 0)
 </box>
@@ -125,7 +148,21 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st customer to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
 
-### Locating customers by attributes: `find`
+### Deleting a customer : `delete`
+
+Deletes the specified customer and the delivery associated with them.
+
+Format: `delete INDEX`
+
+* Deletes the customer at the specified `INDEX`.
+* The index refers to the index number shown in the displayed customer list.
+* The index **must be a positive integer** 1, 2, 3, …
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd customer on the list.
+* `find n/Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
+
+### Finding customers by attributes: `find`
 
 Find customers whose attributes (name, address, tag) match at least 1 of the keywords given in each filter (`n/`, `a/`, `t/`) specified.
 
@@ -149,53 +186,53 @@ Examples:
 * `find n/Alex Bernice a/Yishun t/Vegetarian` displays customers whose name is `Alex` or `Bernice`, with address containing `Yishun` *and* tagged with dietary restriction `Vegetarian`.<br>
   ![result for 'find n/Alex Bernice a/Yishun t/Vegetarian'](images/findAlexBerniceResult.png)
 
-### Locating customers by delivery date: `find-delivery`
+### Finding deliveries on a given date: `find-delivery`
 
-Finds customers who have a delivery scheduled on the given date.
+Finds customers who have a delivery scheduled on the given date or within the given date range.
 
-Format: `find-delivery DATE`
+Format: `find-delivery dt/DATE` or `find-delivery st/START_DATE ed/END_DATE`
 
-* The date should be in the format `yyyy-MM-dd`, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day. e.g. `2026-04-01`
-* A customer is shown only if all of the following are true:
+* All dates must be in the format `yyyy-MM-dd`, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day. e.g. `2026-04-01`
+* `dt/` searches for an exact date. `st/` and `ed/` must be used together to search within a date range.
+* A customer is shown only if all of the following criteria are met:
   * They have a delivery assigned.
-  * The given date falls within their delivery's start and end dates (inclusive).
-  * The day of week of the given date matches one of their scheduled delivery days.
-  * The given date has not been marked as a skipped date.
+  * The customer has a scheduled delivery that falls on the given date or within the date range specified (including the start and end dates itself).
 * If no customers match, an empty list is shown.
 
 Examples:
-* `find-delivery 2026-04-01` returns all customers with a delivery on Wednesday, 1 April 2026.
-* `find-delivery 2026-12-25` returns all customers with a delivery on Friday, 25 December 2026.
+* `find-delivery dt/2026-04-01` returns all customers with a delivery on Wednesday, 1 April 2026.
+* `find-delivery st/2026-04-01 ed/2026-04-30` returns all customers with a delivery scheduled within April 2026.
 
-### Deleting a customer : `delete`
+### Finding customers with expired delivery: `expired`
 
-Deletes the specified customer and the delivery associated with them.
+Finds all customers with deliveries that have expired before the given date.
 
-Format: `delete INDEX`
-
-* Deletes the customer at the specified `INDEX`.
-* The index refers to the index number shown in the displayed customer list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: `expired bf/DATE`
+* `DATE` is in the format `yyyy-MM-dd` (e.g., 2026-04-09).
+* Displays all customers whose delivery end date is **before** the specified date on the customer panel.
+* Deliveries that end on the exact date specified is **not** considered as expired.
+* Customers without a delivery will not be displayed.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd customer on the list.
-* `find n/Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
+* `expired bf/2026-12-21` displays all customers whose deliveries have ended before 21 December 2026.
+  ![result for 'expired bf/2026-12-21'](images/findExpiredDelivery.png)
 
 ### Scheduling a delivery : `schedule`
 
 Adds a delivery or overwrites the existing delivery associated with the specified customer.
 
-Format: `schedule INDEX d/START_DATE n/NUMBER_OF_DAYS t/DELIVERY_TIME days/DELIVERY_DAYS`
+Format: `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DAYS`
 
 * Adds the delivery for the customer at the specified `INDEX`.
 * If the specified customer already has a delivery, the delivery field is overwritten.
 * The index refers to the index number shown in the displayed customer list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * `DELIVERY_DAYS` must be a set of numbers **within the range of 1-7 inclusive** without whitespaces where 1 = Monday, 2 = Tuesday, …​, 7 = Sunday.
+* `24:00` is not a valid value for `DELIVERY_TIME`.
 
 Examples:
-* `schedule 1 d/2026-02-01 n/1 t/12:59 days/125`
-* `schedule 4 d/2026-03-11 n/12 t/13:48 days/2456`
+* `schedule 1 st/2026-02-01 ed/2026-02-02 tm/13:00 d/12` adds a delivery for the 1st customer on the list. The delivery starts on 1 February 2026, ends on 2 February 2026 and occurs at 1 PM on Mondays and Tuesdays.
+* `schedule 4 st/2026-03-11 ed/2026-04-01 tm/15:30 d/246` adds a delivery for the 4th customer on the list. The delivery starts on 11 March 2026, ends on 1 April 2026 and occurs at 3:30 PM on Tuesday, Thursdays and Saturdays.
 
 ### Unscheduling a delivery : `unschedule`
 
@@ -206,17 +243,34 @@ Format: `unschedule INDEX`
 * Deletes the delivery for the customer at the specified `INDEX`.
 * The specified customer must have an existing delivery.
 * The index refers to the index number shown in the displayed customer list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `list` followed by `unschedule 2` deletes the delivery for the 2nd customer on the list.
-* `find n/Betsy` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
+* `find n/Bernice` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
+  ![result for 'unschedule 1' after `find n/Bernice`](images/unscheduleBernice.png)
+
+### Editing a delivery : `reschedule`
+
+Edits the delivery associated with the specified customer.
+
+Format: `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DELIVERY_DAYS]`
+
+* Parameters `st/`, `ed/`, `tm/` and `d/` are optional, but at least one of them must be provided.
+* Existing values will be updated to the input values.Edits the delivery associated with the customer at the specified `INDEX`.
+* The specified customer must have an existing delivery.
+* The index refers to the index number shown in the displayed customer panel.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `reschedule 1 ed/2026-02-02 tm/12:59` Edits the delivery end date and delivery time for the 1st customer to be `2026-02-02` and `12:59` respectively.
+* `reschedule 4 d/25` Edits the delivery days for the 4th customer to be `25` (Tuesday and Friday).
 
 ### Clearing all entries : `clear`
 
-Deletes **all** customer records and delivery details. This operation **cannot be undone** and **data cannot be recovered**.
+Deletes **all** customer records and their delivery details (if any). This operation **cannot be undone** and **data cannot be recovered**.
 
-<box type="warning" seamless>
+<box type="warning" light>
 
 **Warning:**
 This action is permanent and cannot be undone. Ensure that you have thoroughly reviewed and backed up any necessary data before proceeding.
@@ -238,16 +292,12 @@ ServeMate data are saved in the hard disk automatically after any command that c
 
 ServeMate data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" light>
 
 **Warning:**
 If your changes to the data file makes its format invalid, ServeMate will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the ServeMate to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,6 +324,7 @@ Action         | Format, Examples
 **Delete**     | `delete INDEX`<br> e.g., `delete 3`
 **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**       | `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`<br> e.g., `find n/James Jake a/Jurong`
+**Find Delivery** | `find-delivery dt/DATE` or `find-delivery st/START_DATE ed/END_DATE`<br> e.g., `find-delivery dt/2026-04-01` or `find-delivery st/2026-04-01 ed/2026-04-30`
 **Unschedule** | `unschedule INDEX`<br> e.g., `unschedule 3`
 **List**       | `list`
 **Help**       | `help`
