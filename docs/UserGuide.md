@@ -250,6 +250,22 @@ Examples:
 * `find n/Bernice` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
   ![result for 'unschedule 1' after `find n/Bernice`](images/unscheduleBernice.png)
 
+### Editing a delivery : `reschedule`
+
+Edits the delivery associated with the specified customer.
+
+Format: `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DELIVERY_DAYS]`
+
+* Parameters `st/`, `ed/`, `tm/` and `d/` are optional, but at least one of them must be provided.
+* Existing values will be updated to the input values.Edits the delivery associated with the customer at the specified `INDEX`.
+* The specified customer must have an existing delivery.
+* The index refers to the index number shown in the displayed customer panel.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `reschedule 1 ed/2026-02-02 tm/12:59` Edits the delivery end date and delivery time for the 1st customer to be `2026-02-02` and `12:59` respectively.
+* `reschedule 4 d/25` Edits the delivery days for the 4th customer to be `25` (Tuesday and Friday).
+
 ### Clearing all entries : `clear`
 
 Deletes **all** customer records and their delivery details (if any). This operation **cannot be undone** and **data cannot be recovered**.
