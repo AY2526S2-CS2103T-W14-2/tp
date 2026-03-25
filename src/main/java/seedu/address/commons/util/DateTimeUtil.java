@@ -1,8 +1,5 @@
 package seedu.address.commons.util;
 
-import seedu.address.model.delivery.EndDate;
-import seedu.address.model.delivery.StartDate;
-
 import static java.util.Objects.requireNonNull;
 
 import java.time.DayOfWeek;

@@ -3,9 +3,7 @@ package seedu.address.commons.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.DeliveryUtil.generateEndDate;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -13,9 +11,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.model.delivery.EndDate;
-import seedu.address.model.delivery.StartDate;
 
 public class DateTimeUtilTest {
     @Test
