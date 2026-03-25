@@ -26,10 +26,8 @@ public class DateTimeUtil {
     /**
      * The day input that uses this formatter must follow the format of
      * having the number representing the day of the week.
-     *
-     * Examples of day number inputs accepted by the formatter: 1, 2.
+     * <p>Examples of day number inputs accepted by the formatter: 1, 2.
      * The formatter will only successfully parse numbers in the range 1-7.
-     *
      */
     public static final DateTimeFormatter DAY_NUMBER_FORMATTER =
             DateTimeFormatter.ofPattern("e", Locale.UK).withResolverStyle(ResolverStyle.STRICT);

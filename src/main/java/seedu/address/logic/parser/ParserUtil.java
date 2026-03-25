@@ -37,7 +37,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_DATE = "Date is not valid. It should be in the format yyyy-MM-dd.";
     public static final String MESSAGE_INVALID_DAY_NUMBER =
             "Day number is not valid. It can only be a whole number within 1 to 7 inclusive.";
-    public static final String MESSAGE_DUPLICATE_DELIVERY_DAYS = "The delivery day should not be duplicated";
+    public static final String MESSAGE_DUPLICATE_DELIVERY_DAYS = "The delivery day should not be duplicated.";
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
