@@ -95,8 +95,6 @@ public class Messages {
                 .append(delivery.getDeliveryDays())
                 .append("; Delivery Time: ")
                 .append(delivery.getDeliveryTime())
-                .append("; Skipped Dates: ")
-                .append(delivery.getSkippedDates())
                 .toString();
     }
 }

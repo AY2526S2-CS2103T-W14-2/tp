@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DAYS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -34,13 +34,13 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a delivery to the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_START_DATE + "START DATE] "
-            + "[" + PREFIX_NUMBER_OF_DAYS + "NUMBER OF DAYS] "
-            + "[" + PREFIX_TIME + "DELIVERY TIME] "
-            + "[" + PREFIX_DAYS + "DELIVERY DAYS]...\n"
+            + PREFIX_START_DATE + "START DATE "
+            + PREFIX_END_DATE + "END DATE "
+            + PREFIX_TIME + "DELIVERY TIME "
+            + PREFIX_DAYS + "DELIVERY DAYS...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_START_DATE + "2026-10-15 "
-            + PREFIX_NUMBER_OF_DAYS + "5 "
+            + PREFIX_END_DATE + "2026-10-20 "
             + PREFIX_TIME + "12:59 "
             + PREFIX_DAYS + "124";
 
@@ -50,7 +50,7 @@ public class ScheduleCommand extends Command {
     private final Delivery toSchedule;
 
     /**
-     * Creates a Schedulecommand to add the specified {@code Delivery}
+     * Creates a ScheduleCommand to add the specified {@code Delivery}
      * to the Person object found at the specified index of the address book.
      */
     public ScheduleCommand(Index targetIndex, Delivery delivery) {

@@ -9,7 +9,6 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
 import seedu.address.model.delivery.EndDate;
-import seedu.address.model.delivery.SkippedDate;
 import seedu.address.model.delivery.StartDate;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -27,7 +26,6 @@ public class DeliveryBuilder {
     private EndDate endDate;
     private Set<DeliveryDay> deliveryDays;
     private DeliveryTime deliveryTime;
-    private Set<SkippedDate> skippedDates;
 
     /**
      * Creates a {@code DeliveryBuilder} with the default details.
@@ -38,7 +36,6 @@ public class DeliveryBuilder {
         deliveryDays = new HashSet<>();
         deliveryDays.add(toDeliveryDay(DEFAULT_DAY));
         deliveryTime = new DeliveryTime(DEFAULT_TIME);
-        skippedDates = new HashSet<>();
     }
 
     /**
@@ -49,7 +46,6 @@ public class DeliveryBuilder {
         endDate = deliveryToCopy.getEndDate();
         deliveryDays = new HashSet<>(deliveryToCopy.getDeliveryDays());
         deliveryTime = deliveryToCopy.getDeliveryTime();
-        skippedDates = new HashSet<>(deliveryToCopy.getSkippedDates());
     }
 
     /**
@@ -85,16 +81,7 @@ public class DeliveryBuilder {
         return this;
     }
 
-    /**
-     * Parses the {@code skippedDates} into a {@code Set<SkippedDate>} and set it to
-     * the {@code Delivery} that we are building.
-     */
-    public DeliveryBuilder withSkippedDates(String ... dates) {
-        this.skippedDates = SampleDataUtil.getSkippedDateSet(dates);
-        return this;
-    }
-
     public Delivery build() {
-        return new Delivery(startDate, endDate, deliveryDays, deliveryTime, skippedDates);
+        return new Delivery(startDate, endDate, deliveryDays, deliveryTime);
     }
 }

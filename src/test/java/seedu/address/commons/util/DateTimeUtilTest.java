@@ -57,6 +57,16 @@ public class DateTimeUtilTest {
     }
 
     @Test
+    public void formatDeliveryDate() {
+        // null delivery date
+        assertThrows(NullPointerException.class, () -> DateTimeUtil.formatDeliveryDate(null));
+
+        // valid delivery date
+        LocalDate date = LocalDate.of(2019, 10, 15);
+        assertEquals("2019-10-15", DateTimeUtil.formatDeliveryDate(date));
+    }
+
+    @Test
     public void isValidDeliveryDayWord() {
         // null day
         assertThrows(NullPointerException.class, () -> DateTimeUtil.isValidDeliveryDayWord(null));
@@ -184,5 +194,21 @@ public class DateTimeUtilTest {
 
         // valid time
         assertEquals(LocalTime.of(12, 59), DateTimeUtil.parseDeliveryTime("12:59"));
+    }
+
+    @Test
+    public void isValidDeliveryDateRange_invalidDateRange_returnsFalse() {
+        LocalDate startDate = LocalDate.of(2026, 12, 1);
+        LocalDate endDate = startDate.minusDays(5);
+
+        assertFalse(DateTimeUtil.isValidDeliveryDateRange(startDate, endDate));
+    }
+
+    @Test
+    public void isValidDeliveryDateRange_validDateRange_returnsTrue() {
+        LocalDate startDate = LocalDate.of(2026, 12, 1);
+        LocalDate endDate = startDate.minusDays(0);
+
+        assertTrue(DateTimeUtil.isValidDeliveryDateRange(startDate, endDate));
     }
 }

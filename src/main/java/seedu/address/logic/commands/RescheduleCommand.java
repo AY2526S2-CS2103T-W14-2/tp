@@ -97,7 +97,8 @@ public class RescheduleCommand extends Command {
      * @return A new {@code Person} with the edited delivery details.
      */
     private Person createRescheduledPerson(Person personToReschedule,
-                                           RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor) {
+                                           RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor)
+            throws CommandException {
         assert personToReschedule != null;
 
         Delivery rescheduledDelivery = createRescheduledDelivery(personToReschedule, rescheduleDeliveryDescriptor);
@@ -105,8 +106,10 @@ public class RescheduleCommand extends Command {
                 personToReschedule.getAddress(), personToReschedule.getTags(), rescheduledDelivery);
     }
 
+    //@@author MrMarshall12
     private Delivery createRescheduledDelivery(Person personToReschedule,
-                                               RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor) {
+                                               RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor)
+            throws CommandException {
         StartDate startDate = rescheduleDeliveryDescriptor.getStartDate()
                 .orElse(personToReschedule.getDeliveryStartDate());
         EndDate endDate = rescheduleDeliveryDescriptor.getEndDate()
@@ -116,9 +119,14 @@ public class RescheduleCommand extends Command {
         DeliveryTime deliveryTime = rescheduleDeliveryDescriptor.getDeliveryTime()
                 .orElse(personToReschedule.getDeliveryTime());
 
-        Delivery rescheduledDelivery = new Delivery(startDate, endDate, deliveryDays, deliveryTime, new HashSet<>());
+        if (!Delivery.isValidDateRange(startDate, endDate)) {
+            throw new CommandException(Delivery.MESSAGE_CONSTRAINTS);
+        }
+
+        Delivery rescheduledDelivery = new Delivery(startDate, endDate, deliveryDays, deliveryTime);
         return rescheduledDelivery;
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {

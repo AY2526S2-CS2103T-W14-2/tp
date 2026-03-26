@@ -10,7 +10,6 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
 import seedu.address.model.delivery.EndDate;
-import seedu.address.model.delivery.SkippedDate;
 import seedu.address.model.delivery.StartDate;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -28,14 +27,12 @@ public class SampleDataUtil {
     private static final Delivery SAMPLE_DELIVERY_ALEX = new Delivery(
             new StartDate("2026-10-21"), new EndDate("2026-12-20"),
             getDeliveryDaySet("Monday", "Tuesday", "Wednesday", "Friday", "Sunday"),
-            new DeliveryTime("16:00"),
-            getSkippedDateSet("2026-11-20", "2026-11-19")
+            new DeliveryTime("16:00")
     );
     private static final Delivery SAMPLE_DELIVERY_BERNICE = new Delivery(
             new StartDate("2026-10-09"), new EndDate("2026-12-21"),
             getDeliveryDaySet("Monday", "Wednesday", "Friday"),
-            new DeliveryTime("16:00"),
-            getSkippedDateSet("2026-11-21", "2026-10-17")
+            new DeliveryTime("16:00")
     );
 
     /**
@@ -93,14 +90,4 @@ public class SampleDataUtil {
                 .map(DeliveryDay::toDeliveryDay)
                 .collect(Collectors.toSet());
     }
-
-    /**
-     * Returns a skippedDate set containing the list of strings given.
-     */
-    public static Set<SkippedDate> getSkippedDateSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(SkippedDate::new)
-                .collect(Collectors.toSet());
-    }
-
 }

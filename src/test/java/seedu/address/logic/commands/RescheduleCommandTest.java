@@ -3,9 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.DateTimeUtil.formatDeliveryDate;
+import static seedu.address.commons.util.DateTimeUtil.parseDeliveryDate;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_RESCHEDULE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB_RESCHEDULE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_TIME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -15,6 +18,8 @@ import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ELLE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -62,14 +67,8 @@ public class RescheduleCommandTest {
 
         Delivery firstPersonsDelivery = firstPerson.getDelivery();
 
-        // A hotfix before skipped date is removed from Delivery
-        Delivery editedDelivery = new DeliveryBuilder()
-                .withStartDate(firstPersonsDelivery.getStartDate().toString())
-                .withEndDate(firstPersonsDelivery.getEndDate().toString())
-                .withDeliveryDays(firstPersonsDelivery.getDeliveryDays().stream()
-                        .map(day -> day.toString()).toArray(String[]::new))
-                .withDeliveryTime(VALID_DELIVERY_TIME_AMY)
-                .build();
+        Delivery editedDelivery = new DeliveryBuilder(firstPersonsDelivery)
+                .withDeliveryTime(VALID_DELIVERY_TIME_AMY).build();
         Person personWithEditedDelivery = new PersonBuilder(firstPerson).withDelivery(editedDelivery).build();
 
         RescheduleDeliveryDescriptor descriptor = new RescheduleDeliveryDescriptorBuilder()
@@ -92,23 +91,11 @@ public class RescheduleCommandTest {
                 new RescheduleDeliveryDescriptor());
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        Delivery firstPersonsDelivery = firstPerson.getDelivery();
-
-        // A hotfix before skipped date is removed from Delivery
-        Delivery editedDelivery = new DeliveryBuilder()
-                .withStartDate(firstPersonsDelivery.getStartDate().toString())
-                .withEndDate(firstPersonsDelivery.getEndDate().toString())
-                .withDeliveryDays(firstPersonsDelivery.getDeliveryDays().stream()
-                        .map(day -> day.toString()).toArray(String[]::new))
-                .withDeliveryTime(firstPersonsDelivery.getDeliveryTime().toString())
-                .build();
-        Person firstPersonHotFix = new PersonBuilder(firstPerson).withDelivery(editedDelivery).build();
-
         String expectedMessage = String.format(
-                RescheduleCommand.MESSAGE_EDIT_DELIVERY_SUCCESS, Messages.formatDeliveryFromPerson(firstPersonHotFix));
+                RescheduleCommand.MESSAGE_EDIT_DELIVERY_SUCCESS, Messages.formatDeliveryFromPerson(firstPerson));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setPerson(firstPerson, firstPersonHotFix);
+        expectedModel.setPerson(firstPerson, firstPerson);
 
         assertCommandSuccess(rescheduleCommand, model, expectedMessage, expectedModel);
     }
@@ -160,6 +147,23 @@ public class RescheduleCommandTest {
                 .withDeliveryTime(VALID_DELIVERY_TIME_AMY).build());
 
         assertCommandFailure(rescheduleCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidDeliveryDateRange_failure() {
+        assert model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()) != null;
+
+        // start date is after the end date
+        LocalDate startDateValue = parseDeliveryDate(VALID_START_DATE_AMY);
+        LocalDate endDateValue = startDateValue.plusDays(-5);
+        String endDateString = formatDeliveryDate(endDateValue);
+
+        RescheduleDeliveryDescriptor descriptor = new RescheduleDeliveryDescriptorBuilder()
+                .withStartDate(VALID_START_DATE_AMY)
+                .withEndDate(endDateString).build();
+        RescheduleCommand rescheduleCommand = new RescheduleCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(rescheduleCommand, model, Delivery.MESSAGE_CONSTRAINTS);
     }
 
     @Test

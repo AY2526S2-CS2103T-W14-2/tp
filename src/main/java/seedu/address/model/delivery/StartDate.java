@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class StartDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should be of the valid start date format";
+            "Date should be of the valid start date format yyyy-MM-dd";
 
     /**
      * The date must follow the format yyyy-MM-dd

@@ -1,7 +1,8 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -93,7 +94,8 @@ public class JsonAdaptedDelivery {
                     DeliveryDay.class.getSimpleName()));
         }
 
-        final Set<DeliveryDay> modelDeliveryDays = new HashSet<>(deliveryDays);
+        Collections.sort(deliveryDays);
+        final Set<DeliveryDay> modelDeliveryDays = new LinkedHashSet<>(deliveryDays);
 
         if (deliveryTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -106,7 +108,6 @@ public class JsonAdaptedDelivery {
 
         final DeliveryTime modelDeliveryTime = new DeliveryTime(deliveryTime);
 
-        // Hotfix until SkippedDate is removed from Delivery
-        return new Delivery(modelStartDate, modelEndDate, modelDeliveryDays, modelDeliveryTime, new HashSet<>());
+        return new Delivery(modelStartDate, modelEndDate, modelDeliveryDays, modelDeliveryTime);
     }
 }

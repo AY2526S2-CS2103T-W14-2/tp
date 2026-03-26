@@ -5,18 +5,51 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DAY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_TIME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_TIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SKIPPED_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
+import static seedu.address.model.delivery.Delivery.isValidDateRange;
+import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.DeliveryUtil.generateEndDate;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ALICE;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_CARL;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.DeliveryBuilder;
 
 public class DeliveryTest {
+    @Test
+    public void constructor_invalidDateRange_throwsIllegalArgumentException() {
+        StartDate startDate = new StartDate(VALID_START_DATE_BOB);
+        EndDate endDate = generateEndDate(startDate, -5);
+        DeliveryTime deliveryTime = new DeliveryTime(VALID_DELIVERY_TIME_BOB);
+        Set<DeliveryDay> deliveryDaySet = new HashSet<>();
+        deliveryDaySet.add(toDeliveryDay(VALID_DELIVERY_DAY));
+        assertThrows(IllegalArgumentException.class, () ->
+                new Delivery(startDate, endDate, deliveryDaySet, deliveryTime));
+    }
+
+    @Test
+    public void isValidDateRange_invalidDateRange_returnsFalse() {
+        StartDate startDate = new StartDate(VALID_START_DATE_BOB);
+        EndDate endDate = generateEndDate(startDate, -5);
+
+        assertFalse(isValidDateRange(startDate, endDate));
+    }
+
+    @Test
+    public void isValidDateRange_validDateRange_returnsTrue() {
+        StartDate startDate = new StartDate(VALID_START_DATE_BOB);
+        EndDate endDate = generateEndDate(startDate, 0);
+
+        assertTrue(isValidDateRange(startDate, endDate));
+    }
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
@@ -65,18 +98,13 @@ public class DeliveryTest {
         // different delivery days -> returns false
         editedDeliveryOne = new DeliveryBuilder(DELIVERY_ALICE).withDeliveryDays(VALID_DELIVERY_DAY).build();
         assertFalse(DELIVERY_ALICE.equals(editedDeliveryOne));
-
-        // different skipped date -> returns false
-        editedDeliveryOne = new DeliveryBuilder(DELIVERY_ALICE).withSkippedDates(VALID_SKIPPED_DATE).build();
-        assertFalse(DELIVERY_ALICE.equals(editedDeliveryOne));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Delivery.class.getCanonicalName() + "{start date=" + DELIVERY_ALICE.getStartDate()
                 + ", end date=" + DELIVERY_ALICE.getEndDate() + ", delivery days=" + DELIVERY_ALICE.getDeliveryDays()
-                + ", delivery time=" + DELIVERY_ALICE.getDeliveryTime()
-                + ", skipped dates=" + DELIVERY_ALICE.getSkippedDates() + "}";
+                + ", delivery time=" + DELIVERY_ALICE.getDeliveryTime() + "}";
         assertEquals(expected, DELIVERY_ALICE.toString());
     }
 }

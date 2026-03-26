@@ -162,7 +162,7 @@ public class AddressBookParserTest {
         RescheduleDeliveryDescriptor descriptor = new RescheduleDeliveryDescriptorBuilder(delivery).build();
         RescheduleCommand command = (RescheduleCommand) parser.parseCommand(RescheduleCommand.COMMAND_WORD
                 + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + DeliveryUtil.getDeliveryDetailsHotFix(delivery));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + DeliveryUtil.getDeliveryDetails(delivery));
         assertEquals(new RescheduleCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

@@ -14,7 +14,7 @@ import seedu.address.commons.util.DateTimeUtil;
  */
 public class DeliveryTime {
     public static final String MESSAGE_CONSTRAINTS =
-            "Time should be of the valid delivery time format";
+            "Time should be of the valid delivery time format HH:mm";
 
     public final LocalTime time;
 

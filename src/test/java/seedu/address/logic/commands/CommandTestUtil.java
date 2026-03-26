@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -45,17 +44,16 @@ public class CommandTestUtil {
 
     public static final String VALID_START_DATE_AMY = "2019-11-12";
     public static final String VALID_START_DATE_BOB = "2025-10-29";
-    public static final String VALID_END_DATE_AMY = "2020-01-11";
+    public static final String VALID_END_DATE_AMY = "2026-01-11";
     public static final String VALID_END_DATE_BOB = "2025-11-11";
     public static final String VALID_DELIVERY_TIME_AMY = "20:20";
     public static final String VALID_DELIVERY_TIME_BOB = "12:13";
     public static final String VALID_DELIVERY_DAY = "Monday";
     public static final String VALID_DELIVERY_DAY_AMY = "Monday";
     public static final String VALID_DELIVERY_DAY_BOB = "Wednesday";
-    public static final String VALID_SKIPPED_DATE = "2020-02-10";
 
-    public static final String VALID_NUMBER_OF_DAYS_AMY = "61";
-    public static final String VALID_NUMBER_OF_DAYS_BOB = "14";
+    public static final String UNSORTED_DAYS = "4231";
+
     public static final String VALID_DAYS_AMY = "1";
     public static final String VALID_DAYS_BOB = "3";
 
@@ -74,8 +72,6 @@ public class CommandTestUtil {
     public static final String START_DATE_DESC_BOB = " " + PREFIX_START_DATE + VALID_START_DATE_BOB;
     public static final String END_DATE_DESC_AMY = " " + PREFIX_END_DATE + VALID_END_DATE_AMY;
     public static final String END_DATE_DESC_BOB = " " + PREFIX_END_DATE + VALID_END_DATE_BOB;
-    public static final String NUMBER_OF_DAYS_DESC_AMY = " " + PREFIX_NUMBER_OF_DAYS + VALID_NUMBER_OF_DAYS_AMY;
-    public static final String NUMBER_OF_DAYS_DESC_BOB = " " + PREFIX_NUMBER_OF_DAYS + VALID_NUMBER_OF_DAYS_BOB;
     public static final String TIME_DESC_AMY = " " + PREFIX_TIME + VALID_DELIVERY_TIME_AMY;
     public static final String TIME_DESC_BOB = " " + PREFIX_TIME + VALID_DELIVERY_TIME_BOB;
     public static final String DAYS_DESC_AMY = " " + PREFIX_DAYS + VALID_DAYS_AMY;
@@ -91,8 +87,6 @@ public class CommandTestUtil {
             " " + PREFIX_START_DATE + "2020*20*20"; // '*' not allowed in start dates
     public static final String INVALID_END_DATE_DESC =
             " " + PREFIX_END_DATE + "2020*20*20"; // '*' not allowed in end dates
-    public static final String INVALID_NUMBER_OF_DAYS_DESC =
-            " " + PREFIX_NUMBER_OF_DAYS + "11&"; // '&' not allowed in number of days
     public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + "1112"; // missing ':' symbol
     public static final String INVALID_DAYS_DESC = " " + PREFIX_DAYS; // empty string not allowed for delivery days
 

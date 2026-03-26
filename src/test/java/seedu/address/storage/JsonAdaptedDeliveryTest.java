@@ -1,18 +1,27 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.commons.util.DateTimeUtil.FORMATTER_DAY_NUMBER;
+import static seedu.address.commons.util.DateTimeUtil.FORMATTER_DAY_WORD;
+import static seedu.address.logic.commands.CommandTestUtil.UNSORTED_DAYS;
 import static seedu.address.storage.JsonAdaptedDelivery.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ALICE;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ELLE;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.DateTimeUtil;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
 import seedu.address.model.delivery.EndDate;
@@ -105,5 +114,28 @@ public class JsonAdaptedDeliveryTest {
                 VALID_DELIVERY_DAYS, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
+    }
+
+    @Test
+    public void toModelType_unsortedDeliveryDays_returnsDeliveryWithSortedDeliveryDays() throws IllegalValueException {
+        List<JsonAdaptedDeliveryDay> unsortedJsonAdaptedDeliveryDays =
+                Arrays.stream(UNSORTED_DAYS.split(""))
+                        .map(day -> FORMATTER_DAY_NUMBER.parse(day))
+                        .map(day -> FORMATTER_DAY_WORD.format(day))
+                        .map(DeliveryDay::toDeliveryDay)
+                        .map(JsonAdaptedDeliveryDay::new)
+                        .toList();
+
+        JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_START_DATE, VALID_END_DATE,
+                                                               unsortedJsonAdaptedDeliveryDays, VALID_DELIVERY_TIME);
+        Delivery parsedDelivery = delivery.toModelType();
+        Set<DeliveryDay> actualDeliveryDays = parsedDelivery.getDeliveryDays();
+        Set<DeliveryDay> expectedDeliveryDays = Arrays.stream(UNSORTED_DAYS.split(""))
+                .sorted()
+                .map(DateTimeUtil::convertDayNumberToDayWord)
+                .map(DeliveryDay::toDeliveryDay)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        assertArrayEquals(expectedDeliveryDays.toArray(), actualDeliveryDays.toArray());
     }
 }

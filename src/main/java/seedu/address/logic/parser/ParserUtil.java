@@ -8,8 +8,10 @@ import static seedu.address.commons.util.DateTimeUtil.parseDeliveryDate;
 import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -20,7 +22,6 @@ import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
 import seedu.address.model.delivery.EndDate;
 import seedu.address.model.delivery.StartDate;
-import seedu.address.model.delivery.fields.NumberOfDays;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -36,6 +37,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_DATE = "Date is not valid. It should be in the format yyyy-MM-dd.";
     public static final String MESSAGE_INVALID_DAY_NUMBER =
             "Day number is not valid. It can only be a whole number within 1 to 7 inclusive.";
+    public static final String MESSAGE_DUPLICATE_DELIVERY_DAYS = "The delivery day should not be duplicated.";
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
@@ -193,37 +195,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String numberOfDays} into a {@code NumberOfDays}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code numberOfDays} is invalid.
-     */
-    public static NumberOfDays parseNumberOfDays(String numberOfDays) throws ParseException {
-        requireNonNull(numberOfDays);
-        String trimmedNumberOfDays = numberOfDays.trim();
-        if (!NumberOfDays.isValidNumberOfDays(trimmedNumberOfDays)) {
-            throw new ParseException(NumberOfDays.MESSAGE_CONSTRAINTS);
-        }
-        return new NumberOfDays(trimmedNumberOfDays);
-    }
-
-    /**
-     * Returns the {@code EndDate} object when
-     * given the {@code startDate} and {@code numberOfDays}.
-     *
-     * @param startDate The StartDate object representing the start date.
-     * @param numberOfDays The NumberOfDays object representing the number of days
-     *                     that should be added to the startDate.
-     * @return The EndDate object which represents the end date computed.
-     */
-    public static EndDate getEndDate(StartDate startDate, NumberOfDays numberOfDays) {
-        requireNonNull(startDate);
-        requireNonNull(numberOfDays);
-        LocalDate endDate = startDate.date.plusDays(numberOfDays.days - 1);
-        return new EndDate(endDate.format(EndDate.FORMATTER));
-    }
-
-    /**
      * Returns the {@code String deliveryTime} into a {@code DeliveryTime}
      * Leading and trailing whitespaces are trimmed.
      *
@@ -262,7 +233,16 @@ public class ParserUtil {
 
         String trimmedDeliveryDays = deliveryDays.trim();
         String[] listOfDeliveryDays = trimmedDeliveryDays.split("");
-        Set<DeliveryDay> deliveryDaySet = new HashSet<>();
+
+        // Throw ParseException if duplicate delivery days are parsed.
+        if (Arrays.stream(listOfDeliveryDays).distinct().count() != listOfDeliveryDays.length) {
+            throw new ParseException(MESSAGE_DUPLICATE_DELIVERY_DAYS);
+        }
+
+        // Sort delivery days
+        Arrays.sort(listOfDeliveryDays);
+
+        Set<DeliveryDay> deliveryDaySet = new LinkedHashSet<>();
         for (String deliveryDayNumber : listOfDeliveryDays) {
             deliveryDaySet.add(parseDeliveryDayNumber(deliveryDayNumber));
         }

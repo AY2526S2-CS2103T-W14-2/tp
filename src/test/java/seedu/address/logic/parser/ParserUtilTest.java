@@ -1,8 +1,10 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.util.DateTimeUtil.convertDayNumberToDayWord;
+import static seedu.address.logic.commands.CommandTestUtil.UNSORTED_DAYS;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -11,6 +13,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,7 +25,6 @@ import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
 import seedu.address.model.delivery.EndDate;
 import seedu.address.model.delivery.StartDate;
-import seedu.address.model.delivery.fields.NumberOfDays;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -44,23 +46,18 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "South";
 
     private static final String INVALID_START_DATE = "12-11-2012";
-    private static final String INVALID_NUMBER_OF_DAYS = "-12";
     private static final String INVALID_END_DATE = "12-13-2012";
     private static final String INVALID_TIME = "25:67";
     private static final String INVALID_DAY_NUMBER = "0";
     private static final String INVALID_DAYS = "579";
 
     private static final String VALID_START_DATE = "2021-12-11";
-    private static final String VALID_NUMBER_OF_DAYS = "2";
     private static final String VALID_END_DATE = "2021-12-13";
     private static final String VALID_TIME = "23:23";
     private static final String VALID_DAY_NUMBER_1 = "1";
     private static final String VALID_DAY_NUMBER_2 = "4";
     private static final String VALID_DAY_NUMBER_3 = "6";
     private static final String VALID_DAY_NUMBER_4 = "7";
-
-    // The resulting end date of adding VALID_NUMBER_OF_DAYS days to VALID_START_DATE
-    private static final String RESULTING_END_DATE = "2021-12-12";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -269,54 +266,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseNumberOfDays_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseNumberOfDays((String) null));
-    }
-
-    @Test
-    public void parseNumberOfDays_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseNumberOfDays(INVALID_NUMBER_OF_DAYS));
-    }
-
-    @Test
-    public void parseNumberOfDays_validValueWithoutWhitespace_returnsNumberOfDays() throws ParseException {
-        NumberOfDays expectedNumberOfDays = new NumberOfDays(VALID_NUMBER_OF_DAYS);
-        assertEquals(expectedNumberOfDays, ParserUtil.parseNumberOfDays(VALID_NUMBER_OF_DAYS));
-    }
-
-    @Test
-    public void parseNumberOfDays_validValueWithWhitespace_returnsTrimmedNumberOfDays() throws ParseException {
-        String numberOfDaysWithWhitespace = WHITESPACE + VALID_NUMBER_OF_DAYS + WHITESPACE;
-        NumberOfDays expectedNumberOfDays = new NumberOfDays(VALID_NUMBER_OF_DAYS);
-        assertEquals(expectedNumberOfDays, ParserUtil.parseNumberOfDays(numberOfDaysWithWhitespace));
-    }
-
-    @Test
-    public void getEndDate_bothNull_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.getEndDate(null, null));
-    }
-
-    @Test
-    public void getEndDate_nullStartDate_throwsNullPointerException() {
-        NumberOfDays numberOfDays = new NumberOfDays(VALID_NUMBER_OF_DAYS);
-        assertThrows(NullPointerException.class, () -> ParserUtil.getEndDate(null, numberOfDays));
-    }
-
-    @Test
-    public void getEndDate_nullNumberOfDays_throwsNullPointerException() {
-        StartDate startDate = new StartDate(VALID_START_DATE);
-        assertThrows(NullPointerException.class, () -> ParserUtil.getEndDate(startDate, null));
-    }
-
-    @Test
-    public void getEndDate_validValues_returnsEndDate() {
-        StartDate startDate = new StartDate(VALID_START_DATE);
-        NumberOfDays numberOfDays = new NumberOfDays(VALID_NUMBER_OF_DAYS);
-        EndDate expectedEndDate = new EndDate(RESULTING_END_DATE);
-        assertEquals(expectedEndDate, ParserUtil.getEndDate(startDate, numberOfDays));
-    }
-
-    @Test
     public void parseDeliveryTime_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDeliveryTime((String) null));
     }
@@ -364,6 +313,29 @@ public class ParserUtilTest {
     @Test
     public void parseDeliveryDays_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDays(INVALID_DAYS));
+    }
+
+    @Test
+    public void parseDeliveryDays_duplicatedValue_throwsParseException() {
+        String[] deliveryDayNumbers = {VALID_DAY_NUMBER_1, VALID_DAY_NUMBER_3, VALID_DAY_NUMBER_3, VALID_DAY_NUMBER_4};
+
+        assert Arrays.stream(deliveryDayNumbers).distinct().count() != deliveryDayNumbers.length;
+
+        String deliveryDayNumbersArgument = String.join("", deliveryDayNumbers);
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDays(deliveryDayNumbersArgument));
+    }
+
+    @Test
+    public void parseDeliveryDays_unsortedValue_returnsSortedDeliveryDaySet() throws Exception {
+        Set<DeliveryDay> actualDeliveryDaySet = ParserUtil.parseDeliveryDays(UNSORTED_DAYS);
+        Set<DeliveryDay> expectedDeliverySet = Arrays.stream(UNSORTED_DAYS.split(""))
+                .sorted()
+                .map(DateTimeUtil::convertDayNumberToDayWord)
+                .map(DeliveryDay::toDeliveryDay)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        assertArrayEquals(expectedDeliverySet.toArray(), actualDeliveryDaySet.toArray());
     }
 
     @Test

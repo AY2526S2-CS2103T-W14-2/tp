@@ -1,19 +1,20 @@
 package seedu.address.testutil;
 
-import static seedu.address.commons.util.DateTimeUtil.DAY_NUMBER_FORMATTER;
+import static seedu.address.commons.util.DateTimeUtil.FORMATTER_DATE;
+import static seedu.address.commons.util.DateTimeUtil.FORMATTER_DAY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDay;
+import seedu.address.model.delivery.EndDate;
+import seedu.address.model.delivery.StartDate;
 
 /**
  * A utility class for Delivery.
@@ -23,23 +24,6 @@ public class DeliveryUtil {
      * Returns the part of command string for the given {@code delivery}'s details.
      */
     public static String getDeliveryDetails(Delivery delivery) {
-        LocalDate startDate = delivery.getStartDate().date;
-        LocalDate endDate = delivery.getEndDate().date;
-        int numberOfDays = (int) ChronoUnit.DAYS.between(startDate, endDate) + 1;
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_START_DATE + delivery.getStartDate().date.toString() + " ");
-        sb.append(PREFIX_NUMBER_OF_DAYS + String.valueOf(numberOfDays) + " ");
-        sb.append(PREFIX_TIME + delivery.getDeliveryTime().time.toString() + " ");
-        sb.append(PREFIX_DAYS + getDeliveryDaysArgument(delivery.getDeliveryDays()) + " ");
-        return sb.toString();
-    }
-
-    /**
-     * Returns the part of command string for the given {@code delivery}'s details.
-     * This is a hotfix until schedule command that takes end date is implemented.
-     */
-    public static String getDeliveryDetailsHotFix(Delivery delivery) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_START_DATE + delivery.getStartDate().date.toString() + " ");
         sb.append(PREFIX_END_DATE + delivery.getEndDate().date.toString() + " ");
@@ -57,7 +41,22 @@ public class DeliveryUtil {
      */
     private static String getDeliveryDaysArgument(Set<DeliveryDay> deliveryDaysSet) {
         return deliveryDaysSet.stream()
-                .map(deliveryDay -> DAY_NUMBER_FORMATTER.format(deliveryDay.getDay()))
+                .map(deliveryDay -> FORMATTER_DAY_NUMBER.format(deliveryDay.getDay()))
                 .collect(Collectors.joining(""));
+    }
+
+    /**
+     * Returns an EndDate object encapsulating
+     * the date of {@code startDate} added by {@code numberOfDays}.
+     *
+     * @param startDate The StartDate object that will be added upon.
+     * @param numberOfDays The number of days to be added,
+     *                     which can be a negative number.
+     * @return The EndDate object corresponding to
+     *         the start date added by the number of days.
+     */
+    public static EndDate generateEndDate(StartDate startDate, int numberOfDays) {
+        LocalDate endDate = startDate.date.plusDays(numberOfDays);
+        return new EndDate(FORMATTER_DATE.format(endDate));
     }
 }

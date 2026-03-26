@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HALAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_VEGETARIAN;
 import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 import static seedu.address.model.util.SampleDataUtil.getDeliveryDaySet;
-import static seedu.address.model.util.SampleDataUtil.getSkippedDateSet;
 import static seedu.address.model.util.SampleDataUtil.getTagSet;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -14,7 +13,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.delivery.DeliveryDay;
-import seedu.address.model.delivery.SkippedDate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -87,40 +85,4 @@ public class SampleDataUtilTest {
         assertThrows(IllegalArgumentException.class, () -> getDeliveryDaySet(
                 mondayString, tuesdayString, invalidDeliveryDayString));
     }
-
-    @Test
-    void getSkippedDateSet_validSkippedDate_hasSameSkippedDates() {
-        // non-empty set
-        String firstSkippedDateString = "2026-03-10";
-        String secondSkippedDateString = "2026-04-02";
-        SkippedDate firstSkippedDate = new SkippedDate(firstSkippedDateString);
-        SkippedDate secondSkippedDate = new SkippedDate(secondSkippedDateString);
-        assertEquals(Set.of(firstSkippedDate, secondSkippedDate),
-                getSkippedDateSet(firstSkippedDateString, secondSkippedDateString));
-
-        // duplicate items are removed from set
-        assertEquals(Set.of(firstSkippedDate),
-                getSkippedDateSet(firstSkippedDateString, firstSkippedDateString));
-
-        // empty set
-        assertEquals(Set.<SkippedDate>of(), getSkippedDateSet());
-    }
-
-    @Test
-    public void getSkippedDateSet_invalidSkippedDate_throwsIllegalArgumentException() {
-        // empty skipped date
-        String emptySkippedDateString = "";
-        assertThrows(IllegalArgumentException.class, () -> getSkippedDateSet(emptySkippedDateString));
-
-        // wrong format for skipped date
-        String invalidSkippedDateString = "10 March 2026";
-        assertThrows(IllegalArgumentException.class, () -> getSkippedDateSet(invalidSkippedDateString));
-
-        // one invalid skipped date with many valid skipped date
-        String firstSkippedDateString = "2026-03-10";
-        String secondSkippedDateString = "2026-04-02";
-        assertThrows(IllegalArgumentException.class, () -> getSkippedDateSet(
-                firstSkippedDateString, secondSkippedDateString, invalidSkippedDateString));
-    }
-
 }

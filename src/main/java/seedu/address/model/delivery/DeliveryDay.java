@@ -22,7 +22,7 @@ public enum DeliveryDay {
     SUNDAY("Sunday");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "day should be of the valid delivery day format";
+            "Day should be of the valid delivery day format such as Monday and Tuesday";
 
     private DayOfWeek day;
 
