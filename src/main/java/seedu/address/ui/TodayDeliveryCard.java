@@ -2,12 +2,14 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.delivery.DeliveryTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
@@ -19,6 +21,7 @@ import seedu.address.model.tag.Tag;
  */
 public class TodayDeliveryCard extends UiPart<Region> {
     private static final String FXML = "TodayDeliveryCard.fxml";
+    private static final Logger logger = LogsCenter.getLogger(TodayDeliveryCard.class);
 
     public final Person person;
 
@@ -48,6 +51,8 @@ public class TodayDeliveryCard extends UiPart<Region> {
         Address personAddress = person.getAddress();
         Set<Tag> personTags = person.getTags();
 
+        logger.fine("Initializing with: " + personName + ", " + personDeliveryTime + ", "
+                + personAddress + ", " + personTags);
 
         displayTodayCardName(personName);
         displayTodayCardTime(personDeliveryTime);
