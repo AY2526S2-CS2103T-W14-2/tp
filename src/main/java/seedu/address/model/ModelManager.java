@@ -59,9 +59,7 @@ public class ModelManager implements Model {
         // Solution below inspired by Claude AI
         // Sort based on ascending delivery time (from earliest to latest).
         this.sortedPersonWithTodayDeliveryList = new SortedList<>(personWithTodayDeliveryList,
-                Comparator.comparing(person -> person.getDelivery().getDeliveryTime().time));
-        // TODO: Resolve violation of LoD: getDeliverTime().time.
-        // TODO: Refactor to use Sort class in future, if sorting feature implemented.
+                Comparator.comparing(person -> person.getDeliveryTime()));
     }
 
     public ModelManager() {
