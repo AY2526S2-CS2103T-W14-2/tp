@@ -304,8 +304,21 @@ Furthermore, certain edits can cause the ServeMate to behave in unexpected ways 
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ServeMate home folder.
+**Question**: How do I transfer my data to another computer?<br>
+**Answer**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ServeMate home folder.
+<br>
+
+**Question**: Why does the Delivery Panel not automatically update today's date and deliveries when the time passes 12 midnight?<br>
+**Answer**: ServeMate does not automatically refresh the date on the Delivery Panel if the time passes 12 midnight, in case you are still referring to the previous day's deliveries. To refresh the date on the panel, simply close and relaunch ServeMate.
+<br>
+
+**Question**: Why does the `find` command only return customers that matches all filters?<br>
+**Answer**: ServeMate's `find` command is designed to match all filters so you can easily narrow down to the most relevant results to find the customer that you are looking for (e.g. `find n/John a/Clementi` finds all customers named `John` with an address containing `Clementi`). <br>
+If you like to find customers matching any of the filters (e.g. find all customers with name `Richard` or address `Jurong`), you may issue separate commands (e.g. `find n/Richard` and `find a/Jurong`).
+<br>
+
+**Question**: Why does the `find` command use full word matching for keywords?<br>
+**Answer**: ServeMate's `find` command does not support partial word matching, to reduce the number of irrelevant results returned so that you can find customers quickly. In the event that you might not remember exactly the full word to search for (e.g. `Richard` or `Richards`), you may specify multiple keywords within a filter (e.g. `find n/Richard Richards`) to find customers matching any 1 keyword.
 
 --------------------------------------------------------------------------------------------------------------------
 
