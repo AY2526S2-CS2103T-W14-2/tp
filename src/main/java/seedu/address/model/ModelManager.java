@@ -46,11 +46,13 @@ public class ModelManager implements Model {
 
         // Matches all persons with delivery scheduled today
         DeliveryDatePredicate todayDeliveryPredicate = new DeliveryDatePredicate(todayDate);
+        logger.fine("Initializing with todayDeliveryPredicate: " + todayDeliveryPredicate);
 
         // A new FilteredList is created,
         // so that personWithTodayDeliveryList is unaffected by filtering done on filteredPersons list.
         FilteredList<Person> personWithTodayDeliveryList = new FilteredList<>(
                 this.addressBook.getPersonList(), todayDeliveryPredicate);
+        logger.fine("Initializing filtered personWithTodayDeliveryList: " + personWithTodayDeliveryList);
 
         // Defensive programming:
         // Assertion checks todayPredicate filters correctly, each person in the list must have a delivery.
@@ -59,9 +61,8 @@ public class ModelManager implements Model {
         // Solution below inspired by Claude AI
         // Sort based on ascending delivery time (from earliest to latest).
         this.sortedPersonWithTodayDeliveryList = new SortedList<>(personWithTodayDeliveryList,
-                Comparator.comparing(person -> person.getDelivery().getDeliveryTime().time));
-        // TODO: Resolve violation of LoD: getDeliverTime().time.
-        // TODO: Refactor to use Sort class in future, if sorting feature implemented.
+                Comparator.comparing(person -> person.getDeliveryTime()));
+        logger.fine("Initializing sortedPersonWithTodayDeliveryList: " + personWithTodayDeliveryList);
     }
 
     public ModelManager() {
@@ -143,12 +144,14 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Person> getSortedPersonWithTodayDeliveryList() {
+        logger.fine("Returning: " + sortedPersonWithTodayDeliveryList);
         return sortedPersonWithTodayDeliveryList;
     }
 
     //=========== Current Local Date Accessors =============================================================
     @Override
     public LocalDate getTodayDate() {
+        logger.fine("Returning: " + todayDate);
         return todayDate;
     }
 

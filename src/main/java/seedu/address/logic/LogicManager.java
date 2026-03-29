@@ -78,12 +78,18 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Person> getSortedPersonWithTodayDeliveryList() {
-        return model.getSortedPersonWithTodayDeliveryList();
+        ObservableList<Person> sortedPersonWithTodayDeliveryList = model.getSortedPersonWithTodayDeliveryList();
+        logger.fine("Returning: " + sortedPersonWithTodayDeliveryList);
+
+        return sortedPersonWithTodayDeliveryList;
     }
 
     @Override
     public LocalDate getTodayDate() {
-        return model.getTodayDate();
+        LocalDate todayDate = model.getTodayDate();
+        logger.fine("Returning: " + todayDate);
+
+        return todayDate;
     }
 
     @Override
