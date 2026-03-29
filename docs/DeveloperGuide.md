@@ -679,3 +679,10 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Planned enhancements
+1. **Refresh today's deliveries panel:** The current delivery panel does not update automatically when a new day starts. Users must restart the application to view the current day's deliveries. We plan to add a mechanism to refresh the delivery panel to reflect the new current date.
+2. **Combine existing find commands:** The current separation of `find-delivery` and `find` commands does not allow filtering by delivery information (e.g. dates) and customer information (e.g. address). We plan to combine both commands, so that filtering by both delivery information and customer information is possible.
