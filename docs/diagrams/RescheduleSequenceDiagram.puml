@@ -6,7 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":RescheduleCommandParser" as RescheduleCommandParser LOGIC_COLOR
-participant "u:RescheduleCommand" as RescheduleCommand LOGIC_COLOR
+participant "rc:RescheduleCommand" as RescheduleCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -37,13 +37,13 @@ activate RescheduleCommand
 RescheduleCommand --> RescheduleCommandParser :
 deactivate RescheduleCommand
 
-RescheduleCommandParser --> AddressBookParser : u
+RescheduleCommandParser --> AddressBookParser : rc
 deactivate RescheduleCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 RescheduleCommandParser -[hidden]-> AddressBookParser
 destroy RescheduleCommandParser
 
-AddressBookParser --> LogicManager : u
+AddressBookParser --> LogicManager : rc
 deactivate AddressBookParser
 
 LogicManager -> RescheduleCommand : execute(m)
