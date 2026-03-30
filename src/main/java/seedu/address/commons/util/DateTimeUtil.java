@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -89,8 +90,11 @@ public class DateTimeUtil {
      *
      * @param date The LocalDate object to be formatted into a string.
      * @return String that is the formatted version of the date.
+     * @throws NullPointerException If {@code date} is null.
+     * @throws DateTimeException If an error occurs during formatting.
      */
-    public static String formatDeliveryDate(LocalDate date) {
+    public static String formatDeliveryDate(LocalDate date)
+            throws NullPointerException, DateTimeException {
         requireNonNull(date, "delivery date must not be null");
         return FORMATTER_DATE.format(date);
     }
@@ -185,8 +189,11 @@ public class DateTimeUtil {
      *
      * @param day The DayOfWeek object to be formatted into a string.
      * @return String that is the formatted version of the day number value.
+     * @throws NullPointerException If {@code day} is null.
+     * @throws DateTimeException If an error occurs during formatting.
      */
     public static String formatDayNumber(DayOfWeek day) {
+        requireNonNull(day, "delivery day must not be null");
         return FORMATTER_DAY_NUMBER.format(day);
     }
 
