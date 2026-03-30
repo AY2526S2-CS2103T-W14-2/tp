@@ -8,12 +8,11 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="ServeMate" minWidth="700" minHeight="600" onCloseRequest="#handleExit">
+         title="ServeMate" minWidth="850" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/servemate.png" />
   </icons>
@@ -47,9 +46,12 @@
           </padding>
         </StackPane>
 
-        <HBox VBox.vgrow="ALWAYS">
+        <!-- Solution using SplitPane below inspired by Claude AI and
+        https://github.com/AY2526S2-CS2103T-W14-1/tp/blob/master/src/main/resources/view/MainWindow.fxml
+        -->
+        <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.75" >
           <!-- Left Panel: Customer Contact List -->
-          <VBox fx:id="personList" styleClass="pane-with-border" prefWidth="420" HBox.hgrow="ALWAYS">
+          <VBox styleClass="pane-with-border" prefWidth="880" minWidth="360" >
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
@@ -57,13 +59,8 @@
           </VBox>
 
           <!-- Right Panel: Today's Deliveries Panel -->
-          <VBox fx:id="todayDeliveryList" styleClass="pane-with-border" prefWidth="360" HBox.hgrow="SOMETIMES">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="todayDeliveryPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
-        </HBox>
+          <StackPane fx:id="todayDeliveryPanelPlaceholder" styleClass="pane-with-border" minWidth="440" />
+        </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

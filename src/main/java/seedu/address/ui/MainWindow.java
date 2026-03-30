@@ -111,13 +111,17 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Fills up all the placeholders of this window. {@code logic} must not be null.
      */
     void fillInnerParts() {
+        assert logic != null;
+
+        logger.fine("Filling personListPanelPlaceholder");
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         // Today's delivery panel is unaffected by filtering
+        logger.fine("Filling todayDeliveryPanelPlaceholder");
         // Solution below inspired by Claude AI
         todayDeliveryPanel = new TodayDeliveryPanel(logic.getSortedPersonWithTodayDeliveryList(),
                 logic.getTodayDate());
