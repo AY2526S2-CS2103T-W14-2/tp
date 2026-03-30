@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -40,7 +42,7 @@ public class Messages {
      * @return String representation of the person's information.
      */
     public static String formatPerson(Person person) {
-        assert person != null;
+        requireNonNull(person);
 
         StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
@@ -65,7 +67,7 @@ public class Messages {
      *         present, information about their delivery.
      */
     public static String formatDeliveryFromPerson(Person person) {
-        assert person != null;
+        requireNonNull(person);
 
         StringBuilder builder = new StringBuilder();
         builder.append(person.getName());
@@ -84,4 +86,5 @@ public class Messages {
                 .append(person.getDeliveryTime())
                 .toString();
     }
+
 }
