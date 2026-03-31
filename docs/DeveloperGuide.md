@@ -470,8 +470,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view all upcoming deliveries for the day
-2. ServeMate shows a list of all upcoming deliveries for the day
+1. User requests to view all upcoming deliveries for the day.
+2. ServeMate shows a list of all upcoming deliveries for the day.
 
    Use case ends.
 
@@ -487,11 +487,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list customers
-2. ServeMate shows a list of customers
-3. User requests to add a new upcoming delivery for a customer with required fields
-4. ServeMate adds the upcoming delivery to the customer's details
-5. ServeMate shows a success message with the added upcoming delivery's details
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to add a new upcoming delivery for a customer with required fields.
+4. ServeMate adds the upcoming delivery to the customer's details.
+5. ServeMate shows a success message with the added upcoming delivery's details.
 
    Use case ends.
 
@@ -535,11 +535,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list customers
-2. ServeMate shows a list of customers
-3. User requests to delete a customer's delivery
-4. ServeMate deletes the delivery associated with the specified customer
-5. ServeMate shows a confirmation message that includes the customer's name and details of the deleted delivery
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to delete a customer's delivery.
+4. ServeMate deletes the delivery associated with the specified customer.
+5. ServeMate shows a confirmation message that includes the customer's name and details of the deleted delivery.
    Use case ends.
 
 **Extensions**
@@ -570,11 +570,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list customers
-2. ServeMate shows a list of customers
-3. User requests to tag a customer in the list with a delivery note
-4. ServeMate tags the customer in the customer record with the delivery note
-5. ServeMate shows a success message with the updated customer's details including the delivery note
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to tag a customer in the list with a delivery note.
+4. ServeMate tags the customer in the customer record with the delivery note.
+5. ServeMate shows a success message with the updated customer's details including the delivery note.
 
 **Extensions**
 
