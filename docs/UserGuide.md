@@ -320,8 +320,8 @@ Examples:
 * `find t/Vegetarian` displays all customers tagged with dietary restriction `Vegetarian`.
 * `find n/Alex t/Vegetarian` displays customers whose names contain `Alex` *and* tagged with dietary restriction `Vegetarian`.
 * `find n/Bernice a/Yishun Jurong` displays customers whose names contain `Bernice` *and* with address containing `Yishun` or `Jurong`.
-* `find n/Alex Roy a/Street t/Vegetarian` displays customers whose names contain `Alex` or `Roy`, with address containing `Street` *and* tagged with dietary restriction `Vegetarian`.<br>
-  <img src="images/FindCommand.png" alt="result for `find n/Alex Roy a/Street t/Vegetarian`" width="350"/>
+* `find n/Alex Roy a/Street t/Vegetarian` displays customers whose names contain `Alex` or `Roy`, with address containing `Street` *and* tagged with dietary restriction `Vegetarian`.
+  <br>![result for 'find n/Alex Roy a/Street t/Vegetarian'](images/FindCommand.png)
 
 <br>
 
@@ -342,6 +342,7 @@ Format: `find-delivery dt/DATE` or `find-delivery st/START_DATE ed/END_DATE`
 Examples:
 * `find-delivery dt/2026-04-01` returns all customers with a delivery on Wednesday, 1 April 2026.
 * `find-delivery st/2026-04-01 ed/2026-04-30` returns all customers with a delivery scheduled within April 2026.
+  <br>![result for 'find-delivery st/2026-04-01 ed/2026-04-30'](images/FindDeliveryCommand.png)
 
 <br>
 
@@ -376,6 +377,7 @@ Format: `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DA
 Examples:
 * `schedule 1 st/2026-02-01 ed/2026-02-02 tm/13:00 d/12` adds a delivery for the 1st customer on the list. The delivery starts on 1 February 2026, ends on 2 February 2026 and occurs at 1 PM on Mondays and Tuesdays.
 * `schedule 4 st/2026-03-11 ed/2026-04-01 tm/15:30 d/246` adds a delivery for the 4th customer on the list. The delivery starts on 11 March 2026, ends on 1 April 2026 and occurs at 3:30 PM on Tuesday, Thursdays and Saturdays.
+  <br>![result for 'schedule 4 st/2026-03-11 ed/2026-04-01 tm/15:30 d/246'](images/ScheduleCommand.png)
 
 <br>
 
