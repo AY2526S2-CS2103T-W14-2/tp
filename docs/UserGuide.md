@@ -37,7 +37,8 @@ If Java is not installed, follow the installation guide for your operating syste
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 * The customer panel on the left allows you to view customer information, including their full delivery details.
-* The delivery panel on the right allows you to view Today's Deliveries. It provides a quick reference to see deliveries schedule for the current day, from earliest to latest delivery time.
+* The delivery panel on the right allows you to view today's deliveries. It provides a quick reference to view deliveries scheduled for the current day, from earliest to latest delivery time.
+* You can adjust the width of the panels by left-clicking and dragging the divider between them.
 
 <box type="info" seamless>
 
@@ -343,7 +344,15 @@ Furthermore, certain edits can cause the ServeMate to behave in unexpected ways 
 <br>
 
 **Question**: Why does the delivery panel not automatically update today's date and deliveries when the time passes 12 midnight?<br>
-**Answer**: ServeMate does not automatically refresh the date on the delivery panel if the time passes 12 midnight, in case you are still referring to the previous day's deliveries. To refresh the date on the panel, simply close and relaunch ServeMate.
+**Answer**: ServeMate currently does not support automatically refreshing the date on the delivery panel if the time passes 12 midnight, in case you are still referring to the previous day's deliveries. To refresh the date on the panel, simply close and relaunch ServeMate.
+<br>
+
+**Question**: Why can't I use the delivery panel to view deliveries on other dates?<br>
+**Answer**: ServeMate currently does not support viewing deliveries on other dates in the delivery panel. The delivery panel is intended as a quick reference to view deliveries scheduled on the current day for your operations. If you need to view deliveries on other dates, you can use the `find-delivery` command.
+<br>
+
+**Question**: Why is the delivery panel wider than the customer panel when I make the ServeMate application window narrower?<br>
+**Answer**: When the ServeMate application window is narrow, the delivery panel is given a larger width to provide a quick reference to deliveries scheduled on the current day. If you need to view more information in the customer panel, you can resize the application window and expand the customer panel for a better viewing experience.
 <br>
 
 **Question**: Why does the `find` command only return customers that matches all filters?<br>
