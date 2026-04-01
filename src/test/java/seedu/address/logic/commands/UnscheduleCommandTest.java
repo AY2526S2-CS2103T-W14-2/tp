@@ -53,7 +53,8 @@ public class UnscheduleCommandTest {
     @Test
     public void execute_personWithNoDeliveryUnfilteredList_throwsCommandException() {
         Person personToUnschedule = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        // ensures that person does not have delivery
+
+        // First ensure that person does not have delivery
         assertFalse(personToUnschedule.hasDelivery());
 
         UnscheduleCommand unscheduleCommand = new UnscheduleCommand(INDEX_SECOND_PERSON);
