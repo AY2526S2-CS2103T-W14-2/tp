@@ -1,17 +1,24 @@
 package seedu.address.model.util;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HALAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_VEGETARIAN;
+import static seedu.address.commons.util.DateTimeUtil.FORMATTER_DAY_NUMBER;
+import static seedu.address.commons.util.DateTimeUtil.FORMATTER_DAY_WORD;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 import static seedu.address.model.util.SampleDataUtil.getDeliveryDaySet;
 import static seedu.address.model.util.SampleDataUtil.getTagSet;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.tag.Tag;
 
@@ -84,5 +91,23 @@ public class SampleDataUtilTest {
         String tuesdayString = "TueSDAy";
         assertThrows(IllegalArgumentException.class, () -> getDeliveryDaySet(
                 mondayString, tuesdayString, invalidDeliveryDayString));
+    }
+
+    @Test
+    public void getDeliveryDaySet_unsortedDeliveryDays_returnsSortedDeliveryDaySet() throws IllegalValueException {
+        String[] unsortedDeliveryDays =
+                Arrays.stream(UNSORTED_DAYS.split(""))
+                        .map(day -> FORMATTER_DAY_NUMBER.parse(day))
+                        .map(day -> FORMATTER_DAY_WORD.format(day))
+                        .toArray(String[]::new);
+
+        Set<DeliveryDay> actualDeliveryDays = getDeliveryDaySet(unsortedDeliveryDays);
+        Set<DeliveryDay> expectedDeliveryDays = Arrays.stream(UNSORTED_DAYS.split(""))
+                .sorted()
+                .map(DateTimeUtil::convertDayNumberToDayWord)
+                .map(DeliveryDay::toDeliveryDay)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        assertArrayEquals(expectedDeliveryDays.toArray(), actualDeliveryDays.toArray());
     }
 }
