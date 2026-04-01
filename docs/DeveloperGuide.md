@@ -164,6 +164,9 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+Note on parsing address book data:
+* Although commands from the user accept days of the week in the form of numbers (i.e. `123`), they are stored as capitalized alphabet-only strings (i.e. "MONDAY", "TUESDAY", etc.) in the JSON file. This is to enable better readability by advanced users who would like to edit the JSON file since speed of inputting is not a concern for this use case.
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
