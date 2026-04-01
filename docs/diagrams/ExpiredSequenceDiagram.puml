@@ -5,69 +5,73 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":UnscheduleCommandParser" as UnscheduleCommandParser LOGIC_COLOR
-participant "u:UnscheduleCommand" as UnscheduleCommand LOGIC_COLOR
+participant ":ExpiredCommandParser" as ExpiredCommandParser LOGIC_COLOR
+participant "e:ExpiredCommand" as ExpiredCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+participant "p:PersonHasExpiredDeliveryPredicate" as Predicate MODEL_COLOR
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("unschedule 2")
+[-> LogicManager : execute("expired bf/2026-02-01")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("unschedule 2")
+LogicManager -> AddressBookParser : parseCommand("expired bf/2026-02-01")
 activate AddressBookParser
 
-create UnscheduleCommandParser
-AddressBookParser -> UnscheduleCommandParser
-activate UnscheduleCommandParser
+create ExpiredCommandParser
+AddressBookParser -> ExpiredCommandParser
+activate ExpiredCommandParser
 
-UnscheduleCommandParser --> AddressBookParser
-deactivate UnscheduleCommandParser
+ExpiredCommandParser -[hidden]-> AddressBookParser
+deactivate ExpiredCommandParser
 
-AddressBookParser -> UnscheduleCommandParser : parse("2")
-activate UnscheduleCommandParser
+'Extra space needed before prefix to denote empty preamble
+AddressBookParser -> ExpiredCommandParser : parse(" bf/2026-02-01")
+activate ExpiredCommandParser
 
-create UnscheduleCommand
-UnscheduleCommandParser -> UnscheduleCommand
-activate UnscheduleCommand
+create Predicate
+ExpiredCommandParser -> Predicate : PersonHasExpiredDeliveryPredicate(date)
+activate Predicate
 
-UnscheduleCommand --> UnscheduleCommandParser :
-deactivate UnscheduleCommand
+Predicate -[hidden]-> ExpiredCommandParser
+deactivate Predicate
 
-UnscheduleCommandParser --> AddressBookParser : u
-deactivate UnscheduleCommandParser
+create ExpiredCommand
+ExpiredCommandParser -> ExpiredCommand : ExpiredCommand(p)
+activate ExpiredCommand
+
+ExpiredCommand -[hidden]-> ExpiredCommandParser
+deactivate ExpiredCommand
+
+ExpiredCommandParser --> AddressBookParser : e
+deactivate ExpiredCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-UnscheduleCommandParser -[hidden]-> AddressBookParser
-destroy UnscheduleCommandParser
+ExpiredCommandParser -[hidden]-> AddressBookParser
+destroy ExpiredCommandParser
 
-AddressBookParser --> LogicManager : u
+AddressBookParser --> LogicManager : e
 deactivate AddressBookParser
 
-LogicManager -> UnscheduleCommand : execute(m)
+LogicManager -> ExpiredCommand : execute(m)
 
-activate UnscheduleCommand
-note right of UnscheduleCommand
-  target: customer to unschedule
-  updated: copy of target without delivery
-end note
-UnscheduleCommand -> Model : setPerson(target, updated)
+ExpiredCommand -> Model : updateFilteredPersonList(p)
 activate Model
 
-Model --> UnscheduleCommand
+Model -[hidden]-> ExpiredCommand
 deactivate Model
 
 create CommandResult
-UnscheduleCommand -> CommandResult
+ExpiredCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> UnscheduleCommand
+CommandResult -[hidden]-> ExpiredCommand
 deactivate CommandResult
 
-UnscheduleCommand --> LogicManager : r
-deactivate UnscheduleCommand
+ExpiredCommand --> LogicManager : r
+deactivate ExpiredCommand
 
 [<--LogicManager
 deactivate LogicManager

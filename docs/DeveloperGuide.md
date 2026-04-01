@@ -340,7 +340,8 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 6. `UnscheduleCommand` checks whether the specified customer and their delivery exist.
 7. If the customer has a delivery, `UnscheduleCommand` creates a new `Person` object with all existing fields intact except the delivery.
 8. `UnscheduleCommand` requests `Model` to replace the old entry in the address book with the newly created `Person` object.
-9. `UnscheduleCommand` completes and returns the result of the `unschedule` command.
+9. `UnscheduleCommand` requests `Model` to refresh the displayed customer list to show all customers.
+10. `UnscheduleCommand` completes and returns the result of the `unschedule` command.
 
 #### Design considerations
 
