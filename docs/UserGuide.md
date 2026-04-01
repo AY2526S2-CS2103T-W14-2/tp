@@ -103,7 +103,7 @@ Action | Command Format (with Examples)
   * ~Tags should only consist of alphanumerical values without whitespaces.
   * Suggested usages:
     * Dietary restrictions of the customer (i.e. `t/Vegetarian`).
-    * The region where the customer lives (`t/West`).
+    * The region where the customer lives (i.e. `t/West`).
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
