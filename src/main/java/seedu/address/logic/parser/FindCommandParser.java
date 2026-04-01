@@ -58,9 +58,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        logger.fine("Name keywords: " + nameKeywords);
-        logger.fine("Address keywords: " + addressKeywords);
-        logger.fine("Tag keywords: " + tagKeywords);
+        logger.fine("nameKeywords: " + nameKeywords
+                + ", addressKeywords: " + addressKeywords
+                + ", tagKeywords: " + tagKeywords);
 
         // At least 1 filter with both prefix and keyword specified
         PersonMatchesFilterPredicate personFilter =
