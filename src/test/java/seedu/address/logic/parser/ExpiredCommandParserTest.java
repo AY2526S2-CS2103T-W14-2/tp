@@ -24,7 +24,7 @@ public class ExpiredCommandParserTest {
         PersonHasExpiredDeliveryPredicate predicate = new PersonHasExpiredDeliveryPredicate(beforeDate);
         ExpiredCommand expectedCommand = new ExpiredCommand(predicate);
         assertParseSuccess(parser, " " + PREFIX_BEFORE_DATE + "2026-04-01", expectedCommand);
-        assertParseSuccess(parser, " " + PREFIX_BEFORE_DATE + "2026-12-31   ", expectedCommand);
+        assertParseSuccess(parser, " " + PREFIX_BEFORE_DATE + "2026-04-01   ", expectedCommand);
 
         // Boundary value: 29 February exists on leap years
         beforeDate = LocalDate.of(2024, 2, 29);
@@ -35,9 +35,15 @@ public class ExpiredCommandParserTest {
 
     @Test
     public void parse_emptyArg_failure() {
-        // Equivalence partition for empty field
+        // Equivalence partition for empty arguments
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExpiredCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyDateField_failure() {
+        // Equivalence partition for empty date field
+        assertParseFailure(parser, " " + PREFIX_BEFORE_DATE, ParserUtil.MESSAGE_INVALID_DATE);
     }
 
     @Test
@@ -65,9 +71,6 @@ public class ExpiredCommandParserTest {
 
     @Test
     public void parse_invalidDate_failure() {
-        // Equivalence partition for providing no date after prefix
-        assertParseFailure(parser, " " + PREFIX_BEFORE_DATE, ParserUtil.MESSAGE_INVALID_DATE);
-
         // Equivalence partition for non-date strings
         assertParseFailure(parser, " " + PREFIX_BEFORE_DATE + "invalid-date", ParserUtil.MESSAGE_INVALID_DATE);
 
