@@ -19,13 +19,14 @@ public class ExpiredCommandParserTest {
 
     @Test
     public void parse_validDate_success() {
+        // Equivalence partition for valid date
         LocalDate beforeDate = LocalDate.of(2026, 4, 1);
         PersonHasExpiredDeliveryPredicate predicate = new PersonHasExpiredDeliveryPredicate(beforeDate);
         ExpiredCommand expectedCommand = new ExpiredCommand(predicate);
         assertParseSuccess(parser, " " + PREFIX_BEFORE_DATE + "2026-04-01", expectedCommand);
         assertParseSuccess(parser, " " + PREFIX_BEFORE_DATE + "2026-04-01   ", expectedCommand);
 
-        // Valid date - 29 February exists on leap years
+        // Boundary value: 29 February exists on leap years
         beforeDate = LocalDate.of(2024, 2, 29);
         predicate = new PersonHasExpiredDeliveryPredicate(beforeDate);
         expectedCommand = new ExpiredCommand(predicate);
@@ -34,25 +35,34 @@ public class ExpiredCommandParserTest {
 
     @Test
     public void parse_emptyArg_failure() {
-        // No attribute filters
+        // Equivalence partition for empty arguments
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExpiredCommand.MESSAGE_USAGE));
     }
 
     @Test
+    public void parse_emptyDateField_failure() {
+        // Equivalence partition for empty date field
+        assertParseFailure(parser, " " + PREFIX_BEFORE_DATE, ParserUtil.MESSAGE_INVALID_DATE);
+    }
+
+    @Test
     public void parse_preambleExistsBeforePrefix_failure() {
+        // Equivalence partition for including non-empty preamble
         assertParseFailure(parser, " garbage " + PREFIX_BEFORE_DATE + "2026-04-01",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExpiredCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingPrefix_failure() {
+        // Equivalence partition for missing prefix
         assertParseFailure(parser, " 2026-04-01",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExpiredCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_duplicatePrefix_failure() {
+    public void parse_duplicateField_failure() {
+        // Equivalence partition for duplicate fields
         assertParseFailure(parser, " "
                         + PREFIX_BEFORE_DATE + "2026-04-01 "
                         + PREFIX_BEFORE_DATE + "2026-07-11",
@@ -61,27 +71,21 @@ public class ExpiredCommandParserTest {
 
     @Test
     public void parse_invalidDate_failure() {
-        // No date provided
-        assertParseFailure(parser, " " + PREFIX_BEFORE_DATE, ParserUtil.MESSAGE_INVALID_DATE);
-
-        // Not a date
+        // Equivalence partition for non-date strings
         assertParseFailure(parser, " " + PREFIX_BEFORE_DATE + "invalid-date", ParserUtil.MESSAGE_INVALID_DATE);
 
-        // Invalid date format - wrong separator
+        // Equivalence partition for wrong date format
         assertParseFailure(parser, " " + PREFIX_BEFORE_DATE + "01/04/2026", ParserUtil.MESSAGE_INVALID_DATE);
 
-        // Invalid date - 31 April does not exist
+        // Equivalence partition for non-existent dates
         assertParseFailure(parser, " " + PREFIX_BEFORE_DATE + "2026-04-31", ParserUtil.MESSAGE_INVALID_DATE);
-
-        // Invalid date - a year does not have 13 months
         assertParseFailure(parser, " " + PREFIX_BEFORE_DATE + "2026-13-01", ParserUtil.MESSAGE_INVALID_DATE);
-
-        // Invalid date - 29 February does not exist on non-leap years
         assertParseFailure(parser, " " + PREFIX_BEFORE_DATE + "2026-02-29", ParserUtil.MESSAGE_INVALID_DATE);
     }
 
     @Test
     public void parse_extraDate_failure() {
+        // Equivalence partition for having multiple keyword for same field
         assertParseFailure(parser, " " + PREFIX_BEFORE_DATE + "2026-02-29 2026-02-29",
                 ParserUtil.MESSAGE_INVALID_DATE);
     }

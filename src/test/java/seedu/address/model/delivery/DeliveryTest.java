@@ -16,6 +16,7 @@ import static seedu.address.testutil.DeliveryUtil.generateEndDate;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ALICE;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_CARL;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -58,11 +59,52 @@ public class DeliveryTest {
     }
 
     @Test
-    public void getFormattedDeliverySchedule_validDelivery_returnsDeliverySchedule() {
+    public void getFormattedDeliverySchedule_returnsDeliverySchedule() {
         assertEquals(DELIVERY_ALICE.getStartDate()
                         + " to " + DELIVERY_ALICE.getEndDate()
                         + "  |  " + DELIVERY_ALICE.getDeliveryTime(),
                 DELIVERY_ALICE.getFormattedDeliverySchedule());
+    }
+
+    @Test
+    public void hasExpired_deliveryExpired_returnsTrue() {
+        Delivery delivery = new DeliveryBuilder()
+                .withStartDate("2024-03-01")
+                .withEndDate("2024-04-01")
+                .build();
+
+        // Boundary value: delivery expired one day ago
+        LocalDate beforeDate = LocalDate.of(2024, 4, 2);
+        assertTrue(delivery.hasExpired(beforeDate));
+
+        // Equivalence partition for expired delivery
+        beforeDate = LocalDate.of(2026, 3, 27);
+        assertTrue(delivery.hasExpired(beforeDate));
+    }
+
+    @Test
+    public void hasExpired_deliveryNotExpired_returnsFalse() {
+        Delivery delivery = new DeliveryBuilder()
+                .withStartDate("2023-03-01")
+                .withEndDate("2023-04-01")
+                .build();
+
+        // Boundary value: delivery expires today
+        LocalDate beforeDate = LocalDate.of(2023, 4, 1);
+        assertFalse(delivery.hasExpired(beforeDate));
+
+        // Near boundary value: delivery expires in two days
+        beforeDate = LocalDate.of(2023, 3, 31);
+        assertFalse(delivery.hasExpired(beforeDate));
+
+        // Equivalence partition where specified date is between start and end dates of delivery
+        // Specified date is still before the end date of delivery
+        beforeDate = LocalDate.of(2023, 3, 27);
+        assertFalse(delivery.hasExpired(beforeDate));
+
+        // Equivalence partition where specified date is before delivery's start date
+        beforeDate = LocalDate.of(2023, 2, 27);
+        assertFalse(delivery.hasExpired(beforeDate));
     }
 
     @Test

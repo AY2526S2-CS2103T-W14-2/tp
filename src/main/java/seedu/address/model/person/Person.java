@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -110,6 +111,21 @@ public class Person {
      */
     public boolean hasDelivery() {
         return delivery != null;
+    }
+
+    /**
+     * Checks whether the person's delivery ends before the specified date.
+     * <p>Assumes that the specified date is not null.
+     *
+     * @param beforeDate Date to compare against.
+     * @return {@code true} if the person has a delivery assigned and the delivery's
+     *                       end date occurs before the specified date.
+     *         {@code false} otherwise.
+     */
+    public boolean hasExpiredDelivery(LocalDate beforeDate) {
+        assert beforeDate != null;
+
+        return hasDelivery() && delivery.hasExpired(beforeDate); // uses short circuit evaluation
     }
 
     //@@author BenedTj

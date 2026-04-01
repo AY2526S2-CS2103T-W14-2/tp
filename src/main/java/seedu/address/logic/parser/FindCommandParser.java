@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonMatchesFilterPredicate;
@@ -17,6 +19,8 @@ import seedu.address.model.person.PersonMatchesFilterPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
+
+    private static final Logger logger = LogsCenter.getLogger(FindCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -45,13 +49,25 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> addressKeywords = parseKeywords(argMultimap, PREFIX_ADDRESS);
         List<String> tagKeywords = parseKeywords(argMultimap, PREFIX_TAG);
 
+        assert nameKeywords != null;
+        assert addressKeywords != null;
+        assert tagKeywords != null;
+
         // isEmpty() == true, when no prefix specified or no keyword specified after prefix.
         if (nameKeywords.isEmpty() && addressKeywords.isEmpty() && tagKeywords.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
+        logger.fine("nameKeywords: " + nameKeywords
+                + ", addressKeywords: " + addressKeywords
+                + ", tagKeywords: " + tagKeywords);
+
         // At least 1 filter with both prefix and keyword specified
-        return new FindCommand(new PersonMatchesFilterPredicate(nameKeywords, addressKeywords, tagKeywords));
+        PersonMatchesFilterPredicate personFilter =
+                new PersonMatchesFilterPredicate(nameKeywords, addressKeywords, tagKeywords);
+        assert personFilter != null;
+
+        return new FindCommand(personFilter);
     }
 
     /**

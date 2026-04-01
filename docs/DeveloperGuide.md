@@ -24,6 +24,7 @@
 
 ### AI Generated Work
 * Gemini was used to generate the ServeMate icon for the application and GUI window.
+* ChatGPT was used to generate code implementation for custom date formatter `FORMATTER_DATE`.
 * GitHub Copilot was used to aid with the GUI programming.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -108,12 +109,12 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
-
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 How the `Logic` component works:
 
@@ -139,14 +140,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and the `Delivery` objects contained within these `Person` objects.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` and `Delivery` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. Similarly, only one `Delivery` object would be required per unique delivery, instead of each `Person` needing their own `Delivery` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -164,6 +165,9 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+Note on parsing address book data:
+* Although commands from the user accept days of the week in the form of numbers (i.e. `123`), they are stored as capitalized alphabet-only strings (i.e. "MONDAY", "TUESDAY", etc.) in the JSON file. This is to enable better readability by advanced users who would like to edit the JSON file since speed of inputting is not a concern for this use case.
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
@@ -178,7 +182,75 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find delivery by date
 
+**Objective:** Allows administrative staff to filter the customer list to show only customers with deliveries scheduled on a specified date, or within a specified date range.
+
+#### Implementation details
+The following sequence diagram illustrates the interactions within the `Logic` component for finding deliveries by date:
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindDeliveryCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
+</box>
+
+<puml src="diagrams/FindDeliverySequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find-delivery dt/2026-04-01` Command" />
+
+**Execution flow:**
+1. The user enters the `find-delivery` command with either a single date (`dt/`) or a date range (`st/` and `ed/`).
+2. `LogicManager` receives the input string and passes it to `AddressBookParser`.
+3. `AddressBookParser` creates a `FindDeliveryCommandParser` to parse the command arguments.
+4. `FindDeliveryCommandParser` parses the date prefix(es) and constructs a `DeliveryDatePredicate` that encapsulates the search criteria.
+5. `FindDeliveryCommandParser` creates a `FindDeliveryCommand` with the predicate and returns it.
+6. `LogicManager` executes the `FindDeliveryCommand`.
+7. `FindDeliveryCommand` calls `Model#updateFilteredPersonList(predicate)` to filter the customer list.
+8. `FindDeliveryCommand` completes and returns a `CommandResult` indicating how many customers were listed.
+
+#### Design considerations
+
+1. How `find-delivery` accepts date input.
+    * **Chosen:** Support both a single date (`dt/`) and a date range (`st/` and `ed/`), but not both at the same time.
+        * Pros: Flexible; covers the common case of checking a single day as well as planning for a longer window.
+        * Cons: Parser must validate that the two modes are mutually exclusive, adding some complexity.
+    * **Alternative:** Accept only a single date.
+        * Pros: Simpler parsing logic.
+        * Cons: Less useful for staff who need to view deliveries over a multi-day period.
+
 ### Schedule delivery
+
+**Objective:** Allows administrative staff to add a delivery to be associated with the specified customer.
+
+#### Implementation details
+The following sequence diagram illustrates the interactions within the `Logic` component for scheduling a delivery:
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
+</box>
+
+<puml src="diagrams/ScheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `schedule 1 st/2026-01-01 ed/2026-02-01 tm/14:00 d/123` Command">
+
+**Execution flows:**
+1. The user enters the `schedule` command as an input string.
+2. `LogicManager` receives the input string and passes it to `AddressBookParser`.
+3. `AddressBookParser` creates a `ScheduleCommandParser` to parse the command arguments.
+4. `ScheduleCommandParser` parses the index and arguments, and creates both a `Delivery` object and `ScheduleCommand` object.
+5. `LogicManager` executes `ScheduleCommand` object.
+6. `ScheduleCommand` checks whether the specified customer exists and the customer already has a delivery.
+7. If the customer does not already have a delivery, `ScheduleCommand` creates a new `Person` object with the delivery.
+8. `ScheduleCommand` requests `Model` to replace the old entry in the address book with the newly created `Person` object.
+9. `ScheduleCommand` completes and returns the result of the `schedule` command.
+
+#### Design considerations
+
+1. How the `schedule` adds the delivery for a person.
+   * **Chosen:** Implement a dedicated `schedule` command.
+        * Pros: One-shot command that enables users to easily add a new delivery to the specified person.
+        * Cons: Requires implementing a new command class.
+   * **Alternative 1:** Extend `add` to support adding delivery details alongside person details.
+        * Pros: Fewer commands to learn.
+        * Cons: Complicates the syntax of `add`, increases parser and validation complexity and weakens separation between customer-date edits and delivery-scheduling operations.
+   * **Alternative 2:** Extend `edit` to support adding delivery details to person without deliveries.
+        * Pros: Fewer commands to learn.
+        * Cons: Potential confusion between unintuitive command name (`edit`) for the intended effect (adding a new command), increases parser and validation complexity and weakens separation between customer-date edits and delivery-scheduling operations.
 
 ### Reschedule delivery
 
@@ -189,7 +261,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `RescheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `RescheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
 
 <puml src="diagrams/RescheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `reschedule 1 tm/14:00` Command" />
@@ -227,7 +299,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
 
 <puml src="diagrams/UnscheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `unschedule 2` Command" />
@@ -334,29 +406,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a customer contact with required fields 
-2. ServeMate adds the customer into the customer list 
-3. ServeMate shows a success message with the added customer’s details
+1. User requests to add a customer contact with required fields.
+2. ServeMate adds the customer into the customer list.
+3. ServeMate shows a success message with the added customer’s details.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Any required field is missing.
+* 1a. ServeMate detects that a required field is missing.
 
-    * 1a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
-
-      Use case resumes at step 1.
-
-* 1b. Any parameter value is invalid.
-
-    * 1b1. ServeMate shows an error message describing the violated constraint and requests for a new command from the user.
+    * 1a1. ServeMate shows an error message describing the correct command format.
 
       Use case resumes at step 1.
 
-* 1c. A customer with the same name already exists.
+* 1b. ServeMate detects an invalid field value.
 
-    * 1c1. ServeMate shows an error message indicating that the customer already exists and requests for a new command from the user.
+    * 1b1. ServeMate shows an error message describing the violated constraint.
+
+      Use case resumes at step 1.
+
+* 1c. ServeMate detects that a customer with the same name already exists.
+
+    * 1c1. ServeMate shows an error message indicating that the customer already exists.
 
       Use case resumes at step 1.
 
@@ -364,11 +436,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list customers 
-2. ServeMate shows a list of customers 
-3. User requests to delete a customer in the list 
-4. ServeMate deletes the customer
-5. ServeMate shows a confirmation message with the deleted customer’s details
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to delete a customer in the list.
+4. ServeMate deletes the customer.
+5. ServeMate shows a success message with the deleted customer’s details.
 
     Use case ends.
 
@@ -378,15 +450,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is not a positive integer.
+* 3a. ServeMate detects that the given index is not a positive integer.
 
-    * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
+    * 3a1. ServeMate shows an error message describing the correct command format.
 
       Use case resumes at step 3.
 
-* 3b. The given index is out of range.
+* 3b. ServeMate detects that the given index is out of range.
 
-    * 3b1. ServeMate shows an error message indicating that the provided index is invalid and requests for a new command from the user.
+    * 3b1. ServeMate shows an error message indicating that the provided index is invalid.
 
       Use case resumes at step 3.
 
@@ -394,11 +466,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list customers
-2. ServeMate shows a list of customers
-3. User requests to edit a customer in the list
-4. ServeMate updates the customer record
-5. ServeMate shows a success message with the updated customer’s details
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to edit a customer in the list.
+4. ServeMate updates the customer record.
+5. ServeMate shows a success message with the updated customer’s details.
 
    Use case ends.
 
@@ -408,33 +480,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is not a positive integer.
+* 3a. ServeMate detects that the given index is not a positive integer.
 
-    * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
-
-      Use case resumes at step 3.
-
-* 3b. The given index is out of range.
-
-    * 3b1. ServeMate shows an error message indicating that the provided index is invalid and requests for a new command from the user.
+    * 3a1. ServeMate shows an error message describing the correct command format.
 
       Use case resumes at step 3.
 
-* 3c. No fields are specified for editing.
+* 3b. ServeMate detects that the given index is out of range.
 
-    * 3c1. ServeMate shows an error message indicating that at least one field must be provided for editing and requests for a new command from the user.
-
-      Use case resumes at step 3.
-
-* 3d. Any provided field value is invalid.
-
-    * 3d1. ServeMate shows an error message describing the violated constraint and requests for a new command from the user.
+    * 3b1. ServeMate shows an error message indicating that the provided index is invalid.
 
       Use case resumes at step 3.
 
-* 3e. Editing the name causes a duplicate with an existing customer.
+* 3c. ServeMate detects that no fields are specified for editing.
 
-    * 3e1. ServeMate shows an error message indicating that the customer already exists and requests for a new command from the user.
+    * 3c1. ServeMate shows an error message indicating that at least one field must be provided for editing.
+
+      Use case resumes at step 3.
+
+* 3d. ServeMate detects that an invalid field is provided.
+
+    * 3d1. ServeMate shows an error message describing the violated constraint.
+
+      Use case resumes at step 3.
+
+* 3e. ServeMate detects that editing the name causes a duplicate with an existing customer.
+
+    * 3e1. ServeMate shows an error message indicating that the customer already exists.
 
       Use case resumes at step 3.
 
@@ -472,8 +544,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view all upcoming deliveries for the day
-2. ServeMate shows a list of all upcoming deliveries for the day
+1. User requests to view all upcoming deliveries for the day.
+2. ServeMate shows a list of all upcoming deliveries for the day.
 
    Use case ends.
 
@@ -489,11 +561,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list customers
-2. ServeMate shows a list of customers
-3. User requests to add a new upcoming delivery for a customer with required fields
-4. ServeMate adds the upcoming delivery to the customer's details
-5. ServeMate shows a success message with the added upcoming delivery's details
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to add a new upcoming delivery for a customer with required fields.
+4. ServeMate adds the upcoming delivery to the customer's details.
+5. ServeMate shows a success message with the added upcoming delivery's details.
 
    Use case ends.
 
@@ -503,35 +575,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is not a positive integer.
+* 3a. ServeMate detects that the given index is not a positive integer.
 
-    * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
-
-      Use case resumes at step 3.
-
-* 3b. The given index is out of range.
-
-    * 3b1. ServeMate shows an error message indicating that the provided index is invalid and requests for a new command from the user.
+    * 3a1. ServeMate shows an error message describing the correct command format.
 
       Use case resumes at step 3.
 
-* 3c. Any required field is missing.
+* 3b. ServeMate detects that the given index is out of range.
 
-    * 3c1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
+    * 3b1. ServeMate shows an error message indicating that the provided index is invalid.
+
+      Use case resumes at step 3.
+
+* 3c. ServeMate detects that there is a required field is missing.
+
+    * 3c1. ServeMate shows an error message describing the correct command format.
 
       Use case resumes from step 3.
 
-* 3d. Any parameter value is invalid.
+* 3d. ServeMate detects that a parameter value is invalid.
 
-    * 3d1. ServeMate shows an error message describing the violated constraint and requests for a new command from the user.
+    * 3d1. ServeMate shows an error message describing the violated constraint.
 
       Use case resumes from step 3.
 
-* 3e. A delivery to the same customer already exists.
+* 3e. ServeMate detects that a delivery to the same customer already exists.
 
-    * 3e1. ServeMate removes the delivery already added to the customer from the customer's details.
+    * 3e1. ServeMate shows an error message describing that the customer already has a delivery scheduled.
 
-      Use case resumes from step 4.
+      Use case resumes from step 3.
 
 **Use case 7: Edit delivery details belonging to a customer**
 
@@ -580,11 +652,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list customers
-2. ServeMate shows a list of customers
-3. User requests to delete a customer's delivery
-4. ServeMate deletes the delivery associated with the specified customer
-5. ServeMate shows a confirmation message that includes the customer's name and details of the deleted delivery
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to delete a customer's delivery.
+4. ServeMate deletes the delivery associated with the specified customer.
+5. ServeMate shows a success message that includes the customer's name and details of the deleted delivery.
    Use case ends.
 
 **Extensions**
@@ -593,19 +665,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is not a positive integer.
+* 3a. ServeMate detects that the given index is not a positive integer.
 
   * 3a1. ServeMate shows an error message describing the correct command format.
 
     Use case resumes at step 3.
 
-* 3b. The given index is out of range.
+* 3b. ServeMate detects that the given index is out of range.
 
   * 3b1. ServeMate shows an error message describing that the index provided is invalid.
 
     Use case resumes at step 3.
 
-* 3c. The customer at the given index does not have a delivery.
+* 3c. ServeMate detects that the customer at the given index does not have a delivery.
 
   * 3c1. ServeMate shows an error message describing that the specified customer does not have an existing delivery.
 
@@ -615,11 +687,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list customers
-2. ServeMate shows a list of customers
-3. User requests to tag a customer in the list with a delivery note
-4. ServeMate tags the customer in the customer record with the delivery note
-5. ServeMate shows a success message with the updated customer's details including the delivery note
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to tag a customer in the list with a delivery note.
+4. ServeMate tags the customer in the customer record with the delivery note.
+5. ServeMate shows a success message with the updated customer's details including the delivery note.
 
 **Extensions**
 
@@ -627,21 +699,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is not a positive integer.
+* 3a. ServeMate detects that the given index is not a positive integer.
 
-    * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
-
-      Use case resumes at step 3.
-
-* 3b. The given index is out of range.
-
-    * 3b1. ServeMate shows an error message describing that the index value given is invalid and requests for a new command from the user.
+    * 3a1. ServeMate shows an error message describing the correct command format.
 
       Use case resumes at step 3.
 
-* 3c. The given delivery note is empty.
+* 3b. ServeMate detects that the given index is out of range.
 
-    * 3c1. ServeMate shows an error message describing that the delivery note is missing and requests for a new command from the user.
+    * 3b1. ServeMate shows an error message describing that the index value given is invalid.
+
+
+* 3c. ServeMate detects that the given delivery note is empty.
+
+    * 3c1. ServeMate shows an error message describing that the delivery note is missing.
   
       Use case resumes at step 3.
 
