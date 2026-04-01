@@ -109,12 +109,12 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
-
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 How the `Logic` component works:
 
@@ -189,7 +189,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `FindDeliveryCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `FindDeliveryCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
 
 <puml src="diagrams/FindDeliverySequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find-delivery dt/2026-04-01` Command" />
@@ -216,6 +216,42 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 ### Schedule delivery
 
+**Objective:** Allows administrative staff to add a delivery to be associated with the specified customer.
+
+#### Implementation details
+The following sequence diagram illustrates the interactions within the `Logic` component for scheduling a delivery:
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
+</box>
+
+<puml src="diagrams/ScheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `schedule 1 st/2026-01-01 ed/2026-02-01 tm/14:00 d/123` Command">
+
+**Execution flows:**
+1. The user enters the `schedule` command as an input string.
+2. `LogicManager` receives the input string and passes it to `AddressBookParser`.
+3. `AddressBookParser` creates a `ScheduleCommandParser` to parse the command arguments.
+4. `ScheduleCommandParser` parses the index and arguments, and creates both a `Delivery` object and `ScheduleCommand` object.
+5. `LogicManager` executes `ScheduleCommand` object.
+6. `ScheduleCommand` checks whether the specified customer exists and the customer already has a delivery.
+7. If the customer does not already have a delivery, `ScheduleCommand` creates a new `Person` object with the delivery.
+8. `ScheduleCommand` requests `Model` to replace the old entry in the address book with the newly created `Person` object.
+9. `ScheduleCommand` completes and returns the result of the `schedule` command.
+
+#### Design considerations
+
+1. How the `schedule` adds the delivery for a person.
+   * **Chosen:** Implement a dedicated `schedule` command.
+        * Pros: One-shot command that enables users to easily add a new delivery to the specified person.
+        * Cons: Requires implementing a new command class.
+   * **Alternative 1:** Extend `add` to support adding delivery details alongside person details.
+        * Pros: Fewer commands to learn.
+        * Cons: Complicates the syntax of `add`, increases parser and validation complexity and weakens separation between customer-date edits and delivery-scheduling operations.
+   * **Alternative 2:** Extend `edit` to support adding delivery details to person without deliveries.
+        * Pros: Fewer commands to learn.
+        * Cons: Potential confusion between unintuitive command name (`edit`) for the intended effect (adding a new command), increases parser and validation complexity and weakens separation between customer-date edits and delivery-scheduling operations.
+
 ### Reschedule delivery
 
 **Objective:** Allows administrative staff to edit a delivery that is associated with the specified customer.
@@ -225,7 +261,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `RescheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `RescheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
 
 <puml src="diagrams/RescheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `reschedule 1 tm/14:00` Command" />
@@ -263,7 +299,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
 
 <puml src="diagrams/UnscheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `unschedule 2` Command" />
@@ -673,7 +709,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3b1. ServeMate shows an error message describing that the index value given is invalid.
 
-      Use case resumes at step 3.
 
 * 3c. ServeMate detects that the given delivery note is empty.
 
