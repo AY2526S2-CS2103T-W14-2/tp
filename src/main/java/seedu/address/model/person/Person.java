@@ -125,7 +125,7 @@ public class Person {
     public boolean hasExpiredDelivery(LocalDate beforeDate) {
         assert beforeDate != null;
 
-        return delivery != null && delivery.hasExpired(beforeDate); // uses short circuit evaluation
+        return hasDelivery() && delivery.hasExpired(beforeDate); // uses short circuit evaluation
     }
 
     //@@author BenedTj
