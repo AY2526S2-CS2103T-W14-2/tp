@@ -89,7 +89,7 @@ public class DateTimeUtil {
      * @throws NullPointerException If the argument passed is null.
      * @throws DateTimeParseException If the argument passed is an invalid delivery date value.
      */
-    public static LocalDate parseDeliveryDate(String date) throws NullPointerException, DateTimeParseException {
+    public static LocalDate parseDeliveryDate(String date) {
         requireNonNull(date, "delivery date must not be null");
         return LocalDate.parse(date, FORMATTER_DATE);
     }
@@ -103,8 +103,7 @@ public class DateTimeUtil {
      * @throws NullPointerException If {@code date} is null.
      * @throws DateTimeException If an error occurs during formatting.
      */
-    public static String formatDeliveryDate(LocalDate date)
-            throws NullPointerException, DateTimeException {
+    public static String formatDeliveryDate(LocalDate date) {
         requireNonNull(date, "delivery date must not be null");
         return FORMATTER_DATE.format(date);
     }
@@ -144,8 +143,7 @@ public class DateTimeUtil {
      * @throws DateTimeParseException If the argument passed is an invalid delivery day word value.
      * @throws IllegalArgumentException If an empty string is passed as the argument.
      */
-    public static DayOfWeek parseDeliveryDayWord(String day)
-            throws NullPointerException, DateTimeParseException, IllegalArgumentException {
+    public static DayOfWeek parseDeliveryDayWord(String day) {
         requireNonNull(day, "delivery day word must not be null");
         if (day.isEmpty()) {
             throw new IllegalArgumentException();
@@ -185,8 +183,7 @@ public class DateTimeUtil {
      * @throws NullPointerException If the argument passed is null.
      * @throws DateTimeParseException If the argument passed is an invalid delivery day number value.
      */
-    public static String convertDayNumberToDayWord(String dayNumber)
-            throws NullPointerException, DateTimeParseException {
+    public static String convertDayNumberToDayWord(String dayNumber) {
         requireNonNull(dayNumber, "delivery day number must not be null");
         DayOfWeek day = DayOfWeek.from(FORMATTER_DAY_NUMBER.parse(dayNumber));
         return day.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
@@ -234,7 +231,7 @@ public class DateTimeUtil {
      * @throws NullPointerException If the argument passed is null.
      * @throws DateTimeParseException If the argument passed is an invalid delivery time value.
      */
-    public static LocalTime parseDeliveryTime(String time) throws NullPointerException, DateTimeParseException {
+    public static LocalTime parseDeliveryTime(String time) {
         requireNonNull(time, "delivery time must not be null");
         return LocalTime.parse(time, FORMATTER_TIME);
     }
