@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalDeliveries.DELIVERY_CARL;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
 
@@ -62,6 +63,45 @@ public class PersonTest {
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
     }
+
+    @Test
+    public void hasExpiredDelivery_personWithoutDelivery_returnsFalse() {
+        // Equivalence partition for person without delivery
+        Person person = new PersonBuilder()
+                .withDelivery(null)
+                .build();
+        LocalDate beforeDate = LocalDate.of(2024, 4, 2);
+        assertFalse(person.hasExpiredDelivery(beforeDate));
+    }
+
+    @Test
+    public void hasExpiredDelivery_personWithNonExpiredDelivery_returnsFalse() {
+        // Equivalence partition for person with non-expired delivery
+        Delivery delivery = new DeliveryBuilder()
+                .withStartDate("2025-02-10")
+                .withEndDate("2025-03-12")
+                .build();
+        Person person = new PersonBuilder()
+                .withDelivery(delivery)
+                .build();
+        LocalDate beforeDate = LocalDate.of(2025, 2, 20);
+        assertFalse(person.hasExpiredDelivery(beforeDate));
+    }
+
+    @Test
+    public void hasExpiredDelivery_personWithExpiredDelivery_returnsTrue() {
+        // Equivalence partition for person with expired delivery
+        Delivery delivery = new DeliveryBuilder()
+                .withStartDate("2026-02-10")
+                .withEndDate("2026-03-12")
+                .build();
+        Person person = new PersonBuilder()
+                .withDelivery(delivery)
+                .build();
+        LocalDate beforeDate = LocalDate.of(2026, 6, 20);
+        assertTrue(person.hasExpiredDelivery(beforeDate));
+    }
+
 
     @Test
     public void getFormattedDeliverySchedule_personWithDelivery_returnsDeliverySchedule() {
