@@ -12,6 +12,9 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Contains unit tests for {@code PersonHasExpiredDeliveryPredicate}
+ */
 public class PersonHasExpiredDeliveryPredicateTest {
 
     @Test

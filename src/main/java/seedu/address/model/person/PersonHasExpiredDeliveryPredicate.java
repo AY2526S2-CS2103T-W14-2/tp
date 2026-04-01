@@ -6,8 +6,6 @@ import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.delivery.Delivery;
-import seedu.address.model.delivery.DeliveryHasExpiredPredicate;
 
 /**
  * Tests that a {@code Person} has a delivery and it is expired.
@@ -29,14 +27,7 @@ public class PersonHasExpiredDeliveryPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        Delivery delivery = person.getDelivery();
-
-        // Person has no delivery -> person has no expired deliveries
-        if (delivery == null) {
-            return false;
-        }
-
-        return new DeliveryHasExpiredPredicate(beforeDate).test(delivery);
+        return person.hasExpiredDelivery(beforeDate);
     }
 
     @Override
