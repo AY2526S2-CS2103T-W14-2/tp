@@ -4,22 +4,28 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
+// Solution below inspired by Claude AI
 /**
- * Tests that a {@code Person}'s attributes matches all filters specified (AND search).
- * Each attribute matches its corresponding filter, if the attribute matches at least 1 keyword (OR search).
- * Each filter is optional, the corresponding predicate is only tested if there are keywords.
+ * Tests that a {@code Person}'s name, address and tag fields matches all filters specified (AND search).
+ * Each filter is represented by its corresponding keywords list,
+ * it is applied only when its corresponding keywords list is non-empty.
+ * Each field matches its corresponding filter, if the field matches at least 1 keyword (OR search).
  */
 public class PersonMatchesFilterPredicate implements Predicate<Person> {
+    private static final Logger logger = LogsCenter.getLogger(PersonMatchesFilterPredicate.class);
+
     private final List<String> keywordsForName;
     private final List<String> keywordsForAddress;
     private final List<String> keywordsForTag;
 
     /**
-     * Constructs a {@code PersonMatchesFilterPredicate} where every list of keywords,
+     * Constructs a {@code PersonMatchesFilterPredicate} where each keywords list,
      * can be non-empty or empty, but not null.
      */
     public PersonMatchesFilterPredicate(List<String> keywordsForName,
@@ -30,25 +36,54 @@ public class PersonMatchesFilterPredicate implements Predicate<Person> {
         requireNonNull(keywordsForAddress);
         requireNonNull(keywordsForTag);
 
+        logger.fine("Initializing with keywordsForName: " + keywordsForName
+                + ", keywordsForAddress: " + keywordsForAddress
+                + ", keywordsForTag: " + keywordsForTag);
+
         this.keywordsForName = keywordsForName;
         this.keywordsForAddress = keywordsForAddress;
         this.keywordsForTag = keywordsForTag;
     }
 
+    /**
+     * Tests that {@code Person} name, address and tag fields, all match its corresponding keywords list.
+     * Each field is checked only when its corresponding keyword list is non-empty.
+     *
+     * @param person The {@code Person} to test for, not null.
+     * @return {@code true} if the {@code Person} matches the predicate, otherwise {@code false}.
+     */
     @Override
     public boolean test(Person person) {
-        // Short-circuit evaluations. If empty, match without new predicate.
+        assert person != null;
+        logger.fine("Person: " + person);
+
+        logger.fine("Lists of keywordsForName: " + keywordsForName
+                + ", keywordsForAddress: " + keywordsForAddress
+                + ", keywordsForTag: " + keywordsForTag);
+
+        // Short-circuit evaluation. If list is empty, match without instantiating new predicate.
         // Match if: Either no keywords for "name" field or has at least 1 keyword in name.
-        boolean hasMatchedName = keywordsForName.isEmpty()
+        boolean isKeywordsForNameEmpty = keywordsForName.isEmpty();
+        boolean hasMatchedName = isKeywordsForNameEmpty
                 || new NameContainsKeywordsPredicate(keywordsForName).test(person);
 
         // Match if: Either no keywords for "address" field or has at least 1 keyword in address.
-        boolean hasMatchedAddress = keywordsForAddress.isEmpty()
+        boolean isKeywordsForAddressEmpty = keywordsForAddress.isEmpty();
+        boolean hasMatchedAddress = isKeywordsForAddressEmpty
                 || new AddressContainsKeywordsPredicate(keywordsForAddress).test(person);
 
         // Match if: Either no keywords for "tag" or has at least 1 keyword matching at least 1 tag.
-        boolean hasMatchedTag = keywordsForTag.isEmpty()
+        boolean isKeywordsForTagEmpty = keywordsForTag.isEmpty();
+        boolean hasMatchedTag = isKeywordsForTagEmpty
                 || new TagContainsKeywordsPredicate(keywordsForTag).test(person);
+
+        logger.fine("Booleans isKeywordsForNameEmpty: " + isKeywordsForNameEmpty
+                + ", isKeywordsForAddressEmpty: " + isKeywordsForAddressEmpty
+                + ", isKeywordsForTagEmpty: " + isKeywordsForTagEmpty);
+
+        logger.fine("Booleans hasMatchedName: " + hasMatchedName
+                + ", hasMatchedAddress: " + hasMatchedAddress
+                + ", hasMatchedTag: " + hasMatchedTag);
 
         return hasMatchedName && hasMatchedAddress && hasMatchedTag;
     }

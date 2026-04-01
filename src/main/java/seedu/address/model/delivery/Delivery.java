@@ -76,10 +76,6 @@ public class Delivery {
      * @return Formatted string containing the start date, end date, and time of delivery.
      */
     public String getFormattedDeliverySchedule() {
-        assert startDate != null;
-        assert endDate != null;
-        assert deliveryTime != null;
-
         return startDate + " to " + endDate + "  |  " + deliveryTime;
     }
 
@@ -98,6 +94,7 @@ public class Delivery {
 
     /**
      * Checks if delivery's end date is before the specified date.
+     * <p>Assumes that the specified date is not null.
      *
      * @param beforeDate Date to compare against.
      * @return {@code true} if delivery's end date occurs before the specified date,
@@ -136,10 +133,10 @@ public class Delivery {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("start date", startDate)
-                .add("end date", endDate)
-                .add("delivery days", deliveryDays)
-                .add("delivery time", deliveryTime)
+                .add("startDate", startDate)
+                .add("endDate", endDate)
+                .add("deliveryDays", deliveryDays)
+                .add("deliveryTime", deliveryTime)
                 .toString();
     }
 }
