@@ -815,3 +815,10 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Planned enhancements
+Team size: 5
+3. **Allow special characters for customer's name**: The current name field for a customer does not allow names containing special characters, which may be in the customer's legal name. We plan to allow special characters in names (e.g. `s/o`).
+4. **Allow special characters and spaces for customer's phone number**: The current phone number field for a customer does not allow phone numbers containing alphabets, special characters and spaces. We plan to allow entering phone numbers with alphabets, special characters and spaces (e.g. `9876 5432 (HP) 6560-6060 (Office)`).
