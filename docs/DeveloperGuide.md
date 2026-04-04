@@ -815,3 +815,11 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Planned Enhancements
+
+1. **Handle tags longer than 50 characters**: 
+   - Current behavior: Tags are restricted to 50 characters.
+   - Planned Enhancement: Tags with more than 50 characters will be clipped. However, the user can view the full tag by clicking on the clipped tag, which will show the full tag in a tooltip or a pop-up window.
