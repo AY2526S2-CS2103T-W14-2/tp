@@ -15,16 +15,24 @@ public class JsonAdaptedDeliveryDay {
 
     /**
      * Constructs a {@code JsonAdaptedDeliveryDay} with the given {@code dayOfWeek}.
+     *
+     * @param dayOfWeek The day of the week for the delivery day, expected to be non-null.
      */
     @JsonCreator
     public JsonAdaptedDeliveryDay(String dayOfWeek) {
+        assert dayOfWeek != null;
+
         this.dayOfWeek = dayOfWeek;
     }
 
     /**
      * Converts a given {@code DeliveryDay} into this class for Jackson use.
+     *
+     * @param source The delivery day to be converted, expected to be non-null.
      */
     public JsonAdaptedDeliveryDay(DeliveryDay source) {
+        assert source != null;
+
         dayOfWeek = source.toString();
     }
 

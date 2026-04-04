@@ -21,7 +21,9 @@ public class RescheduleCommandParser implements Parser<RescheduleCommand> {
      * Parses the given {@code String} of arguments in the context of the RescheduleCommand
      * and returns an RescheduleCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format.
+     * @param args Arguments specified after the command word, expected to be non-null.
+     * @return A RescheduleCommand object representing the command to reschedule the delivery.
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public RescheduleCommand parse(String args) throws ParseException {
         requireNonNull(args);
