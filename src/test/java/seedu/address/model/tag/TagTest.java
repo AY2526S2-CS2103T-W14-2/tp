@@ -20,6 +20,10 @@ public class TagTest {
         // non alphanumeric tag
         String nonAlphanumericTagName = "(vegan)";
         assertThrows(IllegalArgumentException.class, () -> new Tag(nonAlphanumericTagName));
+
+        // tag longer than 50 characters
+        String longTagName = "a".repeat(51);
+        assertThrows(IllegalArgumentException.class, () -> new Tag(longTagName));
     }
 
     @Test
