@@ -56,7 +56,20 @@
         "implementation": "Implementation",
         "find-customer-by-attribute": "Find customer by attribute",
         "find-delivery-by-date": "Find delivery by date",
-        "schedule-delivery": "Schedule delivery"
+        "schedule-delivery": "Schedule delivery",
+        "reschedule-delivery": "Reschedule delivery",
+        "unschedule-delivery": "Unschedule delivery",
+        "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
+        "appendix-requirements": "Appendix: Requirements",
+        "product-scope": "Product scope",
+        "user-stories": "User stories",
+        "use-cases": "Use cases",
+        "non-functional-requirements": "Non-Functional Requirements",
+        "glossary": "Glossary",
+        "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
+        "launch-and-shutdown": "Launch and shutdown",
+        "deleting-a-customer": "Deleting a customer",
+        "saving-data": "Saving data"
       },
       "headingKeywords": {}
     },
