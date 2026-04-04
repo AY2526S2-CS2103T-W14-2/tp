@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.UNSORTED_DAYS_WORDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HALAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_VEGETARIAN;
-import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 import static seedu.address.model.util.SampleDataUtil.getDeliveryDaySet;
 import static seedu.address.model.util.SampleDataUtil.getTagSet;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -13,7 +12,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -62,8 +60,8 @@ public class SampleDataUtilTest {
         // EP: non-empty set
         String mondayString = "Monday";
         String tuesdayString = "TueSDAy";
-        DeliveryDay monday = toDeliveryDay(mondayString);
-        DeliveryDay tuesday = toDeliveryDay(tuesdayString);
+        DeliveryDay monday = DeliveryDay.MONDAY;
+        DeliveryDay tuesday = DeliveryDay.TUESDAY;
         assertEquals(Set.of(monday, tuesday),
                 getDeliveryDaySet(mondayString, tuesdayString));
 
@@ -95,11 +93,10 @@ public class SampleDataUtilTest {
     @Test
     public void getDeliveryDaySet_unsortedDeliveryDays_returnsSortedDeliveryDaySet() throws IllegalValueException {
         Set<DeliveryDay> actualDeliveryDays = getDeliveryDaySet(UNSORTED_DAYS_WORDS);
-        Set<DeliveryDay> expectedDeliveryDays = Arrays.stream(UNSORTED_DAYS_WORDS)
-                .map(DeliveryDay::toDeliveryDay)
-                .sorted()
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+        DeliveryDay[] expectedDeliveryDays = {DeliveryDay.MONDAY, DeliveryDay.TUESDAY,
+                                              DeliveryDay.WEDNESDAY, DeliveryDay.THURSDAY};
+        Set<DeliveryDay> expectedDeliveryDaySet = new LinkedHashSet<>(Arrays.asList(expectedDeliveryDays));
 
-        assertArrayEquals(expectedDeliveryDays.toArray(), actualDeliveryDays.toArray());
+        assertArrayEquals(expectedDeliveryDaySet.toArray(), actualDeliveryDays.toArray());
     }
 }
