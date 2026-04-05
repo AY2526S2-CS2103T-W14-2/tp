@@ -40,7 +40,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## Design
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** All references of a person in this design section represent a customer.
 </box>
@@ -112,7 +112,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
@@ -148,7 +148,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` and `Delivery` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. Similarly, only one `Delivery` object would be required per unique delivery, instead of each `Person` needing their own `Delivery` objects.<br>
 
@@ -190,7 +190,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for finding deliveries by date:
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `FindDeliveryCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
@@ -224,7 +224,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 #### Implementation Details
 The following sequence diagram illustrates the interactions within the `Logic` component for finding customers with an expired delivery:
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `ExpiredCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
 </box>
@@ -266,7 +266,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 #### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for scheduling a delivery:
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `ScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
@@ -304,7 +304,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 #### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for rescheduling a delivery:
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `RescheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
@@ -342,7 +342,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 #### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for unscheduling a delivery:
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
@@ -813,7 +813,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.

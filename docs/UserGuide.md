@@ -40,7 +40,7 @@ If Java is not installed, follow the installation guide for your operating syste
 * The delivery panel on the right allows you to view today's deliveries. It provides a quick reference to view deliveries scheduled for the current day, from earliest to latest delivery time.
 * You can adjust the width of the panels by left-clicking and dragging the divider between them.
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The date shown on the delivery panel is based on your computer's date setting. If you find today's date is incorrectly reflected, check that your computer's date is correct, then close and relaunch ServeMate.
 </box>
