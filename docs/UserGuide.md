@@ -17,7 +17,7 @@ This is where **ServeMate** comes in.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## Quick start
 
 1. Ensure that Java `17` or later installed on your computer. <br>
 If Java is not installed, follow the installation guide for your operating system:
@@ -34,16 +34,26 @@ If Java is not installed, follow the installation guide for your operating syste
    cd [home-folder]
    java -jar ServeMate.jar
    ```
+   
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    <br>![UI](images/Ui.png)
-* The customer panel on the left allows you to view customer information, including their full delivery details.
-* The delivery panel on the right allows you to view today's deliveries. It provides a quick reference to view deliveries scheduled for the current day, from earliest to latest delivery time.
-* You can adjust the width of the panels by left-clicking and dragging the divider between them.
+   <!-- @@author elijah-ng -->
 
+   * The customer panel on the left allows you to view customer information, including their full delivery details.
+   * The delivery panel on the right allows you to view today's deliveries. It provides a quick reference to view deliveries scheduled for the current day, from earliest to latest delivery time.
+   * You can adjust the width of the panels by left-clicking and dragging the divider between them.
+    
 <box type="info" light>
 
 **Note:** The date shown on the delivery panel is based on your computer's date setting. If you find today's date is incorrectly reflected, check that your computer's date is correct, then close and relaunch ServeMate.
 </box>
+<!-- @@author -->
+
+1. You are now ready to use ServeMate!
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Tutorial
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:

@@ -13,19 +13,19 @@
 
 ## Acknowledgements
 
-### Original Source
+### Original source
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-### Other Sources
+### Other sources
 * Displaying of delivery information under each person card was inspired by [SoCTAssist](https://github.com/AY2526S1-CS2103T-W11-1/tp).
 
-### Libraries Used
+### Libraries used
 * [JavaFX](https://openjfx.io/) for GUI rendering.
 * [Jackson](https://github.com/FasterXML/jackson) for JSON processing.
 * [JUnit5](https://github.com/junit-team/junit5) for unit and integration testing.
 * [PlantUML](https://plantuml.com/stdlib) for generating UML diagrams.
 
-### AI Generated Work
+### AI generated work
 * Gemini was used to generate the ServeMate icon for the application and GUI window.
 * ChatGPT was used to generate code implementation for custom date formatter `FORMATTER_DATE`.
 * GitHub Copilot was used to aid with the GUI programming.
@@ -242,7 +242,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 **Objective:** Allows administrative staff to track subscriptions that have ended and facilitate renewals.
 
-#### Implementation Details
+#### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for finding customers with an expired delivery:
 
 <box type="info" light>
@@ -250,7 +250,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 **Note:** The lifeline for `ExpiredCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
 </box>
 
-<puml src="diagrams/ExpiredSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `expired bf/2026-02-01` Command">
+<puml src="diagrams/ExpiredSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `expired bf/2026-02-01` Command" />
 
 **Execution flow:**
 1. The user enters the `expired` command as an input string.
@@ -262,7 +262,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 7. `ExpiredCommand` requests `Model` to filter the customer list based on the given `PersonHasExpiredDeliveryPredicate`.
 8. `ExpiredCommand` completes and returns the result of the `expired` command.
 
-#### Design Considerations
+#### Design considerations
 
 1. Functionality of the `expired` command.
     * **Chosen:** Find all customers with deliveries that have ended before a user-specified date.
@@ -833,12 +833,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-### Non-Functional Requirements
+### Non-functional requirements
 
 #### ⚙️ Technical
 1. The application should be implemented primarily using the Object-Oriented Paradigm (OOP), where core logic are encapsulated within classes. A small mix of other styles (e.g. lambda expressions from the Functional Programming Paradigm) are allowed if justifiable (e.g. if it improves conciseness or readability within a method).
 
-#### 🚧 Operational Constraints
+#### 🚧 Operational constraints
 1. It should be operated as a **single-user** application. It should not support shared usage nor share access to data amongst multiple users.
 2. The application should not depend on its own remote server.
 
@@ -855,7 +855,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### 🚀 Performance
 1. The application should remain responsive even when managing 1000 customer records.
 
-#### 💾 Data Persistence
+#### 💾 Data persistence
 1. The application should store data locally in a human editable text file (e.g. JSON format). It should not use a Database Management System (DBMS) to store data.
 
 #### 📖 Documentation
