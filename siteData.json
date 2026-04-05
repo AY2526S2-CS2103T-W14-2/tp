@@ -54,7 +54,7 @@
         "storage-component": "Storage component",
         "common-classes": "Common classes",
         "implementation": "Implementation",
-        "find-customer-by-attribute": "Find customer by attribute",
+        "today-s-deliveries-panel": "Today's deliveries panel",
         "find-delivery-by-date": "Find delivery by date",
         "schedule-delivery": "Schedule delivery",
         "reschedule-delivery": "Reschedule delivery",
@@ -69,7 +69,8 @@
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-customer": "Deleting a customer",
-        "saving-data": "Saving data"
+        "saving-data": "Saving data",
+        "appendix-planned-enhancements": "Appendix: Planned enhancements"
       },
       "headingKeywords": {}
     },
