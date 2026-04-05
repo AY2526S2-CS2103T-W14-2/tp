@@ -1,10 +1,23 @@
 package seedu.address.model.tag;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 public class TagTest {
+
+    @Test
+    public void constructor_validTagName_success() {
+        String validTagName = "vegan";
+        Tag tag = new Tag(validTagName);
+        assertEquals(validTagName, tag.tagName);
+
+        // BVA: tag longer than 45 characters
+        String longestValidTagName = "a".repeat(45);
+        tag = new Tag(longestValidTagName);
+        assertEquals(longestValidTagName, tag.tagName);
+    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -21,8 +34,8 @@ public class TagTest {
         String nonAlphanumericTagName = "(vegan)";
         assertThrows(IllegalArgumentException.class, () -> new Tag(nonAlphanumericTagName));
 
-        // BVA: tag longer than 46 characters
-        String longTagName = "a".repeat(47);
+        // BVA: tag longer than 45 characters
+        String longTagName = "a".repeat(46);
         assertThrows(IllegalArgumentException.class, () -> new Tag(longTagName));
     }
 
