@@ -891,7 +891,7 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Appendix: Planned Enhancements
+## Appendix: Planned enhancements
 Team size: 5
 1. **Refresh today's deliveries panel:** The current delivery panel does not update automatically when a new day starts. Users must restart the application to view the current day's deliveries. We plan to add a command (e.g. `today`) to refresh the delivery panel so that it reflects the new current date.
 2. **Combine existing find commands:** The current separation of the `find-delivery` and `find` commands does not allow filtering by both delivery information (e.g. date) and customer information (e.g. address). We plan to combine both commands into a single `find` command, so that filtering by both delivery information and customer information is possible (e.g. `find n/John dt/2026-04-01`).
