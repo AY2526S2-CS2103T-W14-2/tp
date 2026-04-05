@@ -83,10 +83,8 @@ public class DateTimeUtil {
     /**
      * Parses {@code date} into a {@code LocalDate} and returns it.
      *
-     * @param date The string that is attempted
-     *             to be parsed into LocalDate.
-     *             It should not be null or an invalid
-     *             delivery date.
+     * @param date The string that is attempted to be parsed into LocalDate.
+     *             It should not be null or an invalid delivery date.
      * @return LocalDate object representing the parsed date.
      */
     public static LocalDate parseDeliveryDate(String date) {
@@ -220,12 +218,9 @@ public class DateTimeUtil {
     /**
      * Parses {@code time} into a {@code LocalTime} and returns it.
      *
-     * @param time The string attempted
-     *            to be parsed into LocalTime.
-     *             It should not be null
-     *             or an invalid delivery time.
-     * @return LocalTime object representing
-     *         the parsed time value.
+     * @param time The string attempted to be parsed into LocalTime.
+     *             It should not be null or an invalid delivery time.
+     * @return LocalTime object representing the parsed time value.
      */
     public static LocalTime parseDeliveryTime(String time) {
         requireNonNull(time, "delivery time must not be null");
