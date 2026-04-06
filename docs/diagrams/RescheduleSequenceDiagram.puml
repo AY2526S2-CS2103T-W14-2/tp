@@ -11,6 +11,7 @@ participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+participant "rescheduledPerson:Person" as UpdatedPerson MODEL_COLOR
 participant "m:Model" as Model MODEL_COLOR
 end box
 
@@ -49,11 +50,25 @@ deactivate AddressBookParser
 LogicManager -> RescheduleCommand : execute(m)
 
 activate RescheduleCommand
-note right of RescheduleCommand
-  target: customer with delivery to reschedule
-  updated: copy of target with rescheduled delivery
-end note
-RescheduleCommand -> Model : setPerson(target, updated)
+RescheduleCommand -> RescheduleCommand: createRescheduledPerson(personToReschedule, rescheduleDeliveryDescriptor)
+activate RescheduleCommand
+
+create UpdatedPerson
+RescheduleCommand -> UpdatedPerson
+activate UpdatedPerson
+UpdatedPerson --> RescheduleCommand
+deactivate UpdatedPerson
+
+RescheduleCommand --> RescheduleCommand: rescheduledPerson
+deactivate RescheduleCommand
+
+RescheduleCommand -> Model : setPerson(personToReschedule, rescheduledPerson)
+activate Model
+
+Model --> RescheduleCommand
+deactivate Model
+
+RescheduleCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
 activate Model
 
 Model --> RescheduleCommand
