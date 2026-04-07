@@ -137,7 +137,7 @@ Mdm Tan checks that Irfan's record is updated correctly:
 
 ### What's next
 
-You can refer to the [Features](#features) section below to look up details on a specific command.
+You can refer to the [Features](#features) section below to look up details about a specific command.
 
 --------------------------------------------------------------------------------------------------------------------
 
