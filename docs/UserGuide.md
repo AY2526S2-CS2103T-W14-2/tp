@@ -396,5 +396,7 @@ The `preferences.json` file saves configuration settings used by ServeMate. We r
 
 ------------------------------------------------------------------------------------------------------------------
 ## Coming soon
-1. **Integrated `find` command:** Finding specific deliveries will be easier and more convenient! We plan to combine the `find-delivery` and `find` commands, so that you can search for both delivery details (e.g. dates) and customer details (e.g. address) all at once.
+1. **Integrated `find` command:** Finding specific deliveries will be easier and more convenient. We plan to combine the `find-delivery` and `find` commands, so that you can search for both delivery details (e.g. dates) and customer details (e.g. address) all at once.
 2. **Refresh delivery panel:** Currently, you need to relaunch ServeMate to view deliveries scheduled for the new day. Soon, you will be able to refresh the delivery panel whenever needed to view deliveries scheduled on the current day without relaunching ServeMate.
+3. **Support for special characters in a customer's name**: You will be able to enter names containing special characters (e.g. `s/o`), which may appear in your customer's legal name.
+4. **Support for alphabets, special characters and spaces in a customer's phone number**: You will be able to enter phone numbers containing alphabets, special characters and spaces. This allows you to specify country codes and multiple phone numbers for a customer (e.g. `+65 9876 5432 (HP) 6560-6060 (Office)`).
