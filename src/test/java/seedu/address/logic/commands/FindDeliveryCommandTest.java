@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
@@ -53,6 +56,7 @@ public class FindDeliveryCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
+    // EP: single date that matches no person's delivery
     @Test
     public void execute_noPersonFound() {
 
@@ -70,9 +74,40 @@ public class FindDeliveryCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
+    // EP: single date that matches multiple persons' deliveries
+    @Test
+    public void execute_singleDateMatchesPersons_personsFound() {
+        DeliveryDatePredicate predicate =
+                new DeliveryDatePredicate(LocalDate.parse("2025-10-20"));
+
+        FindDeliveryCommand command = new FindDeliveryCommand(predicate);
+
+        expectedModel.updateFilteredPersonList(predicate);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        assertEquals(Arrays.asList(ALICE, CARL), model.getFilteredPersonList());
+    }
+
+    // EP: date range that matches multiple persons' deliveries
+    @Test
+    public void execute_dateRangeMatchesPersons_personsFound() {
+        DeliveryDatePredicate predicate =
+                new DeliveryDatePredicate(LocalDate.parse("2025-10-19"), LocalDate.parse("2025-10-30"));
+
+        FindDeliveryCommand command = new FindDeliveryCommand(predicate);
+
+        expectedModel.updateFilteredPersonList(predicate);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        assertEquals(Arrays.asList(ALICE, CARL), model.getFilteredPersonList());
+    }
+
     @Test
     public void toStringMethod() {
-
         DeliveryDatePredicate predicate =
                 new DeliveryDatePredicate(LocalDate.parse("2026-04-01"));
 
