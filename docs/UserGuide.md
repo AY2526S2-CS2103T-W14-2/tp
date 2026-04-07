@@ -91,7 +91,7 @@ add n/Bryan Wong p/86422468 a/25 Paya Lebar Crescent, S536050 e/wongbryan87@gmai
 Bryan appears instantly in the customer panel on the left, and becomes the 7th customer on the list:
 <br>![Tutorial for Add Command](images/Tutorial-AddCommand.png)
 <br><br>
-Now that Bryan has finally paid for his two-month Tingkat plan every day from 7 April 2026, Mdm Tan starts to schedule his recurring delivery at 5pm:
+Now that Bryan has finally paid for his daily Tingkat plan from 7 April 2026 to 7 June 2026, Mdm Tan starts to schedule his recurring delivery at 5pm:
 ```text
 schedule 7 st/2026-04-07 ed/2026-06-07 d/1234567 tm/17:00
 ```
