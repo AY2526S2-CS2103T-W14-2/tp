@@ -268,7 +268,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
     * **Chosen:** Find all customers with deliveries that have ended before a user-specified date.
       * Pros: Flexible, as it allows users to find deliveries that have expired today or are about to expire.
       * Cons: Requires extra effort to decide on the correct date to key in.
-        * Note that users can find today's date easily by referring to the deliveries panel. 
+        * Note that users can find today's date easily by referring to the delivery panel. 
     * **Alternative:** Find all customers with deliveries that have ended before today.
       * Pros: Simple and fast way to view recently expired deliveries.
       * Cons: Reduces testability, as test cases have to be created with respect to the system's date time.
