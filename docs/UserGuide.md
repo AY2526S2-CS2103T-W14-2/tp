@@ -68,7 +68,7 @@ The ServeMate window should look like the image below. Notice how the app contai
 
 Meet Mdm Tan, an experienced administrative staff at a Tingkat catering business. Let's see how she handles her morning rush with ease using **ServeMate**!
 
-### Listing all customer records
+### Viewing all customer records
 Before the day starts, Mdm Tan wants to check the full list of customers.
 <br><br>
 She types the `list` command into the command box at the top, and the customer panel on the left is updated:
