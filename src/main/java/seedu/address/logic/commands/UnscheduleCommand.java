@@ -37,6 +37,7 @@ public class UnscheduleCommand extends Command {
      * @param targetIndex Index of the person whose delivery is to be deleted. Must not be null.
      */
     public UnscheduleCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 

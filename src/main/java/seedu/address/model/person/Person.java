@@ -164,7 +164,7 @@ public class Person {
      * no delivery days, an empty set is returned.
      * <p>Example of delivery day names: Monday, Tuesday ...
      *
-     * @return A set of delivery day names if the person has a delivery assigned.
+     * @return Set of delivery day names.
      */
     public Set<String> getDeliveryDayNames() {
         if (!hasDelivery()) {
