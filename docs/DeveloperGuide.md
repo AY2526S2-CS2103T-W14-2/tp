@@ -28,7 +28,6 @@
 ### AI Generated Work
 * Gemini was used to generate the ServeMate icon for the application and GUI window.
 * ChatGPT was used to generate code implementation for custom date formatter `FORMATTER_DATE`.
-* GitHub Copilot was used to aid with the GUI programming.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -870,7 +869,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Delivery Rider/Driver**: A person who delivers meals to customers.
 * **Tingkat Administrative Staff**: A person who manages the Tingkat delivery service.
 * **Delivery Route**: A sequence of stops planned for delivering meals to customers.
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, MacOS
 * **Tingkat Delivery**: Subscription-based home-cooked meal delivery service commonly found in Singapore.
 * **Tingkat Package**: The food catering package, ordered from a predefined start date to an end date.
 * **Command Line Interface (CLI)**: A text-based user interface used to interact with software by typing commands.
