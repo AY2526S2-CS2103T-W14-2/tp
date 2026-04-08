@@ -53,6 +53,7 @@ Welcome to **ServeMate**, the mate that helps you serve faster. Follow these sim
      1. Right-click the folder where you saved `ServeMate.jar`.
      2. Select **Open in Terminal**.
      3. A window should pop up. On this window, type `java -jar ServeMate.jar` and press **Enter**.
+    <!-- @@author -->
 5. The ServeMate window should appear in a few seconds. You are now ready to use ServeMate!
 
 --------------------------------------------------------------------------------------------------------------------
@@ -144,11 +145,12 @@ Mdm Tan checks that Irfan's record is updated correctly:
 
 <box type="success" light>
 
-**Congrats!** You are now ready to use ServeMate for your daily tasks.
+**Congrats!** You are now ready to use ServeMate for your daily tasks. 
 </box>
 
 ### What's next
 
+While this tutorial covers the daily essentials, ServeMate has many other commands to help you stay organized.
 You can refer to the [Features](#features) section below to look up details about a specific command.
 
 --------------------------------------------------------------------------------------------------------------------

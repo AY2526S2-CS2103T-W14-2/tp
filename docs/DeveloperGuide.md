@@ -872,7 +872,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### 💻 Portability
 1. The application should support any _mainstream OS_ with Java `17` or higher.
 2. The application should be packaged into a single JAR file or a single zip file, with a maximum size of 100MB.
-3. The application should function as a standalone product that does not require additional user installations other than Java.
+3. The application should function as a standalone product that does not require additional user installations other than a compatible version of Java.
 
 #### ⌨️ Usability
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
