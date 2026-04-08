@@ -27,7 +27,6 @@
 
 ### AI Generated Work
 * Gemini was used to generate the ServeMate icon for the application and GUI window.
-* ChatGPT was used to generate code implementation for custom date formatter `FORMATTER_DATE`.
 * GitHub Copilot was used to aid with the GUI programming.
 
 --------------------------------------------------------------------------------------------------------------------
