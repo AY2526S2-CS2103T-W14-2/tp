@@ -62,7 +62,8 @@ public class FindDeliveryCommandParserTest {
         assertParseSuccess(parser, " st/2026-04-01 ed/2026-04-30", expectedCommand);
     }
 
-    // EP: Valid date range with st/ and ed/ on the same date (boundary: start == end)
+    // EP: Valid date range with st/ and ed/ on the same date
+    //     Boundary: start date == end date
     @Test
     public void parse_sameDateRange_returnsFindDeliveryCommand() {
         LocalDate date = LocalDate.parse("2026-04-01");
@@ -72,7 +73,7 @@ public class FindDeliveryCommandParserTest {
         assertParseSuccess(parser, " st/2026-04-01 ed/2026-04-01", expectedCommand);
     }
 
-    // EP: Invalid date format in dt/, st/, or ed/
+    // EP: Invalid date format
     @Test
     public void parse_invalidSingleDate_throwsParseException() {
         assertParseFailure(parser, " dt/invalid-date", MESSAGE_INVALID_DATE);
