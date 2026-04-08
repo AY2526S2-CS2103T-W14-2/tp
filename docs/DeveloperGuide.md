@@ -1040,5 +1040,5 @@ Team size: 5
 5. **Handle tags longer than 45 characters:** Currently, tags are restricted to 45 characters. We plan to allow tags with more than 45 characters, but the 46th character onwards will be clipped. The user can view the full tag by clicking on the clipped tag, which will show the full tag in a tooltip or a pop-up window.
 6. **Implement `undo` command:** Other than to manually re-enter data or keep a backup `addressbook.json` file, there is currently no simple method to recover from accidental modifications or deletions. We plan to implement the `undo` command for users to revert their changes made.
     * ServeMate will store a history of the past 5 address book states in a stack.
-    * When any command except `undo` is executed, the state before the command is executed is pushed to the stack.
+    * When any command except `undo` is executed, the state before the command is executed will be pushed to the stack.
     * When `undo` is executed, ServeMate will pop the previous state from the stack and restore it if the stack is non-empty.

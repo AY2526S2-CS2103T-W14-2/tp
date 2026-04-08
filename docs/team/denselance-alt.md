@@ -47,6 +47,7 @@ Given below are my contributions to the project.
   * Enable assertions ([\#138](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/138)).
   * Create logo for ServeMate ([\#134](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/134)).
   * Write additional tests for existing and new features to increase test coverage.
+  * Submit release [Alpha Version v1.4](https://github.com/AY2526S2-CS2103T-W14-2/tp/releases/tag/v1.4), with contributions from other team members.
 
 * **Issues Submitted**: [GitHub Submitted Issues](https://github.com/AY2526S2-CS2103T-W14-2/tp/issues?q=author%3ADenseLance-alt)
 
