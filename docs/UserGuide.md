@@ -487,10 +487,12 @@ If you like to find customers matching any of the filters (e.g. find all custome
 
 1. **Application window opens off-screen**: If you used ServeMate on a second screen and later switched to using a single screen, the application window may open off-screen for future start-ups.
    * **Solution**: Delete the `preferences.json` file located in the same folder as `ServeMate.jar` before restarting ServeMate.
+
 <box type="warning">
 
 **Warning:**
 The `preferences.json` file saves configuration settings used by ServeMate. If you choose to edit the file directly, do note that certain edits can cause ServeMate to behave in unexpected ways. Therefore, edit the file only if you are confident that you can update it correctly.
+
 </box>
 
 2. **Help window does not appear**: If you minimize the Help Window and then try to open it again (using the `help` command, `F1` key, or `Help` menu), ServeMate will not open a second Help Window.
@@ -498,10 +500,12 @@ The `preferences.json` file saves configuration settings used by ServeMate. If y
 
 3. **Screen lags when scrolling quickly**: If you quickly scroll through a very long list of customers, you might notice that ServeMate starts to slow down.
    * **Solution**: Scroll at a slower speed to allow the screen to update more smoothly.
+
 <box type="tip">
 
 **Tip:**
 Use the `find` command to search for the customer you want for faster navigation!
+
 </box>
 
 ------------------------------------------------------------------------------------------------------------------
