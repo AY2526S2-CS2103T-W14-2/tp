@@ -378,7 +378,7 @@ If you like to find customers matching any of the filters (e.g. find all custome
 ## Known issues
 
 1. **Application window opens off-screen**<br>
-   If you used ServeMate on a second screen and later switched to using single screen, the application window may open off-screen future start-ups.
+   If you used ServeMate on a second screen and later switched to using a single screen, the application window may open off-screen for future start-ups.
    * **Solution**: Delete the `preferences.json` file located in the same folder as `ServeMate.jar` before restarting ServeMate.
 <box type="warning" light>
 
@@ -392,7 +392,7 @@ The `preferences.json` file saves configuration settings used by ServeMate. If y
 
 3. **Screen lags when scrolling quickly**<br>
    If you quickly scroll through a very long list of customers, you might notice that ServeMate starts to slow down.
-   * **Solution**: Scroll at a slower speed to allow the screen to update smoothly.
+   * **Solution**: Scroll at a slower speed to allow the screen to update more smoothly.
 <box type="tip" light>
 
 **Tip:**
