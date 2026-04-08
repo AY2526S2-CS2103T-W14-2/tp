@@ -27,8 +27,6 @@
 
 ### AI generated work
 * Gemini was used to generate the ServeMate icon for the application and GUI window.
-* ChatGPT was used to generate code implementation for custom date formatter `FORMATTER_DATE`.
-* GitHub Copilot was used to aid with the GUI programming.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -89,14 +87,14 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
-
 <box type="info" light>
 
 **Note:** Due to a limitation of PlantUML, there is an overlap in the dependency arrowhead and inheritance triangle originating from `TodayDeliveryCard` to `Model` and `UiPart` respectively. The arrowheads and inheritance triangle should not overlap.
 </box>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component" />
+
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `TodayDeliveryPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -193,14 +191,18 @@ Internal logic such as input parsing and argument validation are omitted for bre
 Additionally, some of the method parameters in the UML sequence diagrams have also been simplified (e.g., `personToUnschedule` and `personWithNoDelivery` are referred to as `target` and `updated` respectively for `unschedule` command).
 </box>
 
+<br>
+
 ### Today's deliveries panel
 
-The sequence diagram below illustrates the interactions between the `Ui`, `Logic` and `Model` components, to create the `TodayDeliveryPanel` when the application is launched.
+**Objective:** Allow administrative staff to view deliveries scheduled for the current day.
+
+#### Implementation details
+The following sequence diagram illustrates the interactions between the `Ui`, `Logic` and `Model` components, to create the `TodayDeliveryPanel` when the application is launched.
 
 <puml src="diagrams/TodayDeliveryPanelSequenceDiagram.puml" alt="Interactions between the `Ui`, `Logic` and `Model` components, to create the `TodayDeliveryPanel` when the application is launched" />
 
-How the `TodayDeliveryPanel` is created:
-
+**Execution flow:**
 1. When `MainWindow` is called upon to fill its inner parts, it gets the list of persons with deliveries scheduled for the current day from the `LogicManager`.
 2. The `LogicManager` in turn calls `ModelManager`, which retrieves and returns the sorted list of today's deliveries. This list is sorted in ascending order of delivery time.
 3. `MainWindow` then gets the current date from the `LogicManager`, which in turn calls `ModelManager` to retrieve and return the current date.
@@ -208,6 +210,16 @@ How the `TodayDeliveryPanel` is created:
    Note that although `fillInnerParts()` is shown only instantiating a `TodayDeliveryPanel` object in the diagram above (for simplicity), in the code `fillInnerParts()` also instantiates other parts of the `Ui` (e.g. `PersonListPanel`).
 5. Finally, the newly created `TodayDeliveryPanel` object is used by `MainWindow` to fill the panel's placeholder, displaying the current date and the sorted list of today's deliveries.<br>
    Note that this step is omitted in the diagram above (for simplicity).
+
+#### Design considerations
+
+1. Whether deliveries displayed on the `TodayDeliveryPanel` should be updated when filtering commands are executed (e.g. `find`, `find-delivery`).
+    * **Chosen:** `TodayDeliveryPanel` will not be updated when filtering commands are executed.
+        * Pros: Allows the user to consistently view all deliveries scheduled for the current day at a glance. Keeps the responsibilities of the `PersonListPanel` and `TodayDeliveryPanel` distinct.
+        * Cons: Users may not be able to directly see how filtered results relate to deliveries scheduled for the current day on the `TodayDeliveryPanel`.
+    * **Alternative:** `TodayDeliveryPanel` will be updated when filtering commands are executed.
+        * Pros: Allows the user flexibility to filter the deliveries displayed on the `TodayDeliveryPanel`.
+        * Cons: May confuse users when results on both the `PersonListPanel` and `TodayDeliveryPanel` change. Reduces the usefulness of the `TodayDeliveryPanel` as a stable, quick overview of deliveries scheduled for the current day.
 
 <br>
 
@@ -244,6 +256,8 @@ The following sequence diagram illustrates the interactions within the `Logic` c
     * **Alternative:** Accept only a single date.
         * Pros: Simpler parsing logic.
         * Cons: Less useful for staff who need to view deliveries over a multi-day period.
+
+<br>
 
 ### Find customers with expired delivery
 
@@ -287,6 +301,8 @@ The following sequence diagram illustrates the interactions within the `Logic` c
       * Pros: Consistent with the format used for `find-delivery`.
       * Cons: Ambiguous, since `expired ed/DATE` could refer to finding deliveries that end on that exact date.
 
+<br>
+
 ### Schedule delivery
 
 **Objective:** Allows administrative staff to add a delivery to be associated with the specified customer.
@@ -325,6 +341,8 @@ The following sequence diagram illustrates the interactions within the `Logic` c
         * Pros: Fewer commands to learn.
         * Cons: Potential confusion between unintuitive command name (`edit`) for the intended effect (adding a new command), increases parser and validation complexity and weakens separation between customer-date edits and delivery-scheduling operations.
 
+<br>
+
 ### Reschedule delivery
 
 **Objective:** Allows administrative staff to edit a delivery that is associated with the specified customer.
@@ -362,6 +380,8 @@ The following sequence diagram illustrates the interactions within the `Logic` c
     * **Alternative 2:** Extend `edit` to support editing of delivery details alongside customer details.
         * Pros: Fewer commands to learn.
         * Cons: Increases parser and validation complexity and weakens separation between customer-data edits and delivery-scheduling operations.
+
+<br>
 
 ### Unschedule delivery
 
@@ -424,7 +444,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 #### Target user profile
 
-* handle the **planning and administration of deliveries** for administrative staff of a single plan Tingkat caterer
+* handle the **planning and administration of deliveries** for administrative staff of a Tingkat caterer
 * has a need to **manage a significant number** of customers
 * prefer **desktop apps** over other types
 * can **type fast**
@@ -873,16 +893,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Tingkat Delivery**: Subscription-based home-cooked meal delivery service commonly found in Singapore.
-* **Tingkat Package**: The food catering package, ordered for a set number of days, usually 5, 10, or 20 days.
-* **Command Line Interface (CLI)**: A text-based user interface used to interact with software by typing commands.
-* **Graphical User Interface (GUI)**: A visual interface that allows users to interact with the application through graphical elements like buttons, windows, and icons.
 * **Customer**: A person who subscribes to the Tingkat delivery service.
 * **Delivery Rider/Driver**: A person who delivers meals to customers.
 * **Tingkat Administrative Staff**: A person who manages the Tingkat delivery service.
 * **Delivery Route**: A sequence of stops planned for delivering meals to customers.
-* **Subscription**: A predefined plan for meal delivery over a specific period (e.g., 5, 10, or 20 days).
+* **Mainstream OS**: Windows, Linux, MacOS
+* **Tingkat Delivery**: Subscription-based home-cooked meal delivery service commonly found in Singapore.
+* **Tingkat Package**: The food catering package, ordered from a predefined start date to an end date.
+* **Command Line Interface (CLI)**: A text-based user interface used to interact with software by typing commands.
+* **Graphical User Interface (GUI)**: A visual interface that allows users to interact with the application through graphical elements like buttons, windows, and icons.
+* **Subscription**: A predefined plan for meal delivery within a period from start date to end date.
 * **Command**: A user input that triggers a specific action in the application (e.g., `add`, `delete`, `list`).
 * **JavaScript Object Notation (JSON)**: A file format for storing and transmitting data as human-readable text.
 * **Java Archive (JAR)**: A file format that can be used to compress and bundle multiple files associated with a Java application into a single file for ease of distribution and execution.
