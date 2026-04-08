@@ -13,19 +13,19 @@
 
 ## Acknowledgements
 
-### Original Source
+### Original source
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-### Other Sources
+### Other sources
 * Displaying of delivery information under each person card was inspired by [SoCTAssist](https://github.com/AY2526S1-CS2103T-W11-1/tp).
 
-### Libraries Used
+### Libraries used
 * [JavaFX](https://openjfx.io/) for GUI rendering.
 * [Jackson](https://github.com/FasterXML/jackson) for JSON processing.
 * [JUnit5](https://github.com/junit-team/junit5) for unit and integration testing.
 * [PlantUML](https://plantuml.com/stdlib) for generating UML diagrams.
 
-### AI Generated Work
+### AI generated work
 * Gemini was used to generate the ServeMate icon for the application and GUI window.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -184,6 +184,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<box type="info" light>
+
+**Note:** The UML sequence diagrams and execution flows described in the Implementation section represent the high-level interactions between key components.
+Internal logic such as input parsing and argument validation are omitted for brevity but may be found in the codebase.
+Additionally, some of the method parameters in the UML sequence diagrams have also been simplified (e.g., `personToUnschedule` and `personWithNoDelivery` are referred to as `target` and `updated` respectively for `unschedule` command).
+</box>
+
 <br>
 
 ### Today's deliveries panel
@@ -256,7 +263,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 **Objective:** Allows administrative staff to track subscriptions that have ended and facilitate renewals.
 
-#### Implementation Details
+#### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for finding customers with an expired delivery:
 
 <box type="info" light>
@@ -264,7 +271,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 **Note:** The lifeline for `ExpiredCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
 </box>
 
-<puml src="diagrams/ExpiredSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `expired bf/2026-02-01` Command">
+<puml src="diagrams/ExpiredSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `expired bf/2026-02-01` Command" />
 
 **Execution flow:**
 1. The user enters the `expired` command as an input string.
@@ -276,13 +283,13 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 7. `ExpiredCommand` requests `Model` to filter the customer list based on the given `PersonHasExpiredDeliveryPredicate`.
 8. `ExpiredCommand` completes and returns the result of the `expired` command.
 
-#### Design Considerations
+#### Design considerations
 
 1. Functionality of the `expired` command.
     * **Chosen:** Find all customers with deliveries that have ended before a user-specified date.
       * Pros: Flexible, as it allows users to find deliveries that have expired today or are about to expire.
       * Cons: Requires extra effort to decide on the correct date to key in.
-        * Note that users can find today's date easily by referring to the deliveries panel. 
+        * Note that users can find today's date easily by referring to the delivery panel. 
     * **Alternative:** Find all customers with deliveries that have ended before today.
       * Pros: Simple and fast way to view recently expired deliveries.
       * Cons: Reduces testability, as test cases have to be created with respect to the system's date time.
@@ -406,11 +413,11 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 1. How the command is named.
     * **Chosen:** Name the command as `unschedule`.
-      * Pros: User-friendly and intuitive, as it maintains consistency with delivery-related commands (`schedule`, `reschedule`).
+      * Pros: User-friendly and intuitive, as it maintains consistency with delivery-related commands such as `schedule` and `reschedule`.
       * Cons: Not commonly used in standard English, which may cause first-time users to find it unusual.
     * **Alternative:** Name the command as `cancel`.
       * Pros: Familiar word that users are unlikely to mistype.
-      * Cons: Ambiguous, since `cancel` could refer to cancelling of other actions beyond deliveries; breaks consistency with `schedule` and `reschedule`.
+      * Cons: Ambiguous, since `cancel` could refer to cancelling of a payment made for the delivery instead.
 2. How `unschedule` removes the delivery from a customer.
     * **Chosen:** Implement a dedicated `unschedule` command.
       * Pros: One-shot command that enables users to easily remove the delivery of the specified customer.
@@ -828,7 +835,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find all customers whose deliveries have ended before a specific date.
-2. ServeMate displays the list of all matching customers.
+2. ServeMate displays the list of all matching customers on the customer panel.
 
    Use case ends.
 
@@ -848,7 +855,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1c. No customers have deliveries which end before the specified date.
 
-    * 1c1. ServeMate displays an empty result list.
+    * 1c1. ServeMate displays an empty customer list on the customer panel.
 
       Use case ends.
 
@@ -920,19 +927,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-### Non-Functional Requirements
+### Non-functional requirements
 
 #### ⚙️ Technical
 1. The application should be implemented primarily using the Object-Oriented Paradigm (OOP), where core logic are encapsulated within classes. A small mix of other styles (e.g. lambda expressions from the Functional Programming Paradigm) are allowed if justifiable (e.g. if it improves conciseness or readability within a method).
 
-#### 🚧 Operational Constraints
+#### 🚧 Operational constraints
 1. It should be operated as a **single-user** application. It should not support shared usage nor share access to data amongst multiple users.
 2. The application should not depend on its own remote server.
 
 #### 💻 Portability
 1. The application should support any _mainstream OS_ with Java `17` or higher.
 2. The application should be packaged into a single JAR file or a single zip file, with a maximum size of 100MB.
-3. The application should function as a standalone product that does not require additional user installations.
+3. The application should function as a standalone product that does not require additional user installations other than a compatible version of Java.
 
 #### ⌨️ Usability
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
@@ -942,7 +949,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### 🚀 Performance
 1. The application should remain responsive even when managing 1000 customer records.
 
-#### 💾 Data Persistence
+#### 💾 Data persistence
 1. The application should store data locally in a human editable text file (e.g. JSON format). It should not use a Database Management System (DBMS) to store data.
 
 #### 📖 Documentation

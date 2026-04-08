@@ -10,76 +10,169 @@
 Managing customer records and delivery schedules for a Tingkat catering business can quickly become overwhelming when information is scattered across spreadsheets, notebooks and chat messages.
 This is where **ServeMate** comes in.
 
-**ServeMate** is a desktop application designed to help administrative staff of a single plan Tingkat caterer organize customer contacts and delivery details. Optimized for fast typing through a Command Line Interface (CLI), **ServeMate** allows you to quickly add, update, and retrieve customer records without navigating through complicated menus.
+**ServeMate** is a desktop application designed to help administrative staff of Tingkat caterers organize customer contacts and delivery details. Optimized for fast typing using text-based commands, **ServeMate** allows you to quickly add, update, and retrieve customer records without navigating through complicated menus.
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## Quick start
 
-1. Ensure that Java `17` or later installed on your computer. <br>
-If Java is not installed, follow the installation guide for your operating system:
-   * **Windows:** [Java installation guide for Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html).
-   * **Mac:** [Java installation guide for Mac](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-   * **Linux:** [Java installation guide for Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html).
+Welcome to **ServeMate**, the mate that helps you serve faster. Follow these simple steps to start using ServeMate today!
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-W14-2/tp/releases).
+1. ServeMate needs a helper program called **Java 17** to run.<br>
+   * If you do not have Java installed or are unsure, follow the installation guide for your computer:
+     * **For Windows users:** [Java installation guide for Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html#java-17-installation-guide-for-windows-users).
+     * **For Mac users:** [Java installation guide for Mac](https://se-education.org/guides/tutorials/javaInstallationMac.html#java-17-installation-guide-for-mac-users).
+     * **For Linux users:** [Java installation guide for Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html#java-17-installation-guide-for-linux-users).
+2. Download the latest `ServeMate.jar` file from [this link](https://github.com/AY2526S2-CS2103T-W14-2/tp/releases).
+3. Move `ServeMate.jar` to a folder that is easily accessible for you.
+4. Launch ServeMate.
+   * **For Windows users:**
+     1. Open the folder where you saved `ServeMate.jar`.
+     2. Click on the **address bar** at the top (where the folder name is), type `cmd` and press **Enter**.
+     3. A window should pop up. On this window, type `java -jar ServeMate.jar` and press **Enter**.
+    <!--
+    @@author DenseLance-alt-reused
+    Reused from https://support.apple.com/en-ca/guide/terminal/trmlb20c7888/2.15/mac/26
+     with minor modifications
+    -->
+   * **For Mac users:**
+     1. Open a Finder window, then navigate to the folder where you saved `ServeMate.jar`.
+     2. If there is no **path bar** at the bottom of the Finder window, click **View** in the top menu bar and select **Show Path Bar**.
+     3. Right-click the folder name at the very end of **path bar** and select **Open in Terminal**.
+     4. A window should pop up. On this window, type `java -jar ServeMate.jar` and press **Return**.
+    <!-- @@author -->
+    <!--
+    @@author DenseLance-alt-reused
+    Reused from https://askubuntu.com/a/969311
+     with minor modifications
+    -->
+   * **For Linux users:**
+     1. Right-click the folder where you saved `ServeMate.jar`.
+     2. Select **Open in Terminal**.
+     3. A window should pop up. On this window, type `java -jar ServeMate.jar` and press **Enter**.
+    <!-- @@author -->
+5. The ServeMate window should appear in a few seconds. You are now ready to use ServeMate!
 
-1. Copy the file to the folder you want to use as the _home folder_ for ServeMate.
+--------------------------------------------------------------------------------------------------------------------
 
-1. Open a command terminal and run the application using:
-   ```shell
-   cd [home-folder]
-   java -jar ServeMate.jar
-   ```
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
-   <br>![UI](images/Ui.png)
+## Dashboard layout
+
+The ServeMate window should look like the image below. Notice how the app already contains some sample data.
+<br>![UI](images/Ui.png)
+<!-- @@author elijah-ng -->
+
 * The customer panel on the left allows you to view customer information, including their full delivery details.
 * The delivery panel on the right allows you to view today's deliveries. It provides a quick reference to view deliveries scheduled for the current day, from earliest to latest delivery time.
 * You can adjust the width of the panels by left-clicking and dragging the divider between them.
 
 <box type="info" light>
 
-**Note:** The date shown on the delivery panel is based on your computer's date setting. If you find today's date is incorrectly reflected, check that your computer's date is correct, then close and relaunch ServeMate.
+**Note:** The date shown in the delivery panel is based on your computer's date setting. If you find today's date is incorrectly reflected, check that your computer's date is correct, then close and relaunch ServeMate.
+</box>
+<!-- @@author -->
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Step-by-step tutorial
+
+Meet Mdm Tan, an experienced administrative staff at a Tingkat catering business. Let's see how she handles her morning rush with ease using **ServeMate**!
+
+<box type="info" light>
+
+**Note:** This tutorial uses the sample data that comes preloaded with ServeMate so that you can practice right away.
+Please note that your screen might look different from the screenshots below, because what you see for the **delivery panel** on the right depends on your computer's date.
 </box>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+### Viewing all customer records
+Before the day starts, Mdm Tan wants to check the full list of customers.
+<br><br>
+She types the `list` command into the command box at the top, and the customer panel on the left is updated:
+<br>![Tutorial for List Command](images/Tutorial-ListCommand.png)
 
-   * `list` : Lists all contacts.
+### Welcoming a new customer
+The phone rings. It's Bryan Wong from Paya Lebar who wants to start a Tingkat service for his family. He requests for his meals to not contain eggs.
+<br><br>
+As Bryan provides his contact details, Mdm Tan quickly types the **add** command:
+```text
+add n/Bryan Wong p/86422468 a/25 Paya Lebar Crescent, S536050 e/wongbryan87@gmail.com t/NoEgg
+```
+<br>
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ServeMate.
+Bryan appears instantly in the customer panel on the left, and becomes the 7th customer on the list:
+<br>![Tutorial for Add Command](images/Tutorial-AddCommand.png)
+<br><br>
+Now that Bryan has finally paid for his daily Tingkat plan from 7 April 2026 to 7 June 2026, Mdm Tan starts to schedule his recurring 5pm delivery:
+```text
+schedule 7 st/2026-04-07 ed/2026-06-07 d/1234567 tm/17:00
+```
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+<box type="info" light>
 
-   * `clear` : Deletes all contacts.
+**Note:** The examples provided in this tutorial use **7 April 2026** as today's date. To see Bob’s name appear in the delivery panel, ensure that `st/` (start date) is today, and `ed/` (end date) is 2 months later.
+</box>
 
-   * `exit` : Exits the app.
+Since Bryan’s Tingkat plan starts today, his delivery will also be added to the delivery panel on the right:
+<br>![Tutorial for Schedule Command](images/Tutorial-ScheduleCommand.png)
 
-1. Refer to the [Features](#features) below for details of each command.
+### Handling customer feedback
+An hour later, Mdm Tan receives a Whatsapp message. This time, it is Irfan from Tampines who complains about yesterday's meal being too oily.
+<br><br>
+Instead of slowly scrolling through the entire list of customers, Mdm Tan uses the `find` command to locate Irfan's contact:
+```text
+find n/Irfan a/Tampines
+```
+<br>
+
+The customer panel will display a filtered list containing all customers with the name `Irfan` and address in `Tampines`:
+<br>![Tutorial for Find Command](images/Tutorial-FindCommand.png)
+<br><br>
+Next, Mdm Tan uses the `edit` command to update Irfan's tags to reflect his preference for less oily food:
+```text
+edit 1 t/Halal t/LessOil
+```
+
+<box type="warning" light>
+
+**Warning:** When you use the `edit` command to add new tags to a customer, ServeMate will **replace** the old tags. You should always include the original tags (e.g. `Halal`) in your command if you want to keep them!
+</box>
+
+Mdm Tan checks that Irfan's record is updated correctly:
+<br>![Tutorial for Edit Command](images/Tutorial-EditCommand.png)
+<br>
+
+<box type="success" light>
+
+**Congrats!** You are now ready to use ServeMate for your daily tasks. 
+</box>
+
+### What's next
+
+While this tutorial covers the daily essentials, ServeMate has many other commands to help you stay organized.
+You can refer to the [Features](#features) section below to look up details about a specific command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Command Format (with Examples)
------------------|-------------------------------------------------------------------------------------------------
-**Getting help** | `help`
-**Add customer** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br><br>Example:<br>`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Halal t/NoEgg`
-**List all customers** | `list`
-**Edit customer** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br><br>Example:<br>`edit 2 n/James Lee e/jameslee@example.com`
-**Delete customer** | `delete INDEX`<br><br>Example:<br>`delete 3`
-**Find customers by attribute** | `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`<br><br>Example:<br>`find n/James Jake a/Jurong`
-**Find customers with delivery on date** | `find-delivery dt/DATE`<br><br>Example:<br>`find-delivery dt/2026-10-22`
-**Find customers with delivery within date range** | `find-delivery st/START_DATE ed/END_DATE`<br><br>Example:<br>`find-delivery st/2026-10-27 ed/2026-11-10`
-**Find customers with expired delivery** | `expired bf/DATE`<br><br>Example:<br>`expired bf/2026-12-22`
-**Schedule delivery** | `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DAYS`<br><br>Example:<br>`schedule 3 st/2026-04-09 ed/2026-04-21 tm/16:00 d/12367`
-**Reschedule delivery** | `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DELIVERY_DAYS]`<br><br>Example:<br>`reschedule 3 ed/2026-04-21 tm/16:00`
-**Unschedule delivery** | `unschedule INDEX`<br><br>Example:<br>`unschedule 3`
-**Clear all entries** | `clear`
-**Exit program** | `exit`
+| Action                                             | Command Format (with Examples)                                                                                                                                          |
+|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Getting help**                                   | `help`                                                                                                                                                                  |
+| **Add customer**                                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br><br>Example:<br>`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Halal t/NoEgg` |
+| **List all customers**                             | `list`                                                                                                                                                                  |
+| **Edit customer**                                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br><br>Example:<br>`edit 2 n/James Lee e/jameslee@example.com`                                    |
+| **Delete customer**                                | `delete INDEX`<br><br>Example:<br>`delete 3`                                                                                                                            |
+| **Find customers by attribute**                    | `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`<br><br>Example:<br>`find n/James Jake a/Jurong`                                                 |
+| **Find customers with delivery on date**           | `find-delivery dt/DATE`<br><br>Example:<br>`find-delivery dt/2026-10-22`                                                                                                |
+| **Find customers with delivery within date range** | `find-delivery st/START_DATE ed/END_DATE`<br><br>Example:<br>`find-delivery st/2026-10-27 ed/2026-11-10`                                                                |
+| **Find customers with expired delivery**           | `expired bf/DATE`<br><br>Example:<br>`expired bf/2026-12-22`                                                                                                            |
+| **Schedule delivery**                              | `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DAYS`<br><br>Example:<br>`schedule 3 st/2026-04-09 ed/2026-04-21 tm/16:00 d/12367`                |
+| **Reschedule delivery**                            | `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DELIVERY_DAYS]`<br><br>Example:<br>`reschedule 3 ed/2026-04-21 tm/16:00`                          |
+| **Unschedule delivery**                            | `unschedule INDEX`<br><br>Example:<br>`unschedule 3`                                                                                                                    |
+| **Clear all entries**                              | `clear`                                                                                                                                                                 |
+| **Exit program**                                   | `exit`                                                                                                                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -105,7 +198,7 @@ Action | Command Format (with Examples)
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Dates are in `yyyy-MM-dd` format, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day.<br>
-  e.g. 9th March 2026 can be written has `2026-03-09`.
+  e.g. 9th March 2026 can be written as `2026-03-09`.
 
 * Tags (`t/[TAG]`) are intended for use in placing delivery notes for a particular customer.
   * Tags should only consist of alphanumerical values without whitespaces.
@@ -239,7 +332,7 @@ Finds all customers with deliveries that have expired before the given date.
 Format: `expired bf/DATE`
 * `DATE` is in the format `yyyy-MM-dd` (e.g., 2026-04-09).
 * Displays all customers whose delivery end date is **before** the specified date on the customer panel.
-* Deliveries that end on the exact date specified is **not** considered as expired.
+* Deliveries that end exactly on the specified date are **not** considered as expired.
 * Customers without a delivery will not be displayed.
 
 Examples:
@@ -308,12 +401,12 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Deletes **all** customer records and their delivery details (if any). This operation **cannot be undone** and **data cannot be recovered**.
+Deletes **all** customer records and their delivery details (if any).
 
 <box type="warning" light>
 
 **Warning:**
-This action is permanent and cannot be undone. Ensure that you have thoroughly reviewed and backed up any necessary data before proceeding.
+This action **cannot be undone** and results in a **permanent loss of data**. Ensure that you have thoroughly reviewed and backed up any necessary data before proceeding.
 </box>
 
 Format: `clear`
@@ -341,7 +434,7 @@ ServeMate data are saved automatically as a JSON file `[JAR file location]/data/
 <box type="warning" light>
 
 **Warning:**
-If your changes to the data file makes its format invalid, ServeMate will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, ServeMate will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the ServeMate to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 

@@ -7,8 +7,8 @@
 ---
 
 ## 🍲 About
-* ServeMate is a desktop address book created for **administrative staff** for tingkat food delivery to manage their customer contacts for delivery planning.
-* Most user interactions can be carried out easily using a **Command Line Interface (CLI)**.
+* **ServeMate** is a desktop application designed to help administrative staff of Tingkat caterers organize customer contacts and delivery details.
+* Optimized for fast typing using text-based commands, **ServeMate** allows you to quickly add, update, and retrieve customer records without navigating through complicated menus.
 
 ## 🚀 Getting Started
 1. Check that you have **Java 17 or above** installed, using the following command:
@@ -26,8 +26,9 @@
    ```
 
 ## 📖 Features
-ServeMate helps tingkat caterers to:
-* Add, list, and delete detailed customer records.
+ServeMate helps Tingkat caterers to:
+* Add, edit, delete, and list detailed customer records.
+* Schedule, reschedule, and cancel the delivery that is associated with a customer.
 
 ## ✔️ Acknowledgement
 
