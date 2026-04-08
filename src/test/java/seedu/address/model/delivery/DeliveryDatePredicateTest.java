@@ -135,7 +135,8 @@ public class DeliveryDatePredicateTest {
         assertFalse(predicate.test(person));
     }
 
-    // EP: single date equals delivery end date with a matching delivery day
+    // EP: matching single-date query with a matching delivery day
+    // Boundary: single date == end date
     @Test
     public void test_dateOnDeliveryEnd_returnsTrue() {
         Delivery delivery = new DeliveryBuilder()
@@ -195,7 +196,7 @@ public class DeliveryDatePredicateTest {
         assertTrue(predicate.test(person));
     }
 
-    // EP: query range entirely after delivery period (no overlap)
+    // EP: query range entirely outside of delivery period (no overlap)
     @Test
     public void test_rangeNoOverlapWithDelivery_returnsFalse() {
         // Delivery: 2026-04-01 to 2026-04-10, Wednesday
