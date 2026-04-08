@@ -213,7 +213,7 @@ Examples:
 
 <br>
 
-### Finding deliveries on a given date: `find-delivery`
+### Finding customers by delivery date: `find-delivery`
 
 Finds customers who have a delivery scheduled on the given date or within the given date range.
 
