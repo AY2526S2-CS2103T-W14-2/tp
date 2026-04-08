@@ -274,7 +274,7 @@ Edits the delivery associated with the specified customer.
 Format: `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DELIVERY_DAYS]`
 
 * Parameters `st/`, `ed/`, `tm/` and `d/` are optional, but at least one of them must be provided.
-* Existing values will be updated to the input values.
+* Existing values will be updated to the input values. 
 * Edits the delivery associated with the customer at the specified `INDEX`.
 * The specified customer must have an existing delivery.
 * The index refers to the index number shown in the displayed customer panel.
