@@ -381,7 +381,7 @@ If you like to find customers matching any of the filters (e.g. find all custome
 <box type="warning" light>
 
 **Warning:**
-The `preferences.json` file saves configuration settings used by ServeMate. We recommend that you do not edit the file directly as certain edits can cause ServeMate to behave in unexpected ways. Therefore, edit the file only if you are confident that you can update it correctly.
+The `preferences.json` file saves configuration settings used by ServeMate. If you choose to edit the file directly, do note that certain edits can cause ServeMate to behave in unexpected ways. Therefore, edit the file only if you are confident that you can update it correctly.
 </box>
 
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
