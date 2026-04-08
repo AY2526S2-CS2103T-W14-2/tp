@@ -375,14 +375,27 @@ If you like to find customers matching any of the filters (e.g. find all custome
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **Application window opens off-screen**<br>
+   If you used ServeMate on a second screen and later switched to using single screen, the application window may open off-screen future start-ups.
+   * **Solution**: Delete the `preferences.json` file located in the same folder as `ServeMate.jar` before restarting ServeMate.
 <box type="warning" light>
 
 **Warning:**
-The `preferences.json` file saves configuration settings used by ServeMate. We recommend that you do not edit the file directly as certain edits can cause ServeMate to behave in unexpected ways. Therefore, edit the file only if you are confident that you can update it correctly.
+The `preferences.json` file contains configuration settings for ServeMate.
+We recommend that you do not edit the file directly as certain edits may result in unexpected behaviours. Therefore, edit the file only if you are confident that you can update it correctly.
 </box>
 
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **Help window does not appear**<br>
+   If you minimize the Help Window and then try to open it again (using the `help` command, `F1` key, or `Help` menu), ServeMate will not open a second Help Window and the existing Help Window will remain minimized.
+   * **Solution**: Look for the minimized Help Window in your computer's taskbar and click on it to restore it back to the screen.
+
+3. **Screen lags when scrolling quickly**<br>
+   If you quickly scroll through a very long list of customers, you might notice that ServeMate starts to slow down.
+   * **Solution**: Scroll at a slower speed to allow the screen to update smoothly.
+<box type="tip" light>
+
+**Tip:** Use the `find` command to search for the customer you want for faster navigation!
+</box>
 
 ------------------------------------------------------------------------------------------------------------------
 ## Coming soon
