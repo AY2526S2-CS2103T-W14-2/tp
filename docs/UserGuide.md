@@ -387,7 +387,7 @@ The `preferences.json` file saves configuration settings used by ServeMate. If y
 </box>
 
 2. **Help window does not appear**<br>
-   If you minimize the Help Window and then try to open it again (using the `help` command, `F1` key, or `Help` menu), ServeMate will not open a second Help Window and the existing Help Window will remain minimized.
+   If you minimize the Help Window and then try to open it again (using the `help` command, `F1` key, or `Help` menu), ServeMate will not open a second Help Window.
    * **Solution**: Look for the minimized Help Window in your computer's taskbar and click on it to restore it back to the screen.
 
 3. **Screen lags when scrolling quickly**<br>
@@ -395,7 +395,8 @@ The `preferences.json` file saves configuration settings used by ServeMate. If y
    * **Solution**: Scroll at a slower speed to allow the screen to update smoothly.
 <box type="tip" light>
 
-**Tip:** Use the `find` command to search for the customer you want for faster navigation!
+**Tip:**
+Use the `find` command to search for the customer you want for faster navigation!
 </box>
 
 ------------------------------------------------------------------------------------------------------------------
