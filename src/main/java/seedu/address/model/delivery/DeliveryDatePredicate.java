@@ -38,7 +38,8 @@ public class DeliveryDatePredicate implements Predicate<Person> {
     }
 
     /**
-     * Tests whether the given {@code Person} has a delivery scheduled within the stored date range.
+     * Tests whether the given {@code Person} has a delivery scheduled within the stored date range,
+     * inclusive of both start and end dates.
      *
      * @param person The person to test.
      * @return {@code true} if the person has a delivery that falls within the date range, {@code false} otherwise.
