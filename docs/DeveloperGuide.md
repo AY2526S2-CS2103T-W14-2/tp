@@ -268,7 +268,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info">
 
-**Note:** The lifeline for `ExpiredCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+**Note:** The lifelines for `ExpiredCommandParser` and `ExpiredCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines continues till the end of the diagram.
 </box>
 
 <puml src="diagrams/ExpiredSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `expired bf/2026-02-01` Command" />
@@ -392,7 +392,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info">
 
-**Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifelines for `UnscheduleCommandParser` and `UnscheduleCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines continues till the end of diagram.
 </box>
 
 <puml src="diagrams/UnscheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `unschedule 2` Command" />
