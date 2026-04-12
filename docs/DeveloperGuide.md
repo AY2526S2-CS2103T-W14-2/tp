@@ -1042,3 +1042,7 @@ Team size: 5
     * ServeMate will store a history of the past 5 address book states in a stack.
     * When any command except `undo` is executed, the state before the command is executed will be pushed to the stack.
     * When `undo` is executed, ServeMate will pop the previous state from the stack and restore it if the stack is non-empty.
+7. **Implement recoverable data validation when converting JSON to Java objects:** Currently, if users manually edit `addressbook.json` and introduce invalid data (e.g `startDate` is not strictly before `endDate`), the app will crash. We plan to implement data validation that allows the app to recover when such a condition happens.
+    * When invalid data is detected, the app will show the user which fields are invalid and the reason for invalidity.
+    * The app prompts the user to either fix the data or ignore them.
+    * If the user chooses to ignore the invalid data, the app will load the data while ignoring them (e.g. if `startDate` and `endDate` are invalid, the app will load without the delivery whose start and end date are invalid).
