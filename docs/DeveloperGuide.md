@@ -504,6 +504,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
+<!-- @@author Chen-Beitian -->
+
 **Use case 1: Add a customer**
 
 **MSS**
@@ -538,117 +540,117 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case 2: Delete a customer**
 
+Preconditions: A list of customers is displayed
+
 **MSS**
 
-1. User requests to list customers.
-2. ServeMate shows a list of customers.
-3. User requests to delete a customer in the list.
-4. ServeMate deletes the customer.
-5. ServeMate shows a success message with the deleted customer’s details.
+1. User requests to delete a customer in the list.
+2. ServeMate deletes the customer.
+3. ServeMate shows a success message with the deleted customer’s details.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. ServeMate detects that the given index is not a positive integer.
 
-  Use case ends.
+    * 1a1. ServeMate shows an error message describing the correct command format.
 
-* 3a. ServeMate detects that the given index is not a positive integer.
+      Use case resumes at step 1.
 
-    * 3a1. ServeMate shows an error message describing the correct command format.
+* 1b. ServeMate detects that the given index is out of range.
 
-      Use case resumes at step 3.
+    * 1b1. ServeMate shows an error message indicating that the provided index is invalid.
 
-* 3b. ServeMate detects that the given index is out of range.
-
-    * 3b1. ServeMate shows an error message indicating that the provided index is invalid.
-
-      Use case resumes at step 3.
+      Use case resumes at step 1.
 
 <br>
 
 **Use case 3: Edit customer record**
 
+Preconditions: A list of customers is displayed
+
 **MSS**
 
-1. User requests to list customers.
-2. ServeMate shows a list of customers.
-3. User requests to edit a customer in the list.
-4. ServeMate updates the customer record.
-5. ServeMate shows a success message with the updated customer’s details.
+1. User requests to edit a customer in the list.
+2. ServeMate updates the customer record.
+3. ServeMate shows a success message with the updated customer’s details.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. ServeMate detects that the given index is not a positive integer.
 
-  Use case ends.
+    * 1a1. ServeMate shows an error message describing the correct command format.
 
-* 3a. ServeMate detects that the given index is not a positive integer.
+      Use case resumes at step 1.
 
-    * 3a1. ServeMate shows an error message describing the correct command format.
+* 1b. ServeMate detects that the given index is out of range.
 
-      Use case resumes at step 3.
+    * 1b1. ServeMate shows an error message indicating that the provided index is invalid.
 
-* 3b. ServeMate detects that the given index is out of range.
+      Use case resumes at step 1.
 
-    * 3b1. ServeMate shows an error message indicating that the provided index is invalid.
+* 1c. ServeMate detects that no fields are specified for editing.
 
-      Use case resumes at step 3.
+    * 1c1. ServeMate shows an error message indicating that at least one field must be provided for editing.
 
-* 3c. ServeMate detects that no fields are specified for editing.
+      Use case resumes at step 1.
 
-    * 3c1. ServeMate shows an error message indicating that at least one field must be provided for editing.
+* 1d. ServeMate detects that an invalid field is provided.
 
-      Use case resumes at step 3.
+    * 1d1. ServeMate shows an error message describing the violated constraint.
 
-* 3d. ServeMate detects that an invalid field is provided.
+      Use case resumes at step 1.
 
-    * 3d1. ServeMate shows an error message describing the violated constraint.
+* 1e. ServeMate detects that editing the name causes a duplicate with an existing customer.
 
-      Use case resumes at step 3.
+    * 1e1. ServeMate shows an error message indicating that the customer already exists.
 
-* 3e. ServeMate detects that editing the name causes a duplicate with an existing customer.
-
-    * 3e1. ServeMate shows an error message indicating that the customer already exists.
-
-      Use case resumes at step 3.
+      Use case resumes at step 1.
 
 <br>
 
+<!-- @@author  -->
+
+<!-- @@author elijah-ng -->
+
 **Use case 4: Filter customers by attributes**
 
+Preconditions: A list of customers is displayed
+
 **MSS**
-1. User requests to list customers.
-2. ServeMate displays a list of customers.
-3. User requests to filter customers by attributes and provides one or more filters, each containing one or more keywords.
-4. ServeMate displays the list of customers that match the given filter(s).
+1. User requests to filter customers by attributes and provides one or more filters, each containing one or more keywords.
+2. ServeMate displays the list of customers that match the given filter(s).
 
    Use case ends.
 
 **Extensions**
 
-* 3a. ServeMate detects an error in the command format.
+* 1a. ServeMate detects an error in the command format.
 
-    * 3a1. ServeMate displays an error message describing the correct command format.
+    * 1a1. ServeMate displays an error message describing the correct command format.
 
-      Use case resumes at step 3.
+      Use case resumes at step 1.
 
-* 3b. ServeMate detects a violation of keyword format constraints in a filter.
+* 1b. ServeMate detects a violation of keyword format constraints in a filter.
 
-    * 3b1. ServeMate displays an error message describing the violated constraint.
+    * 1b1. ServeMate displays an error message describing the violated constraint.
 
-      Use case resumes at step 3.
+      Use case resumes at step 1.
 
-* 3c. No customers match the specified filters.
+* 1c. No customers match the specified filters.
 
-    * 3c1. ServeMate displays an empty result list.
+    * 1c1. ServeMate displays an empty result list.
 
       Use case ends.
 
 <br>
+
+<!-- @@author  -->
+
+<!-- @@author BenedTj -->
 
 **Use case 5: View all upcoming deliveries for the day**
 
@@ -671,131 +673,123 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case 6: Add delivery for a customer**
 
+Preconditions: A list of customers is displayed
+
 **MSS**
 
-1. User requests to list customers.
-2. ServeMate shows a list of customers.
-3. User requests to add a new delivery for a customer with required fields.
-4. ServeMate adds the delivery to the customer's details.
-5. ServeMate shows a success message with the added delivery's details.
+1. User requests to add a new delivery for a customer with required fields.
+2. ServeMate adds the delivery to the customer's details.
+3. ServeMate shows a success message with the added delivery's details.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. ServeMate detects that the given index is not a positive integer.
 
-  Use case ends.
+    * 1a1. ServeMate shows an error message describing the correct command format.
 
-* 3a. ServeMate detects that the given index is not a positive integer.
+      Use case resumes at step 1.
 
-    * 3a1. ServeMate shows an error message describing the correct command format.
+* 1b. ServeMate detects that the given index is out of range.
 
-      Use case resumes at step 3.
+    * 1b1. ServeMate shows an error message indicating that the provided index is invalid.
 
-* 3b. ServeMate detects that the given index is out of range.
+      Use case resumes at step 1.
 
-    * 3b1. ServeMate shows an error message indicating that the provided index is invalid.
+* 1c. ServeMate detects that there is a required field is missing.
 
-      Use case resumes at step 3.
+    * 1c1. ServeMate shows an error message describing the correct command format.
 
-* 3c. ServeMate detects that there is a required field is missing.
+      Use case resumes from step 1.
 
-    * 3c1. ServeMate shows an error message describing the correct command format.
+* 1d. ServeMate detects that a parameter value is invalid.
 
-      Use case resumes from step 3.
+    * 1d1. ServeMate shows an error message describing the violated constraint.
 
-* 3d. ServeMate detects that a parameter value is invalid.
+      Use case resumes from step 1.
 
-    * 3d1. ServeMate shows an error message describing the violated constraint.
+* 1e. ServeMate detects that a delivery to the same customer already exists.
 
-      Use case resumes from step 3.
+    * 1e1. ServeMate shows an error message describing that the customer already has a delivery scheduled.
 
-* 3e. ServeMate detects that a delivery to the same customer already exists.
-
-    * 3e1. ServeMate shows an error message describing that the customer already has a delivery scheduled.
-
-      Use case resumes from step 3.
+      Use case resumes from step 1.
 
 <br>
+
+<!-- @@author  -->
 
 **Use case 7: Edit delivery details belonging to a customer**
 
+Preconditions: A list of customers is displayed
+
 **MSS**
 
-1. User requests to list customers.
-2. ServeMate shows a list of customers.
-3. User requests to edit the delivery details of a customer in the list.
-4. ServeMate updates the customer's delivery details.
-5. ServeMate shows a success message with the updated customer’s delivery details.
+1. User requests to edit the delivery details of a customer in the list.
+2. ServeMate updates the customer's delivery details.
+3. ServeMate shows a success message with the updated customer’s delivery details.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The given index is not a positive integer.
 
-  Use case ends.
+    * 1a1. ServeMate shows an error message describing the correct command format.
 
-* 3a. The given index is not a positive integer.
+      Use case resumes at step 1.
 
-    * 3a1. ServeMate shows an error message describing the correct command format.
+* 1b. The given index is out of range.
 
-      Use case resumes at step 3.
+    * 1b1. ServeMate shows an error message indicating that the provided index is invalid.
 
-* 3b. The given index is out of range.
+      Use case resumes at step 1.
 
-    * 3b1. ServeMate shows an error message indicating that the provided index is invalid.
+* 1c. No fields are specified for editing.
 
-      Use case resumes at step 3.
+    * 1c1. ServeMate shows an error message indicating that at least one field must be provided for editing.
 
-* 3c. No fields are specified for editing.
+      Use case resumes at step 1.
 
-    * 3c1. ServeMate shows an error message indicating that at least one field must be provided for editing.
-
-      Use case resumes at step 3.
-
-* 3d. Any provided field value is invalid.
+* 1d. Any provided field value is invalid.
 
     * 3d1. ServeMate shows an error message describing the violated constraint.
 
-      Use case resumes at step 3.
+      Use case resumes at step 1.
 
 <br>
 
+<!-- @@author DenseLance-alt -->
+
 **Use case 8: Delete a delivery associated with a customer**
+
+Preconditions: A list of customers is displayed
 
 **MSS**
 
-1. User requests to list customers.
-2. ServeMate shows a list of customers.
-3. User requests to delete a customer's delivery.
-4. ServeMate deletes the delivery associated with the specified customer.
-5. ServeMate shows a success message that includes the customer's name and details of the deleted delivery.
-   
+1. User requests to delete a customer's delivery.
+2. ServeMate deletes the delivery associated with the specified customer.
+3. ServeMate shows a success message that includes the customer's name and details of the deleted delivery.
+
    Use case ends.
 
 **Extensions**
 
-* 1a. The list of customers is empty.
+* 1a. ServeMate detects that the given index is not a positive integer.
 
-  Use case ends.
+  * 1a1. ServeMate shows an error message describing the correct command format.
 
-* 3a. ServeMate detects that the given index is not a positive integer.
+    Use case resumes at step 1.
 
-  * 3a1. ServeMate shows an error message describing the correct command format.
+* 1b. ServeMate detects that the given index is out of range.
 
-    Use case resumes at step 3.
+  * 1b1. ServeMate shows an error message describing that the index provided is invalid.
 
-* 3b. ServeMate detects that the given index is out of range.
+    Use case resumes at step 1.
 
-  * 3b1. ServeMate shows an error message describing that the index provided is invalid.
+* 1c. ServeMate detects that the customer at the given index does not have a delivery.
 
-    Use case resumes at step 3.
-
-* 3c. ServeMate detects that the customer at the given index does not have a delivery.
-
-  * 3c1. ServeMate shows an error message describing that the specified customer does not have an existing delivery.
+  * 1c1. ServeMate shows an error message describing that the specified customer does not have an existing delivery.
 
     Use case ends.
 
@@ -831,6 +825,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 <br>
+
+<!-- @@author  -->
+
+<!-- @@author Chen-Beitian -->
 
 **Use case 10: Find customers by delivery date**
 
@@ -897,6 +895,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 <br>
+
+<!-- @@author  -->
 
 ### Non-functional requirements
 
@@ -1136,8 +1136,20 @@ Team size: 5
 2. **Combine existing find commands:** The current separation of the `find-delivery` and `find` commands does not allow filtering by both delivery information (e.g. date) and customer information (e.g. address). We plan to combine both commands into a single `find` command, so that filtering by both delivery information and customer information is possible (e.g. `find n/John dt/2026-04-01`).
 3. **Allow special characters for customer's name**: The current name field for a customer does not allow names containing special characters, which may be in the customer's legal name. We plan to allow special characters in names (e.g. `s/o`).
 4. **Allow alphabets, special characters and spaces for customer's phone number**: The current phone number field for a customer does not allow phone numbers containing alphabets, special characters and spaces. We plan to allow entering phone numbers with alphabets, special characters and spaces (e.g. `+65 9876 5432 (HP) 6560-6060 (Office)` when a customer has multiple phone numbers).
-5. **Handle tags longer than 25 characters:** Currently, tags are restricted to 25 characters. We plan to allow tags with more than 25 characters, but the 26th character onwards will be clipped. The user can view the full tag by clicking on the clipped tag, which will show the full tag in a tooltip or a pop-up window.
-6. **Implement `undo` command:** Other than to manually re-enter data or keep a backup `addressbook.json` file, there is currently no simple method to recover from accidental modifications or deletions. We plan to implement the `undo` command for users to revert their changes made.
+5. **Implement `undo` command:** Other than to manually re-enter data or keep a backup `addressbook.json` file, there is currently no simple method to recover from accidental modifications or deletions. We plan to implement the `undo` command for users to revert their changes made.
     * ServeMate will store a history of the past 5 address book states in a stack.
     * When any command except `undo` is executed, the state before the command is executed will be pushed to the stack.
     * When `undo` is executed, ServeMate will pop the previous state from the stack and restore it if the stack is non-empty.
+6. **Implement recoverable data validation when converting JSON to Java objects:** Currently, if users manually edit `addressbook.json` and introduce invalid data (e.g `startDate` is not strictly before `endDate`), the app will crash. We plan to implement data validation that allows the app to recover when such a condition happens.
+    * When invalid data is detected, the app will catch show the user which fields are invalid and the reason for invalidity.
+    * The app prompts the user to either fix the data or ignore them.
+    * If the user chooses to ignore the invalid data, the app will load the data while ignoring them (e.g. if `startDate` and `endDate` are invalid, the app will load without the delivery whose start and end dates are invalid).
+7. **Implement customer duplicate checking using phone number:** Currently, ServeMate uses case-sensitive name to detect duplicate customers. This may be restrictive if users have different customers with the same name. Furthermore, the case-sensitivity allows customer with the same name but different casing to be added. This may break the duplicate detection mechanism. We plan to use phone number to detect duplicates instead.
+    * When a new customer is added, ServeMate will reject if the new customer has the same phone number with an existing customer.
+    * When an existing customer is edited, ServeMate will reject if the edited customer has the same phone number with another existing customer.
+8. **Forbid tag duplication for a customer regardless of the tag casing:** Currently, ServeMate accepts duplicate tags for a customer if the tag casing is different (e.g. `Vegan` is accepted although `vegan` exists). We plan to forbid duplicate tags regardless of the casing.
+    * When a new customer is added, ServeMate will reject if the new customer has duplicate tags regardless of the tag casing.
+    * When an existing customer is edited, ServeMate will reject if the edited customer has duplicate tags regardless of the tag casing.
+9. **Implement specific error messages for invalid command prefix:** Currently, ServeMate does not provide specific error messages for invalid commands. If invalid prefixes exist after a valid prefix, it will be treated as an input to that prefix. For example `edit 1 t/vegan r/` will be detected as invalid input to the prefix `t/`, displaying an error message "Tags names should be alphanumeric with no more than 25 characters". Another example, if an invalid prefix is used after the address prefix (`a/`), it will be treated as an input to `a/`. We plan to implement a specific error message for invalid command prefix to give more helpful information to users.
+    * When an invalid command prefix is detected, ServeMate will show an error message indicating an invalid command prefix and showing the command format with valid prefixes for that command.
+10. **Implement more rigorous email validation:** Currently, ServeMate allows some invalid emails (e.g. `123@123`, `andy@example`) to be added. We plan to implement more rigorous email validation to prevent invalid emails from being added.

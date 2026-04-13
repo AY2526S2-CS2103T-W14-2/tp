@@ -276,6 +276,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * You can remove all the customer’s tags by typing `t/` without
     specifying any tags after it.
 
+<box type="warning">
+
+**Warning:** You cannot perform removal of all tags using `t/` and specifying new tags at the same time (e.g. `edit INDEX t/ t/vegetarian` is not allowed).
+</box>
+
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st customer to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
@@ -511,6 +516,11 @@ Furthermore, certain edits can cause the ServeMate to behave in unexpected ways 
 9. **Question**: Why do some error messages refer to ServeMate as an address book?<br>
    **Answer**: ServeMate is an address book since it helps to store your customers' contact information.
 
+<br>
+
+10. **Question**: Why does ServeMate allow users to input delivery dates that happen in the past?<br>
+    **Answer**: This action is allowed to allow users to track past deliveries.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -535,6 +545,9 @@ The `preferences.json` file saves configuration settings used by ServeMate. If y
 **Tip:**
 Use the `find` command to search for the customer you want for faster navigation!
 </box>
+
+4. **Tags are restricted to 25 characters**: If you try to add a tag that is more than 25 characters long, ServeMate will not accept it and display an error message.
+   <br>**Solution**: Use tags that are 25 characters or less. If you need to add a longer tag, you can break it down into multiple tags.
 
 ------------------------------------------------------------------------------------------------------------------
 ## Coming soon
