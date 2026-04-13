@@ -513,6 +513,6 @@ Use the `find` command to search for the customer you want for faster navigation
 3. **Support for special characters in a customer's name**: You will be able to enter names containing special characters (e.g. `s/o`), which may appear in your customer's legal name.
 4. **Support for alphabets, special characters and spaces in a customer's phone number**: You will be able to enter phone numbers containing alphabets, special characters and spaces. This allows you to specify country codes and multiple phone numbers for a customer (e.g. `+65 9876 5432 (HP) 6560-6060 (Office)`).
 5. **Increase specificity of error message for date parsing**: If you entered either a date string with an invalid format or an invalid date, ServeMate will specify which of either cases caused the date string to be invalid. This allows you to immediately be notified of the issue and rectify it.
-   <br> Examples of dates that trigger errors:
+   <br> Examples of erroneous dates:
   * Wrong date: `2026-02-29` is a date that does not exist since 2026 is not a leap year.
-  * Wrong format: `0206-12-03` does not follow the expected format `yyyy-MM-dd`.
+  * Wrong format: `10000-12-03` does not follow the expected format `yyyy-MM-dd`.
