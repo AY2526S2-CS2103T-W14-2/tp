@@ -1011,9 +1011,9 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a customer while all customers are being shown.
     1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
     2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
     3. Test case: `delete 0`<br>
-       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No customer is deleted. Error details shown in the status message.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
@@ -1025,9 +1025,9 @@ testers are expected to do more *exploratory* testing.
 ### Editing a customer
 
 1. Verifying that an existing delivery is retained after editing a customer.
-    1. Prerequisites: Alex Yeoh must be present in the customer list with a delivery (he has one in the default sample data). Run `find n/Alex` — he should appear at index 1 with delivery information on his card.
-    2. Test case: `find n/Alex`, then `edit 1 p/91234567`<br>
-       Expected: Alex Yeoh's phone number is updated. The delivery information on his card remains unchanged. Run `find-delivery dt/2026-10-09` — Alex Yeoh should still appear, confirming that the delivery was not affected by the edit.
+    1. Prerequisites: Irfan Ibrahim must be present in the customer list with a delivery (he has one in the default sample data). Run `find n/Irfan` — he should appear at index 1 with delivery information on his card.
+    2. Test case: `find n/Irfan`, then `edit 1 p/91234567`<br>
+       Expected: Irfan Ibrahim's phone number is updated. The delivery information on his card remains unchanged.
 
 ### Today's delivery panel
 
