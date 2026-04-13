@@ -366,7 +366,7 @@ Format: `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DA
 * The index refers to the index number shown in the displayed customer list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * `DELIVERY_DAYS` must be a set of numbers **within the range of 1-7 inclusive** without whitespaces where 1 = Monday, 2 = Tuesday, …​, 7 = Sunday.
-* `24:00` is not a valid value for `DELIVERY_TIME` and `00:00` should be entered instead.
+* `DELIVERY_TIME` should be in the 24-hour format and be between `00:00` and `23:59`.
 
 Examples:
 * `schedule 1 st/2026-02-01 ed/2026-02-02 tm/13:00 d/12` adds a delivery for the 1st customer on the list. The delivery starts on 1 February 2026, ends on 2 February 2026 and occurs at 1 PM on Mondays and Tuesdays.
