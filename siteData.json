@@ -70,9 +70,16 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-a-customer": "Deleting a customer",
-        "saving-data": "Saving data",
+        "today-s-deliveries-panel-2": "Today's deliveries panel",
         "finding-customers-by-attributes-name-address-tag": "Finding customers by attributes (name, address, tag)",
+        "finding-customers-by-delivery-date": "Finding customers by delivery date",
+        "finding-customers-with-expired-delivery": "Finding customers with expired delivery",
+        "scheduling-a-delivery": "Scheduling a delivery",
+        "rescheduling-a-delivery": "Rescheduling a delivery",
+        "unscheduling-a-delivery": "Unscheduling a delivery",
+        "deleting-a-customer": "Deleting a customer",
+        "editing-a-customer": "Editing a customer",
+        "saving-data": "Saving data",
         "appendix-planned-enhancements": "Appendix: Planned enhancements"
       },
       "headingKeywords": {}
