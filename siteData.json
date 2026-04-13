@@ -72,6 +72,7 @@
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-customer": "Deleting a customer",
         "saving-data": "Saving data",
+        "finding-customers-by-attributes-name-address-tag": "Finding customers by attributes (name, address, tag)",
         "appendix-planned-enhancements": "Appendix: Planned enhancements"
       },
       "headingKeywords": {}
