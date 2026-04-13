@@ -1006,29 +1006,6 @@ testers are expected to do more *exploratory* testing.
     2. In the same folder, run `java -jar ServeMate.jar` again.<br>
        Expected: The most recent window size and location is retained.
 
-### Deleting a customer
-
-1. Deleting a customer while all customers are being shown.
-    1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
-    2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-    3. Test case: `delete 0`<br>
-       Expected: No customer is deleted. Error details shown in the status message.
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-
-2. Deleting a customer who has a delivery.
-    1. Prerequisites: Bernice Yu must be present in the customer list with a delivery (she has one in the default sample data). Run `find n/Bernice` — she should appear at index 1.
-    2. Test case: `find n/Bernice`, then `delete 1`<br>
-       Expected: Bernice Yu is deleted from the list. Run `find-delivery st/2026-08-09 ed/2027-02-09` — Bernice Yu should no longer appear, confirming that her associated delivery was also removed.
-
-### Editing a customer
-
-1. Verifying that an existing delivery is retained after editing a customer.
-    1. Prerequisites: Irfan Ibrahim must be present in the customer list with a delivery (he has one in the default sample data). Run `find n/Irfan` — he should appear at index 1 with delivery information on his card.
-    2. Test case: `find n/Irfan`, then `edit 1 p/91234567`<br>
-       Expected: Irfan Ibrahim's phone number is updated. The delivery information on his card remains unchanged.
-
 ### Today's delivery panel
 
 1. Verifying deliveries displayed on launch.
@@ -1132,6 +1109,29 @@ The following test cases use the default sample data. Customers with a delivery 
     1. Prerequisites: Charlotte Oliveiro must not have a delivery. If not yet set up, first complete the previous test case.
     2. Test case: `find n/Charlotte`, then `unschedule 1`<br>
        Expected: No changes made. Error message shown.
+
+### Deleting a customer
+
+1. Deleting a customer while all customers are being shown.
+    1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
+    2. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+    3. Test case: `delete 0`<br>
+       Expected: No customer is deleted. Error details shown in the status message.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. Deleting a customer who has a delivery.
+    1. Prerequisites: Bernice Yu must be present in the customer list with a delivery (she has one in the default sample data). Run `find n/Bernice` — she should appear at index 1.
+    2. Test case: `find n/Bernice`, then `delete 1`<br>
+       Expected: Bernice Yu is deleted from the list. Run `find-delivery st/2026-08-09 ed/2027-02-09` — Bernice Yu should no longer appear, confirming that her associated delivery was also removed.
+
+### Editing a customer
+
+1. Verifying that an existing delivery is retained after editing a customer.
+    1. Prerequisites: Irfan Ibrahim must be present in the customer list with a delivery (he has one in the default sample data). Run `find n/Irfan` — he should appear at index 1 with delivery information on his card.
+    2. Test case: `find n/Irfan`, then `edit 1 p/91234567`<br>
+       Expected: Irfan Ibrahim's phone number is updated. The delivery information on his card remains unchanged.
 
 ### Saving data
 
