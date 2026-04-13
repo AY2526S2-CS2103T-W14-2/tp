@@ -16,6 +16,11 @@
 ### Original source
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
+<box type="info">
+
+**Note:** All references of address book in the Developer Guide represent ServeMate, since ServeMate helps to store contact information.
+</box>
+
 ### Other sources
 * Displaying of delivery information under each person card was inspired by [SoCTAssist](https://github.com/AY2526S1-CS2103T-W11-1/tp).
 
@@ -53,7 +58,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S2-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2526S2-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -85,7 +90,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S2-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <box type="info">
 
@@ -96,7 +101,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `TodayDeliveryPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S2-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S2-CS2103T-W14-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -107,7 +112,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2526S2-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -117,7 +122,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <box type="info">
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifelines for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines continue till the end of diagram.
 </box>
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
@@ -139,7 +144,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2526S2-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -162,7 +167,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2526S2-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -268,7 +273,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info">
 
-**Note:** The lifeline for `ExpiredCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+**Note:** The lifelines for `ExpiredCommandParser` and `ExpiredCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines continue till the end of the diagram.
 </box>
 
 <puml src="diagrams/ExpiredSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `expired bf/2026-02-01` Command" />
@@ -352,7 +357,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info">
 
-**Note:** The lifeline for `RescheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
+**Note:** The lifeline for `RescheduleCommandParser` and `RescheduleCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines continue till the end of diagram.
 </box>
 
 <puml src="diagrams/RescheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `reschedule 1 tm/14:00` Command" />
@@ -392,7 +397,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info">
 
-**Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifelines for `UnscheduleCommandParser`, `UnscheduleCommand`, and `target` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines continue till the end of diagram.
 </box>
 
 <puml src="diagrams/UnscheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `unschedule 2` Command" />
@@ -460,35 +465,35 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​       | I want to …​                                         | So that I can…​                                                                                                |
-|----------|---------------|------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| `* * *`  | beginner user | add a customer                                       | store their contact information                                                                                |
-| `* * *`  | beginner user | view a list of all customers                         | get a complete overview of my contact base                                                                     |
-| `* * *`  | beginner user | view deliveries for all customers                    | ensure that food is delivered on the correct days                                                              |
-| `* * *`  | beginner user | exit from the app easily                             | avoid cluttering my desktop screen once I have finished using the app                                          |
-| `* * *`  | beginner user | delete a customer                                    | get rid of customer records that I no longer need to track                                                     |
-| `* *`    | beginner user | see a message explaining how to access the help page | learn what each operation does                                                                                 |
-| `* *`    | user          | edit customer's data                                 | correct any mistakes or changes to customer data to keep information accuracy                                  |
-| `* *`    | user          | schedule a delivery                                  | track deliveries that need to be made                                                                          |
-| `* *`    | user          | reschedule a delivery                                | correct any mistakes or changes to delivery data belongs to a particular customer to keep information accuracy |
-| `* *`    | user          | unschedule a delivery                                | remove an inactive delivery                                                                                    |
-| `* *`    | familiar user | display all upcoming deliveries for the day          | prepare the food and plan for the deliveries                                                                   |
-| `* *`    | familiar user | find customers with expired subscriptions            | identify and follow up with customers to renew their subscription                                              |
-| `* *`    | familiar user | tag each customer by their food preference           | inform the cooks to prepare food that aligns with the customers' food preference                               |
-| `*`      | familiar user | create a delivery route                              | inform delivery drivers on their delivery route                                                                |
-| `*`      | busy user     | search for a customer by name, address or tags       | quickly locate customer details                                                                                |
-| `*`      | busy user     | find customers with deliveries on a specific date or within a date range | quickly identify which customers need to be served on a given day or period                  |
-| `*`      | expert user   | reorder stops within a delivery route                | ensures deliveries follow an efficient sequence                                                                |
-| `*`      | expert user   | import customer data in bulk                         | conveniently transition into the app                                                                           |
-| `*`      | expert user   | set estimated time of delivery for a customer        | ensure all customers have their food delivered on time                                                         |
-| `*`      | expert user   | set delivery status for a customer                   | keep track of deliveries that have been made and cancelled                                                     |
-| `*`      | expert user   | track customers' subscription payment                | know when I received their payments                                                                            |
-| `*`      | expert user   | mass copy emails and contact numbers to clipboard    | mass email and message customer about upcoming promotions                                                      |
-| `*`      | expert user   | view free time slots                                 | schedule new deliveries for new customers                                                                      |
-| `*`      | expert user   | track the total revenue from a customer              | know how much I have earned from a customer                                                                    |
-| `*`      | expert user   | track number of days subscribed by a customer so far | know who are my loyal customers                                                                                |
-| `*`      | expert user   | back up customer and route data                      | ensure that delivery operations are not disrupted by data loss                                                 |
-| `*`      | expert user   | archive customers data                               | see only the relevant data for currently subscribed customers                                                  |
+| Priority | As a …​       | I want to …​                                                             | So that I can…​                                                                                                |
+|----------|---------------|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `* * *`  | beginner user | add a customer                                                           | store their contact information                                                                                |
+| `* * *`  | beginner user | view a list of all customers                                             | get a complete overview of my contact base                                                                     |
+| `* * *`  | beginner user | view deliveries for all customers                                        | ensure that food is delivered on the correct days                                                              |
+| `* * *`  | beginner user | exit from the app easily                                                 | avoid cluttering my desktop screen once I have finished using the app                                          |
+| `* * *`  | beginner user | delete a customer                                                        | get rid of customer records that I no longer need to track                                                     |
+| `* *`    | beginner user | see a message explaining how to access the help page                     | learn what each operation does                                                                                 |
+| `* *`    | user          | edit customer's data                                                     | correct any mistakes or changes to customer data to keep information accuracy                                  |
+| `* *`    | user          | schedule a delivery                                                      | track deliveries that need to be made                                                                          |
+| `* *`    | user          | reschedule a delivery                                                    | correct any mistakes or changes to delivery data belongs to a particular customer to keep information accuracy |
+| `* *`    | user          | unschedule a delivery                                                    | remove an inactive delivery                                                                                    |
+| `* *`    | familiar user | display all upcoming deliveries for the day                              | prepare the food and plan for the deliveries                                                                   |
+| `* *`    | familiar user | find customers with expired subscriptions                                | identify and follow up with customers to renew their subscription                                              |
+| `* *`    | familiar user | tag each customer by their food preference                               | inform the cooks to prepare food that aligns with the customers' food preference                               |
+| `*`      | familiar user | create a delivery route                                                  | inform delivery drivers on their delivery route                                                                |
+| `*`      | busy user     | search for a customer by name, address or tags                           | quickly locate customer details                                                                                |
+| `*`      | busy user     | find customers with deliveries on a specific date or within a date range | quickly identify which customers need to be served on a given day or period                                    |
+| `*`      | expert user   | reorder stops within a delivery route                                    | ensures deliveries follow an efficient sequence                                                                |
+| `*`      | expert user   | import customer data in bulk                                             | conveniently transition into the app                                                                           |
+| `*`      | expert user   | set estimated time of delivery for a customer                            | ensure all customers have their food delivered on time                                                         |
+| `*`      | expert user   | set delivery status for a customer                                       | keep track of deliveries that have been made and cancelled                                                     |
+| `*`      | expert user   | track customers' subscription payment                                    | know when I received their payments                                                                            |
+| `*`      | expert user   | mass copy emails and contact numbers to clipboard                        | mass email and message customer about upcoming promotions                                                      |
+| `*`      | expert user   | view free time slots                                                     | schedule new deliveries for new customers                                                                      |
+| `*`      | expert user   | track the total revenue from a customer                                  | know how much I have earned from a customer                                                                    |
+| `*`      | expert user   | track number of days subscribed by a customer so far                     | know who are my loyal customers                                                                                |
+| `*`      | expert user   | back up customer and route data                                          | ensure that delivery operations are not disrupted by data loss                                                 |
+| `*`      | expert user   | archive customers data                                                   | see only the relevant data for currently subscribed customers                                                  |
 <!-- @@author -->
 
 
@@ -666,15 +671,15 @@ Preconditions: A list of customers is displayed
 
 <br>
 
-**Use case 6: Add upcoming delivery for a customer**
+**Use case 6: Add delivery for a customer**
 
 Preconditions: A list of customers is displayed
 
 **MSS**
 
-1. User requests to add a new upcoming delivery for a customer with required fields.
-2. ServeMate adds the upcoming delivery to the customer's details.
-3. ServeMate shows a success message with the added upcoming delivery's details.
+1. User requests to add a new delivery for a customer with required fields.
+2. ServeMate adds the delivery to the customer's details.
+3. ServeMate shows a success message with the added delivery's details.
 
    Use case ends.
 
@@ -765,6 +770,7 @@ Preconditions: A list of customers is displayed
 1. User requests to delete a customer's delivery.
 2. ServeMate deletes the delivery associated with the specified customer.
 3. ServeMate shows a success message that includes the customer's name and details of the deleted delivery.
+
    Use case ends.
 
 **Extensions**
@@ -789,40 +795,7 @@ Preconditions: A list of customers is displayed
 
 <br>
 
-<!-- @@author  -->
-
-**Use case 9: Tag customer with delivery note**
-
-Preconditions: A list of customers is displayed
-
-**MSS**
-
-1. User requests to tag a customer in the list with a delivery note.
-2. ServeMate tags the customer in the customer record with the delivery note.
-3. ServeMate shows a success message with the updated customer's details including the delivery note.
-
-**Extensions**
-
-* 1a. ServeMate detects that the given index is not a positive integer.
-
-    * 1a1. ServeMate shows an error message describing the correct command format.
-
-      Use case resumes at step 3.
-
-* 1b. ServeMate detects that the given index is out of range.
-
-    * 1b1. ServeMate shows an error message describing that the index value given is invalid.
-
-
-* 1c. ServeMate detects that the given delivery note is empty.
-
-    * 1c1. ServeMate shows an error message describing that the delivery note is missing.
-  
-      Use case resumes at step 1.
-
-<br>
-
-**Use case 10: Find expired deliveries**
+**Use case 9: Find expired deliveries**
 
 **MSS**
 
@@ -853,7 +826,11 @@ Preconditions: A list of customers is displayed
 
 <br>
 
-**Use case 11: Find customers by delivery date**
+<!-- @@author  -->
+
+<!-- @@author Chen-Beitian -->
+
+**Use case 10: Find customers by delivery date**
 
 **MSS**
 1. User requests to find customers with deliveries scheduled on a specified date.
@@ -883,7 +860,7 @@ Preconditions: A list of customers is displayed
 
 <br>
 
-**Use case 12: Find customers by delivery date range**
+**Use case 11: Find customers by delivery date range**
 
 **MSS**
 1. User requests to find customers with deliveries scheduled within a specified date range.
@@ -919,6 +896,8 @@ Preconditions: A list of customers is displayed
 
 <br>
 
+<!-- @@author  -->
+
 ### Non-functional requirements
 
 #### ⚙️ Technical
@@ -939,7 +918,7 @@ Preconditions: A list of customers is displayed
 3. The application's GUI should be usable (i.e. allow all application functions to be usable, even if the user experience is not optimal) for resolutions 1280x720 and higher, and for screen scale 150%.
 
 #### 🚀 Performance
-1. The application should respond to all input commands (e.g. `add`, `reschedule`, `expire`) within 400ms even when managing 1000 customer records.
+1. The application should respond to all input commands (e.g. `add`, `reschedule`, `expired`) within 400ms even when managing 1000 customer records.
 
 #### 💾 Data persistence
 1. The application should store data locally in a human editable text file (e.g. JSON format). It should not use a Database Management System (DBMS) to store data.
@@ -981,45 +960,173 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch.
+    1. Download the jar file and copy into an empty folder.
+    2. Open a terminal in that folder and run `java -jar ServeMate.jar`.<br>
+       Expected: The GUI is shown with a set of sample customers. The window size may not be optimum.
 
-   1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+2. Saving window preferences.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    2. In the same folder, run `java -jar ServeMate.jar` again.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Today's deliveries panel
+
+1. Verifying deliveries displayed on launch.
+    1. Prerequisites: Launch the app in an empty folder so that the default sample data is loaded.
+    2. Note the date shown in the delivery panel header and verify it matches your computer's current date. 
+    3. Enter the date in `yyyy-MM-dd` format and run `find-delivery dt/DATE`.<br>
+       Expected: The customers shown in the delivery panel match those returned by the command.
+
+2. Verifying that the panel is unaffected by filter commands.
+    1. Prerequisites: Note the current contents of the delivery panel.
+    2. Test case: `find n/David`<br>
+       Expected: The customer panel shows filtered results. The delivery panel remains unchanged.
+
+### Finding customers by attributes (name, address, tag)
+
+1. Finding customers by name.
+
+    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
+
+    2. Test case: `find n/alex`<br>
+       Expected: Only customers whose name contains `alex` (case-insensitive) are listed (if any).
+
+    3. Test case: `find n/al-ex`<br>
+       Expected: `find` command is not executed and the list of customers remains the same. An error message for the name keywords format is shown.
+
+    4. Test case: `find n/`<br>
+       Expected: `find` command is not executed and the list of customers remains the same. An error message for the command format is shown.
+
+2. Finding customers by name and address.
+
+    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
+
+    2. Test case: `find n/alex a/geylang`<br>
+       Expected: Only customers whose name contains `alex` and address contains `geylang` (both case-insensitive) are listed (if any).
+
+3. Finding customers by name, address and tag.
+
+    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
+
+    2. Test case: `find n/alex a/geylang t/vegetarian`<br>
+       Expected: Only customers whose name contains `alex`, address contains `geylang` and tagged with `vegetarian` (all three are case-insensitive) are listed (if any).
+
+    3. Test case: `find n/alex a/geylang t/vege-tarian`<br>
+       Expected: `find` command is not executed and the list of customers remains the same. An error message for the tag keywords format is shown.
+
+### Finding customers by delivery date
+
+1. Finding customers by exact delivery date.
+    1. Prerequisites: List all customers using the `list` command.
+    2. Test case: `find-delivery dt/2026-10-08`<br>
+       Expected: Only customers whose delivery period includes 2026-10-08 (a Thursday) and who have Thursday as a delivery day are listed.
+    3. Test case: `find-delivery dt/2026-10-10`<br>
+       Expected: Only customers with Saturday as a delivery day and whose delivery period includes 2026-10-10 are listed. Customers whose delivery period includes this date but do not have Saturday as a delivery day are not listed.
+    4. Test case: `find-delivery dt/2024-12-31`<br>
+       Expected: No customers are listed, as no delivery periods include this date.
+
+2. Finding customers by delivery date range.
+    1. Prerequisites: List all customers using the `list` command.
+    2. Test case: `find-delivery st/2026-09-20 ed/2026-09-20`<br>
+       Expected: Only customers whose delivery period includes 2026-09-20 (a Sunday) and who have Sunday as a delivery day are listed. Verifies that the range start date is inclusive.
+    3. Test case: `find-delivery st/2026-09-20 ed/2026-12-20`<br>
+       Expected: All customers with at least one delivery day falling within 2026-09-20 to 2026-12-20 are listed.
+    4. Test case: `find-delivery st/2026-09-15 ed/2026-09-19`<br>
+       Expected: Only customers whose delivery period overlaps with 2026-09-15 to 2026-09-19 and who have at least one delivery day within this range are listed. Customers whose delivery period starts after 2026-09-19 are not listed.
+
+3. Invalid `find-delivery` commands.
+    1. Test case: `find-delivery dt/2026-04-01 st/2026-04-01 ed/2026-04-30`<br>
+       Expected: `find-delivery` command is not executed and the list of customers remains the same. An error message for the command format is shown.
+    2. Test case: `find-delivery st/2026-10-30 ed/2026-10-15`<br>
+       Expected: `find-delivery` command is not executed and the list of customers remains the same. An error message indicating that the start date must not be after the end date is shown.
+    3. Test case: `find-delivery st/2026-10-15`<br>
+       Expected: `find-delivery` command is not executed and the list of customers remains the same. An error message for the command format is shown.
+    4. Other incorrect commands to try: `find-delivery dt/2026-13-01` (invalid date), `find-delivery` (no arguments)<br>
+       Expected: `find-delivery` command is not executed and the list of customers remains the same. An error message for the date format or command format is shown respectively.
+
+### Finding customers with expired delivery
+
+1. Finding customers whose deliveries have expired.
+    1. Prerequisites: List all customers using the `list` command.
+    2. Test case: `expired bf/2026-12-21`<br>
+       Expected: Only customers whose delivery end date is strictly before 2026-12-21 are listed (if any).
+    3. Test case: `expired bf/2026-12-20`<br>
+       Expected: Customers whose delivery end date falls on exactly 2026-12-20 are not listed, as only end dates strictly before the given date qualify.
+    4. Test case: `expired bf/2027-02-10`<br>
+       Expected: Only customers whose delivery end date is strictly before 2027-02-10 are listed (if any).
+    5. Other incorrect commands to try: `expired bf/2026-13-01` (invalid date), `expired` (no arguments)<br>
+       Expected: `expired` command is not executed and the list of customers remains the same. An error message for the date format or command format is shown respectively.
+
+### Scheduling a delivery
+
+1. Scheduling a delivery for a customer without an existing delivery.
+    1. Prerequisites: Ensure that there is no existing customer named John. Add one: `add n/John p/99999999 e/john@example.com a/123 Clementi Road`. Run `find n/John` — John should appear at index 1 with no delivery information on his card.
+    2. Test case: `find n/John`, then `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135`<br>
+       Expected: Delivery details appear on John's card. A success message is shown in the result display.
+
+2. Scheduling a delivery for a customer who already has one.
+    1. Prerequisites: John must have an existing delivery. If not yet set up, first complete the previous test case. Run `find n/John` — he should appear at index 1 with delivery information on his card.
+    2. Test case: `find n/John`, then `schedule 1 st/2026-06-01 ed/2026-06-30 tm/14:00 d/2`<br>
+       Expected: An error message indicating that the customer already has an existing delivery is shown.
+    3. Other incorrect commands to try: start date after end date, delivery day out of range (e.g. `d/8`), `24:00` as delivery time<br>
+       Expected: An error message for the violated constraint is shown.
+
+### Rescheduling a delivery
+
+1. Rescheduling the delivery of a customer who has one.
+    1. Prerequisites: Ensure that there is no existing customer named John. Add one and schedule a delivery: `add n/John p/99999999 e/john@example.com a/123 Clementi Road`, then `find n/John`, then `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135`. Run `find n/John` — he should appear at index 1 with delivery information on his card.
+    2. Test case: `find n/John`, then `reschedule 1 ed/2026-06-30`<br>
+       Expected: The end date of the delivery is updated to 2026-06-30. A success message is shown in the result display.
+
+2. Rescheduling the delivery of a customer without one.
+    1. Prerequisites: Ensure that there is no existing customer named John. Add one: `add n/John p/99999999 e/john@example.com a/123 Clementi Road`. Run `find n/John` — he should appear at index 1 with no delivery information on his card.
+    2. Test case: `find n/John`, then `reschedule 1 ed/2026-06-30`<br>
+       Expected: An error message indicating that the customer does not have an existing delivery is shown.
+    3. Other incorrect commands to try: `find n/John`, then `reschedule 1` (no fields provided)<br>
+       Expected: An error message for the command format is shown.
+
+### Unscheduling a delivery
+
+1. Unscheduling the delivery of a customer who has one.
+    1. Prerequisites: Ensure that there is no existing customer named John. Add one and schedule a delivery: `add n/John p/99999999 e/john@example.com a/123 Clementi Road`, then `find n/John`, then `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135`. Run `find n/John` — he should appear at index 1 with delivery information on his card.
+    2. Test case: `find n/John`, then `unschedule 1`<br>
+       Expected: Delivery details are removed from John's card. A success message is shown in the result display.
+
+2. Unscheduling the delivery of a customer without one.
+    1. Prerequisites: John must not have a delivery. If not yet set up, first complete the previous test case. Run `find n/John` — he should appear at index 1 with no delivery information on his card.
+    2. Test case: `find n/John`, then `unschedule 1`<br>
+       Expected: An error message indicating that the customer does not have an existing delivery is shown.
 
 ### Deleting a customer
 
-1. Deleting a customer while all customers are being shown
+1. Deleting a customer while all customers are being shown.
+    1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
+    2. Test case: `delete 1`<br>
+       Expected: The first customer is deleted from the list. A success message is shown in the result display.
+    3. Test case: `delete 0`<br>
+       Expected: No customer is deleted. An error message for the invalid index is shown.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: No customer is deleted. An error message for the command format or an invalid index is shown.
 
-   1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
+2. Deleting a customer who has a delivery.
+    1. Prerequisites: Bernice Yu must be present in the customer list with a delivery (she has one in the default sample data). Run `find n/Bernice` — she should appear at index 1.
+    2. Test case: `find n/Bernice`, then `delete 1`<br>
+       Expected: Bernice Yu is deleted from the list. Run `find-delivery st/2026-08-09 ed/2027-02-09` should no longer show the deleted customer, confirming that her associated delivery was also removed.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+### Editing a customer
 
-   1. Test case: `delete 0`<br>
-      Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+1. Verifying that an existing delivery is retained after editing a customer.
+    1. Prerequisites: Irfan Ibrahim must be present in the customer list with a delivery. Run `find n/Irfan` — he should appear at index 1 with delivery information on his card.
+    2. Test case: `find n/Irfan`, then `edit 1 p/91234567`<br>
+       Expected: Irfan Ibrahim's phone number is updated. The delivery information on his card remains unchanged.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+1. Dealing with missing data files.
+    1. Prerequisites: Close the app and navigate to the folder containing `data/addressbook.json`.
+    2. Delete `data/addressbook.json`, then launch the app again from the same folder.<br>
+       Expected: The app starts successfully and loads the default sample data.
 
 --------------------------------------------------------------------------------------------------------------------
 
