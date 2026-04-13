@@ -117,8 +117,9 @@ schedule 7 st/2026-04-07 ed/2026-06-07 d/1234567 tm/17:00
 
 <box type="info">
 
-**Note:** The examples provided in this tutorial use **7 April 2026** as today's date. To see Bob’s name appear in the delivery panel, ensure that `st/` (start date) is today, and `ed/` (end date) is 2 months later.
+**Note:** The examples provided in this tutorial use **7 April 2026** as today's date. To see Bryan’s name appear in the delivery panel, ensure that `st/` (start date) is today, and `ed/` (end date) is 2 months later.
 </box>
+<br>
 
 Since Bryan’s Tingkat plan starts today, his delivery will also be added to the delivery panel on the right:
 <br>![Tutorial for Schedule Command](images/Tutorial-ScheduleCommand.png)
