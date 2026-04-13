@@ -983,11 +983,39 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `find n/David`<br>
        Expected: The customer panel shows filtered results. The delivery panel remains unchanged.
 
-### Finding customers by attributes (name, address, tag): `find`
+### Finding customers by attributes (name, address, tag)
 
+1. Finding customers by name.
 
+    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
 
-### Finding customers by delivery date: `find-delivery`
+    2. Test case: `find n/alex`<br>
+       Expected: Only customers whose name contains `alex` (case-insensitive) are listed (if any).
+
+    3. Test case: `find n/al-ex`<br>
+       Expected: `find` command is not executed and the list of customers remains the same. An error message for the name keywords format is shown.
+
+    4. Test case: `find n/`<br>
+       Expected: `find` command is not executed and the list of customers remains the same. An error message for the command format is shown.
+
+2. Finding customers by name and address.
+
+    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
+
+    2. Test case: `find n/alex a/geylang`<br>
+       Expected: Only customers whose name contains `alex` and address contains `geylang` (both case-insensitive) are listed (if any).
+
+3. Finding customers by name, address and tag.
+
+    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
+
+    2. Test case: `find n/alex a/geylang t/vegetarian`<br>
+       Expected: Only customers whose name contains `alex`, address contains `geylang` and tagged with `vegetarian` (all three are case-insensitive) are listed (if any).
+
+    3. Test case: `find n/alex a/geylang t/vege-tarian`<br>
+       Expected: `find` command is not executed and the list of customers remains the same. An error message for the tag keywords format is shown.
+
+### Finding customers by delivery date
 
 1. Finding customers by exact delivery date.
     1. Prerequisites: List all customers using the `list` command.
@@ -1017,7 +1045,7 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect commands to try: `find-delivery dt/2026-13-01` (invalid date), `find-delivery` (no arguments)<br>
        Expected: `find-delivery` command is not executed and the list of customers remains the same. An error message for the date format or command format is shown respectively.
 
-### Finding customers with expired delivery: `expired`
+### Finding customers with expired delivery
 
 1. Finding customers whose deliveries have expired.
     1. Prerequisites: List all customers using the `list` command.
@@ -1030,7 +1058,7 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect commands to try: `expired bf/2026-13-01` (invalid date), `expired` (no arguments)<br>
        Expected: `expired` command is not executed and the list of customers remains the same. An error message for the date format or command format is shown respectively.
 
-### Scheduling a delivery: `schedule`
+### Scheduling a delivery
 
 1. Scheduling a delivery for a customer without an existing delivery.
     1. Prerequisites: Charlotte Oliveiro must be present in the customer list without a delivery (she has none in the default sample data). Run `find n/Charlotte` — she should appear at index 1 with no delivery information on her card.
@@ -1044,7 +1072,7 @@ testers are expected to do more *exploratory* testing.
     3. Other incorrect commands to try: start date after end date, delivery day out of range (e.g. `d/8`), `24:00` as delivery time<br>
        Expected: An error message for the violated constraint is shown.
 
-### Rescheduling a delivery: `reschedule`
+### Rescheduling a delivery
 
 1. Rescheduling the delivery of a customer who has one.
     1. Prerequisites: Charlotte Oliveiro must have an existing delivery. Run `find n/Charlotte` — she should appear at index 1. If she has no delivery, run `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135` to set one up.
@@ -1058,7 +1086,7 @@ testers are expected to do more *exploratory* testing.
     3. Other incorrect commands to try: `find n/Charlotte`, then `reschedule 1` (no fields provided)<br>
        Expected: An error message for the command format is shown.
 
-### Unscheduling a delivery: `unschedule`
+### Unscheduling a delivery
 
 1. Unscheduling the delivery of a customer who has one.
     1. Prerequisites: Charlotte Oliveiro must have an existing delivery. Run `find n/Charlotte` — she should appear at index 1. If she has no delivery, run `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135` to set one up.
@@ -1099,38 +1127,6 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Close the app and navigate to the folder containing `data/addressbook.json`.
     2. Delete `data/addressbook.json`, then launch the app again from the same folder.<br>
        Expected: The app starts successfully and loads the default sample data.
-
-### Finding customers by attributes (name, address, tag)
-
-1. Finding customers by name.
-
-    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
-
-    2. Test case: `find n/alex`<br>
-       Expected: Only customers whose name contains `alex` (case-insensitive) are listed (if any).
-
-    3. Test case: `find n/al-ex`<br>
-       Expected: `find` command is not executed and the list of customers remains the same. An error message for the name keywords format is shown.
-   
-    4. Test case: `find n/`<br>
-      Expected: `find` command is not executed and the list of customers remains the same. An error message for the command format is shown.
-
-2. Finding customers by name and address.
-
-    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
-
-    2. Test case: `find n/alex a/geylang`<br>
-       Expected: Only customers whose name contains `alex` and address contains `geylang` (both case-insensitive) are listed (if any).
-
-3. Finding customers by name, address and tag.
-
-    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
-
-    2. Test case: `find n/alex a/geylang t/vegetarian`<br>
-       Expected: Only customers whose name contains `alex`, address contains `geylang` and tagged with `vegetarian` (all three are case-insensitive) are listed (if any).
-   
-    3. Test case: `find n/alex a/geylang t/vege-tarian`<br>
-      Expected: `find` command is not executed and the list of customers remains the same. An error message for the tag keywords format is shown.
 
 --------------------------------------------------------------------------------------------------------------------
 
