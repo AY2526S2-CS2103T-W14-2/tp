@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonHasExpiredDeliveryPredicate;
 
 /**
@@ -34,62 +35,36 @@ public class ExpiredCommandTest {
     @Test
     public void execute_validDate_multiplePersonsWithExpiredDeliveryFound() {
         LocalDate beforeDate = LocalDate.of(2024, 4, 1);
-        PersonHasExpiredDeliveryPredicate predicate = new PersonHasExpiredDeliveryPredicate(beforeDate);
-        ExpiredCommand command = new ExpiredCommand(predicate);
+        List<Person> expectedPersons = List.of(ELLE, FIONA);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(predicate);
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                expectedModel.getFilteredPersonList().size());
-
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ELLE, FIONA), model.getFilteredPersonList());
+        assertExpiredCommand(beforeDate, expectedPersons);
     }
 
     @Test
     public void execute_validDate_personWithExpiredDeliveryFound() {
         // Elle's delivery ends on 2019-03-27 -> expires one day before specified date
         LocalDate beforeDate = LocalDate.of(2019, 3, 28);
-        PersonHasExpiredDeliveryPredicate predicate = new PersonHasExpiredDeliveryPredicate(beforeDate);
-        ExpiredCommand command = new ExpiredCommand(predicate);
+        List<Person> expectedPersons = List.of(ELLE);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(predicate);
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                expectedModel.getFilteredPersonList().size());
-
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ELLE), model.getFilteredPersonList());
+        assertExpiredCommand(beforeDate, expectedPersons);
     }
 
     @Test
     public void execute_furthestPastDate_noPersonFound() {
         // No deliveries should have expired before the specified (furthest past) date
-        PersonHasExpiredDeliveryPredicate predicate = new PersonHasExpiredDeliveryPredicate(LocalDate.MIN);
-        ExpiredCommand command = new ExpiredCommand(predicate);
+        LocalDate beforeDate = LocalDate.MIN;
+        List<Person> expectedPersons = Collections.emptyList();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(predicate);
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                expectedModel.getFilteredPersonList().size());
-
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertExpiredCommand(beforeDate, expectedPersons);
     }
 
     @Test
     public void execute_furthestFutureDate_allPersonsWithDeliveryFound() {
         // All deliveries should have expired before the specified (furthest future) date
-        PersonHasExpiredDeliveryPredicate predicate = new PersonHasExpiredDeliveryPredicate(LocalDate.MAX);
-        ExpiredCommand command = new ExpiredCommand(predicate);
+        LocalDate beforeDate = LocalDate.MAX;
+        List<Person> expectedPersons = Arrays.asList(ALICE, CARL, DANIEL, ELLE, FIONA);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(predicate);
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                expectedModel.getFilteredPersonList().size());
-
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, CARL, DANIEL, ELLE, FIONA), model.getFilteredPersonList());
+        assertExpiredCommand(beforeDate, expectedPersons);
     }
 
     @Test
@@ -128,6 +103,25 @@ public class ExpiredCommandTest {
 
         String expected = ExpiredCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, expiredCommand.toString());
+    }
+
+    /**
+     * Executes an ExpiredCommand and asserts that command succeeds with the correct
+     * behaviour and message returned.
+     *
+     * @param beforeDate Date to compare against.
+     * @param expectedPersons List of expected persons in filtered list.
+     */
+    private void assertExpiredCommand(LocalDate beforeDate, List<Person> expectedPersons) {
+        PersonHasExpiredDeliveryPredicate predicate = new PersonHasExpiredDeliveryPredicate(beforeDate);
+        ExpiredCommand command = new ExpiredCommand(predicate);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(predicate);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
+                expectedModel.getFilteredPersonList().size());
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(expectedPersons, model.getFilteredPersonList());
     }
 
 }
