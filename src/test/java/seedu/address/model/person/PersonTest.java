@@ -26,6 +26,15 @@ import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
 
+    private final Delivery delivery = new DeliveryBuilder()
+            .withStartDate("2026-02-10")
+            .withEndDate("2026-03-12")
+            .withDeliveryTime("16:00")
+            .build();
+    private final Person person = new PersonBuilder()
+            .withDelivery(delivery)
+            .build();
+
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
@@ -77,27 +86,13 @@ public class PersonTest {
     @Test
     public void hasExpiredDelivery_personWithNonExpiredDelivery_returnsFalse() {
         // Equivalence partition for person with non-expired delivery
-        Delivery delivery = new DeliveryBuilder()
-                .withStartDate("2025-02-10")
-                .withEndDate("2025-03-12")
-                .build();
-        Person person = new PersonBuilder()
-                .withDelivery(delivery)
-                .build();
-        LocalDate beforeDate = LocalDate.of(2025, 2, 20);
+        LocalDate beforeDate = LocalDate.of(2026, 2, 20);
         assertFalse(person.hasExpiredDelivery(beforeDate));
     }
 
     @Test
     public void hasExpiredDelivery_personWithExpiredDelivery_returnsTrue() {
         // Equivalence partition for person with expired delivery
-        Delivery delivery = new DeliveryBuilder()
-                .withStartDate("2026-02-10")
-                .withEndDate("2026-03-12")
-                .build();
-        Person person = new PersonBuilder()
-                .withDelivery(delivery)
-                .build();
         LocalDate beforeDate = LocalDate.of(2026, 6, 20);
         assertTrue(person.hasExpiredDelivery(beforeDate));
     }
@@ -105,14 +100,6 @@ public class PersonTest {
 
     @Test
     public void getFormattedDeliverySchedule_personWithDelivery_returnsDeliverySchedule() {
-        Delivery delivery = new DeliveryBuilder()
-                .withStartDate("2026-02-10")
-                .withEndDate("2026-03-12")
-                .withDeliveryTime("16:00")
-                .build();
-        Person person = new PersonBuilder()
-                .withDelivery(delivery)
-                .build();
         assertEquals("2026-02-10 to 2026-03-12  |  16:00", person.getFormattedDeliverySchedule());
     }
 
@@ -123,21 +110,11 @@ public class PersonTest {
 
     @Test
     public void getDeliveryDayNames_personWithDelivery_returnsDeliveryDayNames() {
-        Delivery delivery = new DeliveryBuilder()
-                .withDeliveryDays("Tuesday", "Friday")
-                .build();
-        Person person = new PersonBuilder()
-                .withDelivery(delivery)
-                .build();
+        Person person = buildPersonWithDeliveryDays("Tuesday", "Friday");
         assertEquals(Set.of("TUESDAY", "FRIDAY"), person.getDeliveryDayNames());
 
         // no delivery days -> return empty set
-        delivery = new DeliveryBuilder()
-                .withDeliveryDays()
-                .build();
-        person = new PersonBuilder()
-                .withDelivery(delivery)
-                .build();
+        person = buildPersonWithDeliveryDays();
         assertEquals(Collections.emptySet(), person.getDeliveryDayNames());
     }
 
@@ -192,4 +169,20 @@ public class PersonTest {
                 + ", delivery=" + ALICE.getDelivery() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    /**
+     * Builds {@code Person} with delivery, given delivery day names.
+     *
+     * @param dayNames Delivery day names for the person's delivery.
+     * @return Person with a delivery.
+     */
+    private Person buildPersonWithDeliveryDays(String... dayNames) {
+        Delivery delivery = new DeliveryBuilder()
+                .withDeliveryDays(dayNames)
+                .build();
+        return new PersonBuilder()
+                .withDelivery(delivery)
+                .build();
+    }
+
 }
