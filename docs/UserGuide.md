@@ -492,8 +492,8 @@ Furthermore, certain edits can cause the ServeMate to behave in unexpected ways 
 
 <br>
 
-8. **Question**: Why can't I see the full status message when I execute a command?<br>
-   **Answer**: ServeMate currently does not support resizing the status message panel. If the message exceeds the length of the panel, you can scroll down to view the rest of the message.
+8. **Question**: Why can't I see the full status message (below where the command was entered), after running the command?<br>
+   **Answer**: ServeMate currently does not support resizing the panel displaying the status message. If the message exceeds the length of the panel, you can scroll down to view the rest of the message.
 
 --------------------------------------------------------------------------------------------------------------------
 
