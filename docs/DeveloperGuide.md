@@ -1042,7 +1042,7 @@ Team size: 5
     * When any command except `undo` is executed, the state before the command is executed will be pushed to the stack.
     * When `undo` is executed, ServeMate will pop the previous state from the stack and restore it if the stack is non-empty.
 6. **Implement recoverable data validation when converting JSON to Java objects:** Currently, if users manually edit `addressbook.json` and introduce invalid data (e.g `startDate` is not strictly before `endDate`), the app will crash. We plan to implement data validation that allows the app to recover when such a condition happens.
-    * When invalid data is detected, the app will show the user which fields are invalid and the reason for invalidity.
+    * When invalid data is detected, the app will catch show the user which fields are invalid and the reason for invalidity.
     * The app prompts the user to either fix the data or ignore them.
     * If the user chooses to ignore the invalid data, the app will load the data while ignoring them (e.g. if `startDate` and `endDate` are invalid, the app will load without the delivery whose start and end dates are invalid).
 7. **Implement customer duplicate checking using phone number:** Currently, ServeMate uses case-sensitive name to detect duplicate customers. This may be restrictive if users have different customers with the same name. Furthermore, the case-sensitivity allows customer with the same name but different casing to be added. This may break the duplicate detection mechanism. We plan to use phone number to detect duplicates instead.
@@ -1051,3 +1051,5 @@ Team size: 5
 8. **Forbid tag duplication for a customer regardless of the tag casing:** Currently, ServeMate accepts duplicate tags for a customer if the tag casing is different (e.g. `Vegan` is accepted although `vegan` exists). We plan to forbid duplicate tags regardless of the casing.
     * When a new customer is added, ServeMate will reject if the new customer has duplicate tags regardless of the tag casing.
     * When an existing customer is edited, ServeMate will reject if the edited customer has duplicate tags regardless of the tag casing.
+9. **Implement specific error messages for invalid command prefix:** Currently, ServeMate does not provide specific error messages for invalid commands. For example, `edit 1 t/vegan r/` will be detected as invalid input to the prefix `t/`, displaying an error message "Tags names should be alphanumeric with no more than 25 characters". We plan to implement a specific error message for invalid command prefix to give more helpful information to users.
+    * When an invalid command prefix is detected, ServeMate will show an error message indicating an invalid command prefix and showing the command format with valid prefixes.
