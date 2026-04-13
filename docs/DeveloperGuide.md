@@ -664,15 +664,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-**Use case 6: Add upcoming delivery for a customer**
+**Use case 6: Add delivery for a customer**
 
 **MSS**
 
 1. User requests to list customers.
 2. ServeMate shows a list of customers.
-3. User requests to add a new upcoming delivery for a customer with required fields.
-4. ServeMate adds the upcoming delivery to the customer's details.
-5. ServeMate shows a success message with the added upcoming delivery's details.
+3. User requests to add a new delivery for a customer with required fields.
+4. ServeMate adds the delivery to the customer's details.
+5. ServeMate shows a success message with the added delivery's details.
 
    Use case ends.
 
@@ -796,7 +796,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-**Use case 9: Tag customer with delivery note**
+**Use case 9: Find expired deliveries**
 
 **MSS**
 
@@ -863,7 +863,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-**Use case 11: Find customers by delivery date**
+**Use case 10: Find customers by delivery date**
 
 **MSS**
 1. User requests to find customers with deliveries scheduled on a specified date.
@@ -893,7 +893,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-**Use case 12: Find customers by delivery date range**
+**Use case 11: Find customers by delivery date range**
 
 **MSS**
 1. User requests to find customers with deliveries scheduled within a specified date range.
