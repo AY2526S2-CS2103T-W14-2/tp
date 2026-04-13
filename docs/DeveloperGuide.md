@@ -317,7 +317,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info">
 
-**Note:** The lifeline for `ScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML.
+**Note:** The lifeline for `ScheduleCommandParser` and `ScheduleCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines continue till the end of the diagram.
 </box>
 
 <puml src="diagrams/ScheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `schedule 1 st/2026-01-01 ed/2026-02-01 tm/14:00 d/123` Command" />
