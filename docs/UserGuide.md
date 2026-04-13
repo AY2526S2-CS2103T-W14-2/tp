@@ -213,6 +213,8 @@ You can refer to the [Features](#features) section below to look up details abou
 * Dates are in `yyyy-MM-dd` format, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day.<br>
   e.g. 9th March 2026 can be written as `2026-03-09`.
 
+* Times should be in the 24-hour format and be between `00:00` and `23:59`.
+
 * Tags (`t/[TAG]`) are intended for use in placing delivery notes for a particular customer.
   * Tags should only consist of alphanumerical values without whitespaces.
   * Suggested usages:
@@ -366,7 +368,6 @@ Format: `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DA
 * The index refers to the index number shown in the displayed customer list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * `DELIVERY_DAYS` must be a set of numbers **within the range of 1-7 inclusive** without whitespaces where 1 = Monday, 2 = Tuesday, …​, 7 = Sunday.
-* `DELIVERY_TIME` should be in the 24-hour format and be between `00:00` and `23:59`.
 
 Examples:
 * `schedule 1 st/2026-02-01 ed/2026-02-02 tm/13:00 d/12` adds a delivery for the 1st customer on the list. The delivery starts on 1 February 2026, ends on 2 February 2026 and occurs at 1 PM on Mondays and Tuesdays.
@@ -389,7 +390,6 @@ Format: `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DE
 * The index refers to the index number shown in the displayed customer panel.
 * The index **must be a positive integer** 1, 2, 3, …​
 * `DELIVERY_DAYS` must be a set of numbers **within the range of 1-7 inclusive** without whitespaces where 1 = Monday, 2 = Tuesday, …​, 7 = Sunday.
-* `DELIVERY_TIME` should be in the 24-hour format and be between `00:00` and `23:59`.
 
 Examples:
 * `reschedule 1 ed/2026-02-02 tm/12:45` Edits the delivery end date and delivery time for the 1st customer to be `2026-02-02` and `12:45` respectively.
@@ -525,7 +525,3 @@ Use the `find` command to search for the customer you want for faster navigation
    <br> Examples of erroneous dates:
   * Wrong date: `2026-02-29` is a date that does not exist since 2026 is not a leap year.
   * Wrong format: `10000-12-03` does not follow the expected format `yyyy-MM-dd`.
-6. **Increase specificity of error message for time parsing**: If you entered either a time string with an invalid format or an invalid time, ServeMate will specify which of either cases caused the date string to be invalid. This allows you to immediately be notified of the issue and rectify it.
-   <br> Examples of erroneous times:
-  * Wrong time: `35:00` is a time that does not exist.
-  * Wrong format: `120:00` does not follow the expected format `HH:mm`.
